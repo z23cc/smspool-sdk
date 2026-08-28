@@ -1,0 +1,8 @@
+{
+  "days": 30,
+  "expiry": 1707153885,
+  "message": "Your rental has been ordered, it will take upto 24 hours to activate your rental although usually your rental will be issued instantly.",
+  "phonenumber": "123456789",
+  "rental_code": "ABCDEFGH",
+  "success": 1
+}

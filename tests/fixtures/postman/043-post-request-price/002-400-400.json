@@ -1,0 +1,10 @@
+{
+  "errors": [
+    {
+      "description": "Country name or country ID which can be retrieved at the /country/retrieve_all endpoint",
+      "message": "You are missing a required parameter for this request.",
+      "param": "country"
+    }
+  ],
+  "success": 0
+}

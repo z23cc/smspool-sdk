@@ -1,0 +1,222 @@
+[
+  {
+    "ID": 975,
+    "dataInGb": 0.1,
+    "duration": 7,
+    "extendable": 2,
+    "ip": "HK",
+    "network": "[{\"country\":\"United States\",\"network\":[{\"operatorName\":\"T-Mobile\",\"networkType\":\"5G\"},{\"operatorName\":\"Verizon\",\"networkType\":\"5G\"}]}]",
+    "price": "0.40",
+    "speed": "3G/4G/5G"
+  },
+  {
+    "ID": 1495,
+    "dataInGb": 0.5,
+    "duration": 7,
+    "extendable": 2,
+    "ip": "HK",
+    "network": "[{\"country\":\"United States\",\"network\":[{\"operatorName\":\"T-Mobile\",\"networkType\":\"5G\"},{\"operatorName\":\"Verizon\",\"networkType\":\"5G\"}]}]",
+    "price": "0.70",
+    "speed": "3G/4G/5G"
+  },
+  {
+    "ID": 689,
+    "dataInGb": 1,
+    "duration": 7,
+    "extendable": 1,
+    "ip": "PL",
+    "network": "[{\"country\":\"United States\",\"network\":[{\"operatorName\":\"Verizon\",\"networkType\":\"5G\"},{\"operatorName\":\"AT&T\",\"networkType\":\"5G\"}]}]",
+    "price": "1.10",
+    "speed": "3G/4G/5G"
+  },
+  {
+    "ID": 675,
+    "dataInGb": 0.5,
+    "duration": 1,
+    "extendable": 1,
+    "ip": "HK",
+    "network": "[{\"country\":\"United States\",\"network\":[{\"operatorName\":\"T-Mobile\",\"networkType\":\"5G\"},{\"operatorName\":\"Verizon\",\"networkType\":\"5G\"}]}]",
+    "price": "1.20",
+    "speed": "3G/4G/5G"
+  },
+  {
+    "ID": 593,
+    "dataInGb": 1,
+    "duration": 7,
+    "extendable": 2,
+    "ip": "HK",
+    "network": "[{\"country\":\"United States\",\"network\":[{\"operatorName\":\"T-Mobile\",\"networkType\":\"5G\"},{\"operatorName\":\"Verizon\",\"networkType\":\"5G\"}]}]",
+    "price": "1.30",
+    "speed": "3G/4G/5G"
+  },
+  {
+    "ID": 598,
+    "dataInGb": 1,
+    "duration": 1,
+    "extendable": 1,
+    "ip": "HK",
+    "network": "[{\"country\":\"United States\",\"network\":[{\"operatorName\":\"T-Mobile\",\"networkType\":\"5G\"},{\"operatorName\":\"Verizon\",\"networkType\":\"5G\"}]}]",
+    "price": "1.80",
+    "speed": "3G/4G/5G"
+  },
+  {
+    "ID": 599,
+    "dataInGb": 5,
+    "duration": 1,
+    "extendable": 1,
+    "ip": "HK",
+    "network": "[{\"country\":\"United States\",\"network\":[{\"operatorName\":\"T-Mobile\",\"networkType\":\"5G\"},{\"operatorName\":\"Verizon\",\"networkType\":\"5G\"}]}]",
+    "price": "2.20",
+    "speed": "3G/4G/5G"
+  },
+  {
+    "ID": 592,
+    "dataInGb": 3,
+    "duration": 15,
+    "extendable": 2,
+    "ip": "HK",
+    "network": "[{\"country\":\"United States\",\"network\":[{\"operatorName\":\"T-Mobile\",\"networkType\":\"5G\"},{\"operatorName\":\"Verizon\",\"networkType\":\"5G\"}]}]",
+    "price": "3.10",
+    "speed": "3G/4G/5G"
+  },
+  {
+    "ID": 688,
+    "dataInGb": 3,
+    "duration": 30,
+    "extendable": 1,
+    "ip": "PL",
+    "network": "[{\"country\":\"United States\",\"network\":[{\"operatorName\":\"Verizon\",\"networkType\":\"5G\"},{\"operatorName\":\"AT&T\",\"networkType\":\"5G\"}]}]",
+    "price": "3.10",
+    "speed": "3G/4G/5G"
+  },
+  {
+    "ID": 595,
+    "dataInGb": 3,
+    "duration": 30,
+    "extendable": 2,
+    "ip": "HK",
+    "network": "[{\"country\":\"United States\",\"network\":[{\"operatorName\":\"T-Mobile\",\"networkType\":\"5G\"},{\"operatorName\":\"Verizon\",\"networkType\":\"5G\"}]}]",
+    "price": "3.20",
+    "speed": "3G/4G/5G"
+  },
+  {
+    "ID": 600,
+    "dataInGb": 2,
+    "duration": 1,
+    "extendable": 1,
+    "ip": "HK",
+    "network": "[{\"country\":\"United States\",\"network\":[{\"operatorName\":\"T-Mobile\",\"networkType\":\"5G\"},{\"operatorName\":\"Verizon\",\"networkType\":\"5G\"}]}]",
+    "price": "3.20",
+    "speed": "3G/4G/5G"
+  },
+  {
+    "ID": 687,
+    "dataInGb": 5,
+    "duration": 30,
+    "extendable": 1,
+    "ip": "PL",
+    "network": "[{\"country\":\"United States\",\"network\":[{\"operatorName\":\"Verizon\",\"networkType\":\"5G\"},{\"operatorName\":\"AT&T\",\"networkType\":\"5G\"}]}]",
+    "price": "4.60",
+    "speed": "3G/4G/5G"
+  },
+  {
+    "ID": 594,
+    "dataInGb": 5,
+    "duration": 30,
+    "extendable": 2,
+    "ip": "HK",
+    "network": "[{\"country\":\"United States\",\"network\":[{\"operatorName\":\"T-Mobile\",\"networkType\":\"5G\"},{\"operatorName\":\"Verizon\",\"networkType\":\"5G\"}]}]",
+    "price": "4.80",
+    "speed": "3G/4G/5G"
+  },
+  {
+    "ID": 674,
+    "dataInGb": 3,
+    "duration": 1,
+    "extendable": 1,
+    "ip": "HK",
+    "network": "[{\"country\":\"United States\",\"network\":[{\"operatorName\":\"T-Mobile\",\"networkType\":\"5G\"},{\"operatorName\":\"Verizon\",\"networkType\":\"5G\"}]}]",
+    "price": "5.30",
+    "speed": "3G/4G/5G"
+  },
+  {
+    "ID": 686,
+    "dataInGb": 10,
+    "duration": 30,
+    "extendable": 1,
+    "ip": "PL",
+    "network": "[{\"country\":\"United States\",\"network\":[{\"operatorName\":\"Verizon\",\"networkType\":\"5G\"},{\"operatorName\":\"AT&T\",\"networkType\":\"5G\"}]}]",
+    "price": "8.30",
+    "speed": "3G/4G/5G"
+  },
+  {
+    "ID": 591,
+    "dataInGb": 10,
+    "duration": 30,
+    "extendable": 2,
+    "ip": "HK",
+    "network": "[{\"country\":\"United States\",\"network\":[{\"operatorName\":\"T-Mobile\",\"networkType\":\"5G\"},{\"operatorName\":\"Verizon\",\"networkType\":\"5G\"}]}]",
+    "price": "8.50",
+    "speed": "3G/4G/5G"
+  },
+  {
+    "ID": 1559,
+    "dataInGb": 15,
+    "duration": 30,
+    "extendable": 2,
+    "ip": "HK",
+    "network": "[{\"country\":\"United States\",\"network\":[{\"operatorName\":\"T-Mobile\",\"networkType\":\"5G\"},{\"operatorName\":\"Verizon\",\"networkType\":\"5G\"}]}]",
+    "price": "11.90",
+    "speed": "3G/4G/5G"
+  },
+  {
+    "ID": 1072,
+    "dataInGb": 20,
+    "duration": 30,
+    "extendable": 2,
+    "ip": "HK",
+    "network": "[{\"country\":\"United States\",\"network\":[{\"operatorName\":\"T-Mobile\",\"networkType\":\"5G\"},{\"operatorName\":\"Verizon\",\"networkType\":\"5G\"}]}]",
+    "price": "16.70",
+    "speed": "3G/4G/5G"
+  },
+  {
+    "ID": 676,
+    "dataInGb": 10,
+    "duration": 1,
+    "extendable": 1,
+    "ip": "HK",
+    "network": "[{\"country\":\"United States\",\"network\":[{\"operatorName\":\"T-Mobile\",\"networkType\":\"5G\"},{\"operatorName\":\"Verizon\",\"networkType\":\"5G\"}]}]",
+    "price": "17.40",
+    "speed": "3G/4G/5G"
+  },
+  {
+    "ID": 589,
+    "dataInGb": 20,
+    "duration": 90,
+    "extendable": 2,
+    "ip": "HK",
+    "network": "[{\"country\":\"United States\",\"network\":[{\"operatorName\":\"T-Mobile\",\"networkType\":\"5G\"},{\"operatorName\":\"Verizon\",\"networkType\":\"5G\"}]}]",
+    "price": "20.00",
+    "speed": "3G/4G/5G"
+  },
+  {
+    "ID": 1352,
+    "dataInGb": 50,
+    "duration": 30,
+    "extendable": 2,
+    "ip": "HK",
+    "network": "[{\"country\":\"United States\",\"network\":[{\"operatorName\":\"T-Mobile\",\"networkType\":\"5G\"},{\"operatorName\":\"Verizon\",\"networkType\":\"5G\"}]}]",
+    "price": "39.20",
+    "speed": "3G/4G/5G"
+  },
+  {
+    "ID": 590,
+    "dataInGb": 50,
+    "duration": 180,
+    "extendable": 2,
+    "ip": "HK",
+    "network": "[{\"country\":\"United States\",\"network\":[{\"operatorName\":\"T-Mobile\",\"networkType\":\"5G\"},{\"operatorName\":\"Verizon\",\"networkType\":\"5G\"}]}]",
+    "price": "49.00",
+    "speed": "3G/4G/5G"
+  }
+]

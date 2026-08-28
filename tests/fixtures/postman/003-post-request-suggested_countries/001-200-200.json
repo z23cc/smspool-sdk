@@ -1,0 +1,142 @@
+[
+  {
+    "country_id": 1,
+    "name": "United States",
+    "pool": 1,
+    "price": "0.24",
+    "short_name": "US"
+  },
+  {
+    "country_id": 2,
+    "name": "United Kingdom",
+    "pool": 7,
+    "price": "0.10",
+    "short_name": "GB"
+  },
+  {
+    "country_id": 3,
+    "name": "Netherlands",
+    "pool": 7,
+    "price": "0.24",
+    "short_name": "NL"
+  },
+  {
+    "country_id": 4,
+    "name": "Russia",
+    "pool": 12,
+    "price": "0.10",
+    "short_name": "RU"
+  },
+  {
+    "country_id": 6,
+    "name": "Sweden",
+    "pool": 12,
+    "price": "0.10",
+    "short_name": "SE"
+  },
+  {
+    "country_id": 7,
+    "name": "Kazakhstan",
+    "pool": 12,
+    "price": "0.10",
+    "short_name": "KZ"
+  },
+  {
+    "country_id": 9,
+    "name": "Indonesia",
+    "pool": 7,
+    "price": "0.24",
+    "short_name": "ID"
+  },
+  {
+    "country_id": 13,
+    "name": "Romania",
+    "pool": 12,
+    "price": "0.10",
+    "short_name": "RO"
+  },
+  {
+    "country_id": 18,
+    "name": "Kyrgyzstan",
+    "pool": 12,
+    "price": "0.10",
+    "short_name": "KG"
+  },
+  {
+    "country_id": 23,
+    "name": "France",
+    "pool": 12,
+    "price": "0.10",
+    "short_name": "FR"
+  },
+  {
+    "country_id": 29,
+    "name": "Israel",
+    "pool": 12,
+    "price": "0.10",
+    "short_name": "IL"
+  },
+  {
+    "country_id": 32,
+    "name": "Ireland",
+    "pool": 12,
+    "price": "0.10",
+    "short_name": "IE"
+  },
+  {
+    "country_id": 34,
+    "name": "Laos",
+    "pool": 12,
+    "price": "0.10",
+    "short_name": "LA"
+  },
+  {
+    "country_id": 48,
+    "name": "Croatia",
+    "pool": 12,
+    "price": "0.10",
+    "short_name": "HR"
+  },
+  {
+    "country_id": 52,
+    "name": "Thailand",
+    "pool": 12,
+    "price": "0.10",
+    "short_name": "TH"
+  },
+  {
+    "country_id": 53,
+    "name": "Mexico",
+    "pool": 12,
+    "price": "0.10",
+    "short_name": "MX"
+  },
+  {
+    "country_id": 54,
+    "name": "Taiwan",
+    "pool": 7,
+    "price": "0.10",
+    "short_name": "TW"
+  },
+  {
+    "country_id": 62,
+    "name": "Pakistan",
+    "pool": 12,
+    "price": "0.10",
+    "short_name": "PK"
+  },
+  {
+    "country_id": 72,
+    "name": "Cyprus",
+    "pool": 12,
+    "price": "0.10",
+    "short_name": "CY"
+  },
+  {
+    "country_id": 149,
+    "name": "Czech Republic",
+    "pool": 12,
+    "price": "0.10",
+    "short_name": "CZ"
+  }
+]

@@ -1,0 +1,19 @@
+{
+  "data": [
+    {
+      "cost": "0.10",
+      "countryCode": "us",
+      "dataInGb": 50,
+      "expiration": "2025-10-05",
+      "label": "Labels",
+      "name": "United States",
+      "plan": 1,
+      "status": 2,
+      "timestamp": "2025-07-21",
+      "transactionId": "ABCDEFGHI123456"
+    }
+  ],
+  "limit": 20,
+  "page": 1,
+  "rows": 1
+}

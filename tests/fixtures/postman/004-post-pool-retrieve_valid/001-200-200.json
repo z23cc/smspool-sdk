@@ -1,0 +1,32 @@
+[
+  {
+    "custom_area": 1,
+    "name": "Foxtrot",
+    "pool": 7,
+    "price": "0.30"
+  },
+  {
+    "custom_area": 0,
+    "name": "Mike",
+    "pool": 12,
+    "price": "0.30"
+  },
+  {
+    "custom_area": 0,
+    "name": "Delta",
+    "pool": 4,
+    "price": "0.32"
+  },
+  {
+    "custom_area": 0,
+    "name": "Bravo",
+    "pool": 2,
+    "price": "1.16"
+  },
+  {
+    "custom_area": 0,
+    "name": "Charlie",
+    "pool": 3,
+    "price": "0.48"
+  }
+]

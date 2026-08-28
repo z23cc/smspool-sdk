@@ -1,0 +1,82 @@
+[
+  {
+    "ID": 1,
+    "dataInGb": 3,
+    "duration": 30,
+    "extendable": 2,
+    "ip": "UK/NO",
+    "network": "[{\"country\":\"Spain\",\"network\":[{\"operatorName\":\"Vodafone\",\"networkType\":\"5G\"},{\"operatorName\":\"Orange\",\"networkType\":\"5G\"},{\"operatorName\":\"Movistar\",\"networkType\":\"5G\"},{\"operatorName\":\"Yoigo\",\"networkType\":\"5G\"}]}]",
+    "price": "2.50",
+    "speed": "3G/4G/5G"
+  },
+  {
+    "ID": 2,
+    "dataInGb": 5,
+    "duration": 30,
+    "extendable": 2,
+    "ip": "UK/NO",
+    "network": "[{\"country\":\"Spain\",\"network\":[{\"operatorName\":\"Vodafone\",\"networkType\":\"5G\"},{\"operatorName\":\"Orange\",\"networkType\":\"5G\"},{\"operatorName\":\"Movistar\",\"networkType\":\"5G\"},{\"operatorName\":\"Yoigo\",\"networkType\":\"5G\"}]}]",
+    "price": "3.80",
+    "speed": "3G/4G/5G"
+  },
+  {
+    "ID": 191,
+    "dataInGb": 1,
+    "duration": 7,
+    "extendable": 2,
+    "ip": "UK/NO",
+    "network": "[{\"country\":\"Spain\",\"network\":[{\"operatorName\":\"Vodafone\",\"networkType\":\"5G\"},{\"operatorName\":\"Orange\",\"networkType\":\"5G\"},{\"operatorName\":\"Movistar\",\"networkType\":\"5G\"},{\"operatorName\":\"Yoigo\",\"networkType\":\"5G\"}]}]",
+    "price": "1.00",
+    "speed": "3G/4G/5G"
+  },
+  {
+    "ID": 192,
+    "dataInGb": 3,
+    "duration": 15,
+    "extendable": 2,
+    "ip": "UK/NO",
+    "network": "[{\"country\":\"Spain\",\"network\":[{\"operatorName\":\"Vodafone\",\"networkType\":\"5G\"},{\"operatorName\":\"Orange\",\"networkType\":\"5G\"},{\"operatorName\":\"Movistar\",\"networkType\":\"5G\"},{\"operatorName\":\"Yoigo\",\"networkType\":\"5G\"}]}]",
+    "price": "2.40",
+    "speed": "3G/4G/5G"
+  },
+  {
+    "ID": 396,
+    "dataInGb": 10,
+    "duration": 30,
+    "extendable": 2,
+    "ip": "UK/NO",
+    "network": "[{\"country\":\"Spain\",\"network\":[{\"operatorName\":\"Vodafone\",\"networkType\":\"5G\"},{\"operatorName\":\"Orange\",\"networkType\":\"5G\"},{\"operatorName\":\"Movistar\",\"networkType\":\"5G\"},{\"operatorName\":\"Yoigo\",\"networkType\":\"5G\"}]}]",
+    "price": "6.60",
+    "speed": "3G/4G/5G"
+  },
+  {
+    "ID": 397,
+    "dataInGb": 20,
+    "duration": 30,
+    "extendable": 2,
+    "ip": "UK/NO",
+    "network": "[{\"country\":\"Spain\",\"network\":[{\"operatorName\":\"Vodafone\",\"networkType\":\"5G\"},{\"operatorName\":\"Orange\",\"networkType\":\"5G\"},{\"operatorName\":\"Movistar\",\"networkType\":\"5G\"},{\"operatorName\":\"Yoigo\",\"networkType\":\"5G\"}]}]",
+    "price": "11.50",
+    "speed": "3G/4G/5G"
+  },
+  {
+    "ID": 1209,
+    "dataInGb": 50,
+    "duration": 30,
+    "extendable": 2,
+    "ip": "UK/NO",
+    "network": "[{\"country\":\"Spain\",\"network\":[{\"operatorName\":\"Vodafone\",\"networkType\":\"5G\"},{\"operatorName\":\"Orange\",\"networkType\":\"5G\"},{\"operatorName\":\"Movistar\",\"networkType\":\"5G\"},{\"operatorName\":\"Yoigo\",\"networkType\":\"5G\"}]}]",
+    "price": "23.80",
+    "speed": "3G/4G"
+  },
+  {
+    "ID": 550,
+    "dataInGb": 50,
+    "duration": 180,
+    "extendable": 2,
+    "ip": "UK/NO",
+    "network": "[{\"country\":\"Spain\",\"network\":[{\"operatorName\":\"Vodafone\",\"networkType\":\"5G\"},{\"operatorName\":\"Orange\",\"networkType\":\"5G\"},{\"operatorName\":\"Movistar\",\"networkType\":\"5G\"},{\"operatorName\":\"Yoigo\",\"networkType\":\"5G\"}]}]",
+    "price": "30.80",
+    "speed": "3G/4G/5G"
+  }
+]

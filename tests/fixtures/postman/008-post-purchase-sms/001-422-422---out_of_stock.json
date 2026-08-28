@@ -1,0 +1,22 @@
+{
+  "errors": [
+    {
+      "message": "We couldn't find an available phone number for you, please try again later!"
+    }
+  ],
+  "message": "<p>Pool <b>Foxtrot</b>: <p>We couldn't find an available phone number for you, please try again later!</p></p>",
+  "pools": {
+    "Foxtrot": {
+      "errors": [
+        {
+          "message": "We couldn't find an available phone number for you, please try again later!"
+        }
+      ],
+      "message": "<p><b>Foxtrot</b> <p>We couldn't find an available phone number for you, please try again later!</p></p>",
+      "success": 0,
+      "type": "OUT_OF_STOCK"
+    }
+  },
+  "success": 0,
+  "type": "OUT_OF_STOCK"
+}

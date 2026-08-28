@@ -1,0 +1,2987 @@
+[
+  {
+    "ID": 1106,
+    "name": "101Sweets",
+    "pool": 1
+  },
+  {
+    "ID": 1,
+    "name": "1688",
+    "pool": 1
+  },
+  {
+    "ID": 3,
+    "name": "1StopMove",
+    "pool": 1
+  },
+  {
+    "ID": 8,
+    "name": "3Fun",
+    "pool": 1
+  },
+  {
+    "ID": 10,
+    "name": "5miles",
+    "pool": 1
+  },
+  {
+    "ID": 17,
+    "name": "Abra",
+    "pool": 1
+  },
+  {
+    "ID": 1107,
+    "name": "AccountPatrol / MoneyPatrol",
+    "pool": 1
+  },
+  {
+    "ID": 1108,
+    "name": "Acorns",
+    "pool": 1
+  },
+  {
+    "ID": 1103,
+    "name": "AdGate",
+    "pool": 1
+  },
+  {
+    "ID": 19,
+    "name": "Adidas",
+    "pool": 1
+  },
+  {
+    "ID": 24,
+    "name": "AdWallet",
+    "pool": 1
+  },
+  {
+    "ID": 1109,
+    "name": "Aeldra",
+    "pool": 1
+  },
+  {
+    "ID": 25,
+    "name": "Affirm",
+    "pool": 1
+  },
+  {
+    "ID": 26,
+    "name": "Afterpay",
+    "pool": 1
+  },
+  {
+    "ID": 1248,
+    "name": "AH4R",
+    "pool": 1
+  },
+  {
+    "ID": 28,
+    "name": "Airbnb",
+    "pool": 1
+  },
+  {
+    "ID": 30,
+    "name": "Airtm",
+    "pool": 1
+  },
+  {
+    "ID": 32,
+    "name": "Albert",
+    "pool": 1
+  },
+  {
+    "ID": 33,
+    "name": "Alibaba",
+    "pool": 1
+  },
+  {
+    "ID": 36,
+    "name": "Allset",
+    "pool": 1
+  },
+  {
+    "ID": 38,
+    "name": "Amasia",
+    "pool": 1
+  },
+  {
+    "ID": 40,
+    "name": "America Voice",
+    "pool": 1
+  },
+  {
+    "ID": 41,
+    "name": "Ando",
+    "pool": 1
+  },
+  {
+    "ID": 1282,
+    "name": "Angi",
+    "pool": 1
+  },
+  {
+    "ID": 43,
+    "name": "Ankama",
+    "pool": 1
+  },
+  {
+    "ID": 46,
+    "name": "Aol",
+    "pool": 1
+  },
+  {
+    "ID": 47,
+    "name": "App Flame",
+    "pool": 1
+  },
+  {
+    "ID": 48,
+    "name": "Apple",
+    "pool": 1
+  },
+  {
+    "ID": 1113,
+    "name": "Apple Wallet",
+    "pool": 1
+  },
+  {
+    "ID": 50,
+    "name": "AppStation",
+    "pool": 1
+  },
+  {
+    "ID": 51,
+    "name": "ARMSLIST",
+    "pool": 1
+  },
+  {
+    "ID": 1114,
+    "name": "Aspiration",
+    "pool": 1
+  },
+  {
+    "ID": 53,
+    "name": "Atom",
+    "pool": 1
+  },
+  {
+    "ID": 54,
+    "name": "Atomy",
+    "pool": 1
+  },
+  {
+    "ID": 55,
+    "name": "AttaPoll",
+    "pool": 1
+  },
+  {
+    "ID": 57,
+    "name": "Authy",
+    "pool": 1
+  },
+  {
+    "ID": 60,
+    "name": "Avail",
+    "pool": 1
+  },
+  {
+    "ID": 63,
+    "name": "Backblaze",
+    "pool": 1
+  },
+  {
+    "ID": 65,
+    "name": "Badoo",
+    "pool": 1
+  },
+  {
+    "ID": 66,
+    "name": "Baidu",
+    "pool": 1
+  },
+  {
+    "ID": 1116,
+    "name": "Bakkt",
+    "pool": 1
+  },
+  {
+    "ID": 69,
+    "name": "Banxa",
+    "pool": 1
+  },
+  {
+    "ID": 71,
+    "name": "BBVA",
+    "pool": 1
+  },
+  {
+    "ID": 1275,
+    "name": "Beat",
+    "pool": 1
+  },
+  {
+    "ID": 76,
+    "name": "Best Of Our Valley",
+    "pool": 1
+  },
+  {
+    "ID": 1269,
+    "name": "BetMGM",
+    "pool": 1
+  },
+  {
+    "ID": 1119,
+    "name": "Betterment",
+    "pool": 1
+  },
+  {
+    "ID": 1120,
+    "name": "Bilt Rewards",
+    "pool": 1
+  },
+  {
+    "ID": 85,
+    "name": "Binance",
+    "pool": 1
+  },
+  {
+    "ID": 90,
+    "name": "BitClout",
+    "pool": 1
+  },
+  {
+    "ID": 92,
+    "name": "Bitcoin ATM",
+    "pool": 1
+  },
+  {
+    "ID": 95,
+    "name": "bitFlyer",
+    "pool": 1
+  },
+  {
+    "ID": 96,
+    "name": "Bitfront",
+    "pool": 1
+  },
+  {
+    "ID": 100,
+    "name": "Bitmo",
+    "pool": 1
+  },
+  {
+    "ID": 107,
+    "name": "Bitstamp",
+    "pool": 1
+  },
+  {
+    "ID": 109,
+    "name": "Bitwage",
+    "pool": 1
+  },
+  {
+    "ID": 113,
+    "name": "BlackPeopleMeet",
+    "pool": 1
+  },
+  {
+    "ID": 1122,
+    "name": "BlockFi",
+    "pool": 1
+  },
+  {
+    "ID": 118,
+    "name": "BlueAcorn",
+    "pool": 1
+  },
+  {
+    "ID": 1123,
+    "name": "BlueBird",
+    "pool": 1
+  },
+  {
+    "ID": 120,
+    "name": "Blue Federal Credit Union",
+    "pool": 1
+  },
+  {
+    "ID": 122,
+    "name": "BlueVine",
+    "pool": 1
+  },
+  {
+    "ID": 1124,
+    "name": "BMOHarris",
+    "pool": 1
+  },
+  {
+    "ID": 123,
+    "name": "Boatsetter",
+    "pool": 1
+  },
+  {
+    "ID": 124,
+    "name": "Bolt",
+    "pool": 1
+  },
+  {
+    "ID": 125,
+    "name": "Booking.com",
+    "pool": 1
+  },
+  {
+    "ID": 1230,
+    "name": "BOSS Revolution Money",
+    "pool": 1
+  },
+  {
+    "ID": 1125,
+    "name": "Bovada",
+    "pool": 1
+  },
+  {
+    "ID": 131,
+    "name": "Boxed Deal",
+    "pool": 1
+  },
+  {
+    "ID": 132,
+    "name": "Braid",
+    "pool": 1
+  },
+  {
+    "ID": 1126,
+    "name": "Brandclub",
+    "pool": 1
+  },
+  {
+    "ID": 135,
+    "name": "Brex",
+    "pool": 1
+  },
+  {
+    "ID": 1127,
+    "name": "BridgeCard",
+    "pool": 1
+  },
+  {
+    "ID": 138,
+    "name": "BTCDirect",
+    "pool": 1
+  },
+  {
+    "ID": 139,
+    "name": "BTCsurveys",
+    "pool": 1
+  },
+  {
+    "ID": 142,
+    "name": "Bumble",
+    "pool": 1
+  },
+  {
+    "ID": 143,
+    "name": "Bump",
+    "pool": 1
+  },
+  {
+    "ID": 144,
+    "name": "Bundil",
+    "pool": 1
+  },
+  {
+    "ID": 1246,
+    "name": "BurstSMS",
+    "pool": 1
+  },
+  {
+    "ID": 1128,
+    "name": "BuyOnTrust",
+    "pool": 1
+  },
+  {
+    "ID": 152,
+    "name": "CARD.com",
+    "pool": 1
+  },
+  {
+    "ID": 154,
+    "name": "Careem",
+    "pool": 1
+  },
+  {
+    "ID": 155,
+    "name": "Carepoynt",
+    "pool": 1
+  },
+  {
+    "ID": 159,
+    "name": "Cash Alarm",
+    "pool": 1
+  },
+  {
+    "ID": 1256,
+    "name": "Cashew",
+    "pool": 1
+  },
+  {
+    "ID": 162,
+    "name": "Cash Show",
+    "pool": 1
+  },
+  {
+    "ID": 163,
+    "name": "CashWalk",
+    "pool": 1
+  },
+  {
+    "ID": 167,
+    "name": "Caviar",
+    "pool": 1
+  },
+  {
+    "ID": 168,
+    "name": "cdkeys.com",
+    "pool": 1
+  },
+  {
+    "ID": 1129,
+    "name": "Champs Sports",
+    "pool": 1
+  },
+  {
+    "ID": 172,
+    "name": "Changelly",
+    "pool": 1
+  },
+  {
+    "ID": 1130,
+    "name": "Charles Schwab",
+    "pool": 1
+  },
+  {
+    "ID": 174,
+    "name": "Chase",
+    "pool": 1
+  },
+  {
+    "ID": 175,
+    "name": "CheapVoip",
+    "pool": 1
+  },
+  {
+    "ID": 177,
+    "name": "CheckPoints",
+    "pool": 1
+  },
+  {
+    "ID": 178,
+    "name": "Cheese",
+    "pool": 1
+  },
+  {
+    "ID": 1131,
+    "name": "Chicks Gold Inc.",
+    "pool": 1
+  },
+  {
+    "ID": 179,
+    "name": "Chime",
+    "pool": 1
+  },
+  {
+    "ID": 181,
+    "name": "Chispa",
+    "pool": 1
+  },
+  {
+    "ID": 182,
+    "name": "Chowbus",
+    "pool": 1
+  },
+  {
+    "ID": 183,
+    "name": "CIBC",
+    "pool": 1
+  },
+  {
+    "ID": 184,
+    "name": "Cinchbucks",
+    "pool": 1
+  },
+  {
+    "ID": 185,
+    "name": "Circle",
+    "pool": 1
+  },
+  {
+    "ID": 186,
+    "name": "CJS-CDKEYS.COM",
+    "pool": 1
+  },
+  {
+    "ID": 191,
+    "name": "Cleo",
+    "pool": 1
+  },
+  {
+    "ID": 192,
+    "name": "Clickadu",
+    "pool": 1
+  },
+  {
+    "ID": 194,
+    "name": "ClickDishes",
+    "pool": 1
+  },
+  {
+    "ID": 195,
+    "name": "clickworker",
+    "pool": 1
+  },
+  {
+    "ID": 201,
+    "name": "Clover",
+    "pool": 1
+  },
+  {
+    "ID": 203,
+    "name": "Clubhouse",
+    "pool": 1
+  },
+  {
+    "ID": 1244,
+    "name": "CocaCola",
+    "pool": 1
+  },
+  {
+    "ID": 206,
+    "name": "Coffee Meets Bagel",
+    "pool": 1
+  },
+  {
+    "ID": 208,
+    "name": "Coinbase",
+    "pool": 1
+  },
+  {
+    "ID": 1133,
+    "name": "CoinCircle",
+    "pool": 1
+  },
+  {
+    "ID": 210,
+    "name": "CoinCloud",
+    "pool": 1
+  },
+  {
+    "ID": 212,
+    "name": "CoinFlip",
+    "pool": 1
+  },
+  {
+    "ID": 213,
+    "name": "CoinGate",
+    "pool": 1
+  },
+  {
+    "ID": 1283,
+    "name": "Coinloot",
+    "pool": 1
+  },
+  {
+    "ID": 217,
+    "name": "Coinme",
+    "pool": 1
+  },
+  {
+    "ID": 218,
+    "name": "Coinomi",
+    "pool": 1
+  },
+  {
+    "ID": 219,
+    "name": "Coin Pop",
+    "pool": 1
+  },
+  {
+    "ID": 1101,
+    "name": "CoinsBaron",
+    "pool": 1
+  },
+  {
+    "ID": 220,
+    "name": "Coinseed",
+    "pool": 1
+  },
+  {
+    "ID": 224,
+    "name": "CoinSwitch",
+    "pool": 1
+  },
+  {
+    "ID": 225,
+    "name": "Cointelegraph",
+    "pool": 1
+  },
+  {
+    "ID": 226,
+    "name": "CoinZoom",
+    "pool": 1
+  },
+  {
+    "ID": 1135,
+    "name": "Comenity / Bread Financial / Bread Pay",
+    "pool": 1
+  },
+  {
+    "ID": 227,
+    "name": "Community Insights Forum",
+    "pool": 1
+  },
+  {
+    "ID": 229,
+    "name": "Copper",
+    "pool": 1
+  },
+  {
+    "ID": 231,
+    "name": "Coupons.com",
+    "pool": 1
+  },
+  {
+    "ID": 232,
+    "name": "Course Hero",
+    "pool": 1
+  },
+  {
+    "ID": 233,
+    "name": "Craigslist",
+    "pool": 1
+  },
+  {
+    "ID": 235,
+    "name": "Credit Karma",
+    "pool": 1
+  },
+  {
+    "ID": 236,
+    "name": "Credit Sesame",
+    "pool": 1
+  },
+  {
+    "ID": 237,
+    "name": "CrowdTap",
+    "pool": 1
+  },
+  {
+    "ID": 238,
+    "name": "Crypterium",
+    "pool": 1
+  },
+  {
+    "ID": 239,
+    "name": "Crypto.com",
+    "pool": 1
+  },
+  {
+    "ID": 1136,
+    "name": "Cryptolocally",
+    "pool": 1
+  },
+  {
+    "ID": 241,
+    "name": "CryptoVoucher",
+    "pool": 1
+  },
+  {
+    "ID": 244,
+    "name": "CuriousCat",
+    "pool": 1
+  },
+  {
+    "ID": 245,
+    "name": "Current",
+    "pool": 1
+  },
+  {
+    "ID": 247,
+    "name": "Current Rewards",
+    "pool": 1
+  },
+  {
+    "ID": 248,
+    "name": "Curtsy",
+    "pool": 1
+  },
+  {
+    "ID": 1260,
+    "name": "CVS",
+    "pool": 1
+  },
+  {
+    "ID": 250,
+    "name": "Dabbl",
+    "pool": 1
+  },
+  {
+    "ID": 252,
+    "name": "Dapper",
+    "pool": 1
+  },
+  {
+    "ID": 1137,
+    "name": "DasherDirect",
+    "pool": 1
+  },
+  {
+    "ID": 255,
+    "name": "Dave",
+    "pool": 1
+  },
+  {
+    "ID": 256,
+    "name": "Daybreak Games",
+    "pool": 1
+  },
+  {
+    "ID": 261,
+    "name": "Dent",
+    "pool": 1
+  },
+  {
+    "ID": 262,
+    "name": "Depop",
+    "pool": 1
+  },
+  {
+    "ID": 264,
+    "name": "DHL",
+    "pool": 1
+  },
+  {
+    "ID": 265,
+    "name": "Dialpad",
+    "pool": 1
+  },
+  {
+    "ID": 269,
+    "name": "Digit",
+    "pool": 1
+  },
+  {
+    "ID": 1138,
+    "name": "Ding",
+    "pool": 1
+  },
+  {
+    "ID": 273,
+    "name": "Discord",
+    "pool": 1
+  },
+  {
+    "ID": 275,
+    "name": "DistroKid",
+    "pool": 1
+  },
+  {
+    "ID": 276,
+    "name": "DocuSign",
+    "pool": 1
+  },
+  {
+    "ID": 278,
+    "name": "DollarClix",
+    "pool": 1
+  },
+  {
+    "ID": 279,
+    "name": "Dollar General",
+    "pool": 1
+  },
+  {
+    "ID": 1273,
+    "name": "Donately",
+    "pool": 1
+  },
+  {
+    "ID": 1139,
+    "name": "Donut",
+    "pool": 1
+  },
+  {
+    "ID": 280,
+    "name": "DoorDash",
+    "pool": 1
+  },
+  {
+    "ID": 281,
+    "name": "Dora",
+    "pool": 1
+  },
+  {
+    "ID": 282,
+    "name": "DOSH",
+    "pool": 1
+  },
+  {
+    "ID": 285,
+    "name": "Doublelist",
+    "pool": 1
+  },
+  {
+    "ID": 286,
+    "name": "Douugh",
+    "pool": 1
+  },
+  {
+    "ID": 1140,
+    "name": "DreamSpring",
+    "pool": 1
+  },
+  {
+    "ID": 289,
+    "name": "Drop",
+    "pool": 1
+  },
+  {
+    "ID": 296,
+    "name": "DunkinDonuts",
+    "pool": 1
+  },
+  {
+    "ID": 1141,
+    "name": "EarlyBird",
+    "pool": 1
+  },
+  {
+    "ID": 299,
+    "name": "Earnably",
+    "pool": 1
+  },
+  {
+    "ID": 300,
+    "name": "Earn Honey",
+    "pool": 1
+  },
+  {
+    "ID": 302,
+    "name": "EarningStation",
+    "pool": 1
+  },
+  {
+    "ID": 1142,
+    "name": "Eastbay",
+    "pool": 1
+  },
+  {
+    "ID": 305,
+    "name": "eBay",
+    "pool": 1
+  },
+  {
+    "ID": 306,
+    "name": "eGifter",
+    "pool": 1
+  },
+  {
+    "ID": 307,
+    "name": "Elepreneur",
+    "pool": 1
+  },
+  {
+    "ID": 308,
+    "name": "Elevacity",
+    "pool": 1
+  },
+  {
+    "ID": 311,
+    "name": "Empower",
+    "pool": 1
+  },
+  {
+    "ID": 312,
+    "name": "Eneba",
+    "pool": 1
+  },
+  {
+    "ID": 317,
+    "name": "EpicNPC",
+    "pool": 1
+  },
+  {
+    "ID": 1143,
+    "name": "EpochTimes",
+    "pool": 1
+  },
+  {
+    "ID": 318,
+    "name": "e-Rewards",
+    "pool": 1
+  },
+  {
+    "ID": 322,
+    "name": "eToro",
+    "pool": 1
+  },
+  {
+    "ID": 323,
+    "name": "Etsy",
+    "pool": 1
+  },
+  {
+    "ID": 1267,
+    "name": "Eureka",
+    "pool": 1
+  },
+  {
+    "ID": 325,
+    "name": "EveryoneAPI",
+    "pool": 1
+  },
+  {
+    "ID": 1144,
+    "name": "EZ Texting",
+    "pool": 1
+  },
+  {
+    "ID": 329,
+    "name": "Facebook",
+    "pool": 1
+  },
+  {
+    "ID": 1287,
+    "name": "FarmersOnly",
+    "pool": 1
+  },
+  {
+    "ID": 333,
+    "name": "FastMail",
+    "pool": 1
+  },
+  {
+    "ID": 334,
+    "name": "Fave",
+    "pool": 1
+  },
+  {
+    "ID": 336,
+    "name": "FedEx",
+    "pool": 1
+  },
+  {
+    "ID": 337,
+    "name": "Fetch Rewards",
+    "pool": 1
+  },
+  {
+    "ID": 338,
+    "name": "FetLife",
+    "pool": 1
+  },
+  {
+    "ID": 1145,
+    "name": "Fidelity Investments",
+    "pool": 1
+  },
+  {
+    "ID": 339,
+    "name": "Figure Eight",
+    "pool": 1
+  },
+  {
+    "ID": 342,
+    "name": "Finish Line",
+    "pool": 1
+  },
+  {
+    "ID": 1147,
+    "name": "First Tech Federal Credit Union",
+    "pool": 1
+  },
+  {
+    "ID": 345,
+    "name": "Fitplay",
+    "pool": 1
+  },
+  {
+    "ID": 346,
+    "name": "Fiverr",
+    "pool": 1
+  },
+  {
+    "ID": 347,
+    "name": "Flare",
+    "pool": 1
+  },
+  {
+    "ID": 348,
+    "name": "Flash Rewards",
+    "pool": 1
+  },
+  {
+    "ID": 351,
+    "name": "Flippa",
+    "pool": 1
+  },
+  {
+    "ID": 355,
+    "name": "Fluz",
+    "pool": 1
+  },
+  {
+    "ID": 1148,
+    "name": "Fold",
+    "pool": 1
+  },
+  {
+    "ID": 1149,
+    "name": "Foot Locker",
+    "pool": 1
+  },
+  {
+    "ID": 362,
+    "name": "Found",
+    "pool": 1
+  },
+  {
+    "ID": 363,
+    "name": "Freelancer",
+    "pool": 1
+  },
+  {
+    "ID": 364,
+    "name": "FreeTaxUSA",
+    "pool": 1
+  },
+  {
+    "ID": 366,
+    "name": "Fruitlab",
+    "pool": 1
+  },
+  {
+    "ID": 367,
+    "name": "FTX",
+    "pool": 1
+  },
+  {
+    "ID": 368,
+    "name": "FusionCash",
+    "pool": 1
+  },
+  {
+    "ID": 369,
+    "name": "G2A",
+    "pool": 1
+  },
+  {
+    "ID": 370,
+    "name": "G2G",
+    "pool": 1
+  },
+  {
+    "ID": 1150,
+    "name": "Gabi",
+    "pool": 1
+  },
+  {
+    "ID": 1280,
+    "name": "Gaintplay",
+    "pool": 1
+  },
+  {
+    "ID": 372,
+    "name": "Gameflip",
+    "pool": 1
+  },
+  {
+    "ID": 373,
+    "name": "Gamekit",
+    "pool": 1
+  },
+  {
+    "ID": 1151,
+    "name": "Gamercraft",
+    "pool": 1
+  },
+  {
+    "ID": 378,
+    "name": "Gemini",
+    "pool": 1
+  },
+  {
+    "ID": 1152,
+    "name": "Gemiplay",
+    "pool": 1
+  },
+  {
+    "ID": 379,
+    "name": "Genitrust",
+    "pool": 1
+  },
+  {
+    "ID": 380,
+    "name": "GetPaidTo",
+    "pool": 1
+  },
+  {
+    "ID": 385,
+    "name": "Gifthulk",
+    "pool": 1
+  },
+  {
+    "ID": 386,
+    "name": "GiftHunterClub",
+    "pool": 1
+  },
+  {
+    "ID": 1153,
+    "name": "GiftPocket",
+    "pool": 1
+  },
+  {
+    "ID": 1154,
+    "name": "Glass.net",
+    "pool": 1
+  },
+  {
+    "ID": 387,
+    "name": "Glidera",
+    "pool": 1
+  },
+  {
+    "ID": 391,
+    "name": "GoFundMe",
+    "pool": 1
+  },
+  {
+    "ID": 393,
+    "name": "Golden Farmery",
+    "pool": 1
+  },
+  {
+    "ID": 395,
+    "name": "Google/Gmail",
+    "pool": 1
+  },
+  {
+    "ID": 1158,
+    "name": "Google Business Profile",
+    "pool": 1
+  },
+  {
+    "ID": 1159,
+    "name": "Google Merchant Center",
+    "pool": 1
+  },
+  {
+    "ID": 396,
+    "name": "Google Voice",
+    "pool": 1
+  },
+  {
+    "ID": 397,
+    "name": "Gopuff",
+    "pool": 1
+  },
+  {
+    "ID": 1093,
+    "name": "Grab",
+    "pool": 1
+  },
+  {
+    "ID": 399,
+    "name": "GrabPoints",
+    "pool": 1
+  },
+  {
+    "ID": 1160,
+    "name": "Green Dot Smart Home",
+    "pool": 1
+  },
+  {
+    "ID": 1105,
+    "name": "Greenlight",
+    "pool": 1
+  },
+  {
+    "ID": 403,
+    "name": "Grindr",
+    "pool": 1
+  },
+  {
+    "ID": 404,
+    "name": "GroupMe",
+    "pool": 1
+  },
+  {
+    "ID": 407,
+    "name": "Guru",
+    "pool": 1
+  },
+  {
+    "ID": 409,
+    "name": "Happn",
+    "pool": 1
+  },
+  {
+    "ID": 410,
+    "name": "HappyCo",
+    "pool": 1
+  },
+  {
+    "ID": 414,
+    "name": "Harris Poll",
+    "pool": 1
+  },
+  {
+    "ID": 417,
+    "name": "Hibbett",
+    "pool": 1
+  },
+  {
+    "ID": 420,
+    "name": "Hinge",
+    "pool": 1
+  },
+  {
+    "ID": 423,
+    "name": "HomeAway",
+    "pool": 1
+  },
+  {
+    "ID": 427,
+    "name": "HQ Trivia",
+    "pool": 1
+  },
+  {
+    "ID": 431,
+    "name": "Humble Bundle",
+    "pool": 1
+  },
+  {
+    "ID": 1249,
+    "name": "Hunter",
+    "pool": 1
+  },
+  {
+    "ID": 470,
+    "name": "Ipsos iSay",
+    "pool": 1
+  },
+  {
+    "ID": 435,
+    "name": "ibotta",
+    "pool": 1
+  },
+  {
+    "ID": 436,
+    "name": "ICQ",
+    "pool": 1
+  },
+  {
+    "ID": 1163,
+    "name": "IDES",
+    "pool": 1
+  },
+  {
+    "ID": 438,
+    "name": "Idle-Empire",
+    "pool": 1
+  },
+  {
+    "ID": 439,
+    "name": "ID.me",
+    "pool": 1
+  },
+  {
+    "ID": 442,
+    "name": "Imgur",
+    "pool": 1
+  },
+  {
+    "ID": 1164,
+    "name": "iMoney",
+    "pool": 1
+  },
+  {
+    "ID": 451,
+    "name": "Indeed",
+    "pool": 1
+  },
+  {
+    "ID": 452,
+    "name": "Indi",
+    "pool": 1
+  },
+  {
+    "ID": 453,
+    "name": "Innago",
+    "pool": 1
+  },
+  {
+    "ID": 454,
+    "name": "Inspire",
+    "pool": 1
+  },
+  {
+    "ID": 455,
+    "name": "Instacart",
+    "pool": 1
+  },
+  {
+    "ID": 456,
+    "name": "InstaGC",
+    "pool": 1
+  },
+  {
+    "ID": 457,
+    "name": "Instagram",
+    "pool": 1
+  },
+  {
+    "ID": 458,
+    "name": "InstaRem",
+    "pool": 1
+  },
+  {
+    "ID": 460,
+    "name": "Intuit",
+    "pool": 1
+  },
+  {
+    "ID": 461,
+    "name": "iOffer",
+    "pool": 1
+  },
+  {
+    "ID": 465,
+    "name": "iPlum",
+    "pool": 1
+  },
+  {
+    "ID": 466,
+    "name": "iPoll",
+    "pool": 1
+  },
+  {
+    "ID": 468,
+    "name": "iRazoo",
+    "pool": 1
+  },
+  {
+    "ID": 475,
+    "name": "Jelli",
+    "pool": 1
+  },
+  {
+    "ID": 477,
+    "name": "Jerry",
+    "pool": 1
+  },
+  {
+    "ID": 1166,
+    "name": "Jobber",
+    "pool": 1
+  },
+  {
+    "ID": 484,
+    "name": "Juno",
+    "pool": 1
+  },
+  {
+    "ID": 487,
+    "name": "KakaoTalk",
+    "pool": 1
+  },
+  {
+    "ID": 488,
+    "name": "Kamatera",
+    "pool": 1
+  },
+  {
+    "ID": 494,
+    "name": "Keybase",
+    "pool": 1
+  },
+  {
+    "ID": 1168,
+    "name": "Kikoff",
+    "pool": 1
+  },
+  {
+    "ID": 1169,
+    "name": "Kixify",
+    "pool": 1
+  },
+  {
+    "ID": 497,
+    "name": "Klarna",
+    "pool": 1
+  },
+  {
+    "ID": 502,
+    "name": "KuCoin",
+    "pool": 1
+  },
+  {
+    "ID": 512,
+    "name": "LBRY App",
+    "pool": 1
+  },
+  {
+    "ID": 1250,
+    "name": "LDSPlanet",
+    "pool": 1
+  },
+  {
+    "ID": 515,
+    "name": "Letgo",
+    "pool": 1
+  },
+  {
+    "ID": 517,
+    "name": "LibertyX",
+    "pool": 1
+  },
+  {
+    "ID": 1170,
+    "name": "LikeCard",
+    "pool": 1
+  },
+  {
+    "ID": 521,
+    "name": "Lili",
+    "pool": 1
+  },
+  {
+    "ID": 522,
+    "name": "Line",
+    "pool": 1
+  },
+  {
+    "ID": 1257,
+    "name": "Link",
+    "pool": 1
+  },
+  {
+    "ID": 523,
+    "name": "LinkedIn",
+    "pool": 1
+  },
+  {
+    "ID": 525,
+    "name": "Listia",
+    "pool": 1
+  },
+  {
+    "ID": 532,
+    "name": "LocalBitcoins",
+    "pool": 1
+  },
+  {
+    "ID": 533,
+    "name": "LocalCoinATM",
+    "pool": 1
+  },
+  {
+    "ID": 535,
+    "name": "Locanto",
+    "pool": 1
+  },
+  {
+    "ID": 1251,
+    "name": "LoveAndSeek",
+    "pool": 1
+  },
+  {
+    "ID": 542,
+    "name": "Lyft",
+    "pool": 1
+  },
+  {
+    "ID": 544,
+    "name": "M1 Finance",
+    "pool": 1
+  },
+  {
+    "ID": 552,
+    "name": "Mail Princess",
+    "pool": 1
+  },
+  {
+    "ID": 553,
+    "name": "MailRu",
+    "pool": 1
+  },
+  {
+    "ID": 555,
+    "name": "Mamba",
+    "pool": 1
+  },
+  {
+    "ID": 1171,
+    "name": "Marcus",
+    "pool": 1
+  },
+  {
+    "ID": 1172,
+    "name": "McMoney",
+    "pool": 1
+  },
+  {
+    "ID": 564,
+    "name": "MeetMe",
+    "pool": 1
+  },
+  {
+    "ID": 568,
+    "name": "Mercari",
+    "pool": 1
+  },
+  {
+    "ID": 569,
+    "name": "MessageBird",
+    "pool": 1
+  },
+  {
+    "ID": 1173,
+    "name": "MessageDesk",
+    "pool": 1
+  },
+  {
+    "ID": 570,
+    "name": "Metal Pay",
+    "pool": 1
+  },
+  {
+    "ID": 573,
+    "name": "Mezu",
+    "pool": 1
+  },
+  {
+    "ID": 1072,
+    "name": "Microsoft / Microsoft Rewards / Outlook ",
+    "pool": 1
+  },
+  {
+    "ID": 1097,
+    "name": "Microsoft Azure",
+    "pool": 1
+  },
+  {
+    "ID": 1174,
+    "name": "Microsoft Office 365 Business / Microsoft Product",
+    "pool": 1
+  },
+  {
+    "ID": 1075,
+    "name": "Xbox",
+    "pool": 1
+  },
+  {
+    "ID": 576,
+    "name": "Microworkers",
+    "pool": 1
+  },
+  {
+    "ID": 1178,
+    "name": "Millions",
+    "pool": 1
+  },
+  {
+    "ID": 582,
+    "name": "Mint",
+    "pool": 1
+  },
+  {
+    "ID": 1179,
+    "name": "MintVine",
+    "pool": 1
+  },
+  {
+    "ID": 583,
+    "name": "Mistplay",
+    "pool": 1
+  },
+  {
+    "ID": 584,
+    "name": "mixi",
+    "pool": 1
+  },
+  {
+    "ID": 588,
+    "name": "MobileMoney",
+    "pool": 1
+  },
+  {
+    "ID": 1234,
+    "name": "Mode Earn App",
+    "pool": 1
+  },
+  {
+    "ID": 1181,
+    "name": "MoneyGram",
+    "pool": 1
+  },
+  {
+    "ID": 591,
+    "name": "MoneyLion",
+    "pool": 1
+  },
+  {
+    "ID": 592,
+    "name": "MoneyPak",
+    "pool": 1
+  },
+  {
+    "ID": 593,
+    "name": "MoneyRawr",
+    "pool": 1
+  },
+  {
+    "ID": 595,
+    "name": "MoolaDays",
+    "pool": 1
+  },
+  {
+    "ID": 596,
+    "name": "MoonPay",
+    "pool": 1
+  },
+  {
+    "ID": 1182,
+    "name": "Mos",
+    "pool": 1
+  },
+  {
+    "ID": 598,
+    "name": "MOVO",
+    "pool": 1
+  },
+  {
+    "ID": 602,
+    "name": "Mrsool",
+    "pool": 1
+  },
+  {
+    "ID": 604,
+    "name": "MTC Game Portal",
+    "pool": 1
+  },
+  {
+    "ID": 1183,
+    "name": "Mudflap",
+    "pool": 1
+  },
+  {
+    "ID": 1274,
+    "name": "Musicstre.am",
+    "pool": 1
+  },
+  {
+    "ID": 607,
+    "name": "MyBookie",
+    "pool": 1
+  },
+  {
+    "ID": 609,
+    "name": "MyGiftCardSupply",
+    "pool": 1
+  },
+  {
+    "ID": 1185,
+    "name": "MyRobinhood",
+    "pool": 1
+  },
+  {
+    "ID": 618,
+    "name": "My Trainer Rewards",
+    "pool": 1
+  },
+  {
+    "ID": 1186,
+    "name": "My Voice",
+    "pool": 1
+  },
+  {
+    "ID": 1187,
+    "name": "myWisely",
+    "pool": 1
+  },
+  {
+    "ID": 1188,
+    "name": "Natural / Brain.ai",
+    "pool": 1
+  },
+  {
+    "ID": 621,
+    "name": "NBA Topshot",
+    "pool": 1
+  },
+  {
+    "ID": 630,
+    "name": "Netflix",
+    "pool": 1
+  },
+  {
+    "ID": 631,
+    "name": "NetZero",
+    "pool": 1
+  },
+  {
+    "ID": 632,
+    "name": "Neuron",
+    "pool": 1
+  },
+  {
+    "ID": 633,
+    "name": "Nexmo",
+    "pool": 1
+  },
+  {
+    "ID": 634,
+    "name": "Nextdoor",
+    "pool": 1
+  },
+  {
+    "ID": 1190,
+    "name": "NFCU",
+    "pool": 1
+  },
+  {
+    "ID": 1263,
+    "name": "Nielsen",
+    "pool": 1
+  },
+  {
+    "ID": 639,
+    "name": "Nike",
+    "pool": 1
+  },
+  {
+    "ID": 641,
+    "name": "Nonoh",
+    "pool": 1
+  },
+  {
+    "ID": 644,
+    "name": "Nordstrom ",
+    "pool": 1
+  },
+  {
+    "ID": 646,
+    "name": "Novo",
+    "pool": 1
+  },
+  {
+    "ID": 649,
+    "name": "NTWRK",
+    "pool": 1
+  },
+  {
+    "ID": 1286,
+    "name": "Octo",
+    "pool": 1
+  },
+  {
+    "ID": 653,
+    "name": "Offer Nation",
+    "pool": 1
+  },
+  {
+    "ID": 654,
+    "name": "OfferUp",
+    "pool": 1
+  },
+  {
+    "ID": 655,
+    "name": "OffGamers",
+    "pool": 1
+  },
+  {
+    "ID": 656,
+    "name": "OhmConnect",
+    "pool": 1
+  },
+  {
+    "ID": 657,
+    "name": "OKCoin",
+    "pool": 1
+  },
+  {
+    "ID": 658,
+    "name": "OkCupid",
+    "pool": 1
+  },
+  {
+    "ID": 665,
+    "name": "One Finance",
+    "pool": 1
+  },
+  {
+    "ID": 666,
+    "name": "OneMain Financial",
+    "pool": 1
+  },
+  {
+    "ID": 668,
+    "name": "OnJuno",
+    "pool": 1
+  },
+  {
+    "ID": 669,
+    "name": "Online.net",
+    "pool": 1
+  },
+  {
+    "ID": 671,
+    "name": "OpenAI / ChatGPT",
+    "pool": 1
+  },
+  {
+    "ID": 673,
+    "name": "OpenPhone",
+    "pool": 1
+  },
+  {
+    "ID": 1235,
+    "name": "Opinions Outpost",
+    "pool": 1
+  },
+  {
+    "ID": 676,
+    "name": "Opinion World",
+    "pool": 1
+  },
+  {
+    "ID": 1191,
+    "name": "Oportun",
+    "pool": 1
+  },
+  {
+    "ID": 680,
+    "name": "OurTime",
+    "pool": 1
+  },
+  {
+    "ID": 1192,
+    "name": "Oxygen",
+    "pool": 1
+  },
+  {
+    "ID": 682,
+    "name": "OYO",
+    "pool": 1
+  },
+  {
+    "ID": 689,
+    "name": "Parler",
+    "pool": 1
+  },
+  {
+    "ID": 1270,
+    "name": "PartyPoker",
+    "pool": 1
+  },
+  {
+    "ID": 691,
+    "name": "Passbook",
+    "pool": 1
+  },
+  {
+    "ID": 692,
+    "name": "Paxful",
+    "pool": 1
+  },
+  {
+    "ID": 693,
+    "name": "Payactiv",
+    "pool": 1
+  },
+  {
+    "ID": 695,
+    "name": "Paybis",
+    "pool": 1
+  },
+  {
+    "ID": 697,
+    "name": "PayCenter",
+    "pool": 1
+  },
+  {
+    "ID": 700,
+    "name": "PaymeDollar",
+    "pool": 1
+  },
+  {
+    "ID": 702,
+    "name": "Payoneer",
+    "pool": 1
+  },
+  {
+    "ID": 703,
+    "name": "PayPal",
+    "pool": 1
+  },
+  {
+    "ID": 707,
+    "name": "PaySend",
+    "pool": 1
+  },
+  {
+    "ID": 708,
+    "name": "Paysera",
+    "pool": 1
+  },
+  {
+    "ID": 710,
+    "name": "PCGameSupply",
+    "pool": 1
+  },
+  {
+    "ID": 711,
+    "name": "Pei",
+    "pool": 1
+  },
+  {
+    "ID": 1194,
+    "name": "Penfed",
+    "pool": 1
+  },
+  {
+    "ID": 713,
+    "name": "Perk",
+    "pool": 1
+  },
+  {
+    "ID": 714,
+    "name": "Personal Capital",
+    "pool": 1
+  },
+  {
+    "ID": 1284,
+    "name": "PGSamsBuyGet",
+    "pool": 1
+  },
+  {
+    "ID": 718,
+    "name": "Pinecone Research",
+    "pool": 1
+  },
+  {
+    "ID": 722,
+    "name": "Plaid",
+    "pool": 1
+  },
+  {
+    "ID": 723,
+    "name": "PlayerAuctions",
+    "pool": 1
+  },
+  {
+    "ID": 724,
+    "name": "Plenty Of Fish",
+    "pool": 1
+  },
+  {
+    "ID": 1100,
+    "name": "Plivo",
+    "pool": 1
+  },
+  {
+    "ID": 728,
+    "name": "Pogo",
+    "pool": 1
+  },
+  {
+    "ID": 729,
+    "name": "Pointclub",
+    "pool": 1
+  },
+  {
+    "ID": 731,
+    "name": "PollPass",
+    "pool": 1
+  },
+  {
+    "ID": 734,
+    "name": "Porte",
+    "pool": 1
+  },
+  {
+    "ID": 735,
+    "name": "Poshmark",
+    "pool": 1
+  },
+  {
+    "ID": 738,
+    "name": "Potato Chat",
+    "pool": 1
+  },
+  {
+    "ID": 1240,
+    "name": "PREMIER",
+    "pool": 1
+  },
+  {
+    "ID": 739,
+    "name": "Prepaid2Cash",
+    "pool": 1
+  },
+  {
+    "ID": 741,
+    "name": "Privacy",
+    "pool": 1
+  },
+  {
+    "ID": 742,
+    "name": "Prolific",
+    "pool": 1
+  },
+  {
+    "ID": 743,
+    "name": "Promotion Pod",
+    "pool": 1
+  },
+  {
+    "ID": 744,
+    "name": "ProOpinions",
+    "pool": 1
+  },
+  {
+    "ID": 746,
+    "name": "Propy",
+    "pool": 1
+  },
+  {
+    "ID": 747,
+    "name": "ProtonMail",
+    "pool": 1
+  },
+  {
+    "ID": 748,
+    "name": "Pruvit",
+    "pool": 1
+  },
+  {
+    "ID": 752,
+    "name": "Purse.io",
+    "pool": 1
+  },
+  {
+    "ID": 1064,
+    "name": "Zip/QuadPay",
+    "pool": 1
+  },
+  {
+    "ID": 761,
+    "name": "Qube Money",
+    "pool": 1
+  },
+  {
+    "ID": 762,
+    "name": "QuickBooks",
+    "pool": 1
+  },
+  {
+    "ID": 764,
+    "name": "Quick Pay Survey",
+    "pool": 1
+  },
+  {
+    "ID": 765,
+    "name": "Quick Thoughts",
+    "pool": 1
+  },
+  {
+    "ID": 767,
+    "name": "Radial Insight",
+    "pool": 1
+  },
+  {
+    "ID": 768,
+    "name": "Raise",
+    "pool": 1
+  },
+  {
+    "ID": 1255,
+    "name": "RBFCU",
+    "pool": 1
+  },
+  {
+    "ID": 772,
+    "name": "Rebtel",
+    "pool": 1
+  },
+  {
+    "ID": 1261,
+    "name": "RECUR",
+    "pool": 1
+  },
+  {
+    "ID": 1196,
+    "name": "RedCircle",
+    "pool": 1
+  },
+  {
+    "ID": 773,
+    "name": "Remitly",
+    "pool": 1
+  },
+  {
+    "ID": 774,
+    "name": "RentMe",
+    "pool": 1
+  },
+  {
+    "ID": 775,
+    "name": "Reonomy",
+    "pool": 1
+  },
+  {
+    "ID": 777,
+    "name": "RetailMeNot",
+    "pool": 1
+  },
+  {
+    "ID": 778,
+    "name": "Revolut",
+    "pool": 1
+  },
+  {
+    "ID": 779,
+    "name": "Rewarded Play",
+    "pool": 1
+  },
+  {
+    "ID": 780,
+    "name": "Rewarding Ways",
+    "pool": 1
+  },
+  {
+    "ID": 1197,
+    "name": "RI",
+    "pool": 1
+  },
+  {
+    "ID": 781,
+    "name": "Ria Financial",
+    "pool": 1
+  },
+  {
+    "ID": 782,
+    "name": "RingCaptcha",
+    "pool": 1
+  },
+  {
+    "ID": 785,
+    "name": "Ritual.co",
+    "pool": 1
+  },
+  {
+    "ID": 789,
+    "name": "Robinhood",
+    "pool": 1
+  },
+  {
+    "ID": 793,
+    "name": "Roomster",
+    "pool": 1
+  },
+  {
+    "ID": 794,
+    "name": "Root",
+    "pool": 1
+  },
+  {
+    "ID": 795,
+    "name": "Rover",
+    "pool": 1
+  },
+  {
+    "ID": 796,
+    "name": "RRF",
+    "pool": 1
+  },
+  {
+    "ID": 797,
+    "name": "RSGoldMine",
+    "pool": 1
+  },
+  {
+    "ID": 1198,
+    "name": "RSocks",
+    "pool": 1
+  },
+  {
+    "ID": 1199,
+    "name": "Safeway / Albertsons",
+    "pool": 1
+  },
+  {
+    "ID": 1200,
+    "name": "Santander",
+    "pool": 1
+  },
+  {
+    "ID": 1201,
+    "name": "SaverLife",
+    "pool": 1
+  },
+  {
+    "ID": 803,
+    "name": "Save With Surveys",
+    "pool": 1
+  },
+  {
+    "ID": 804,
+    "name": "SayHi",
+    "pool": 1
+  },
+  {
+    "ID": 1202,
+    "name": "SBA",
+    "pool": 1
+  },
+  {
+    "ID": 805,
+    "name": "Scaleway",
+    "pool": 1
+  },
+  {
+    "ID": 809,
+    "name": "SEAGM",
+    "pool": 1
+  },
+  {
+    "ID": 810,
+    "name": "Seated",
+    "pool": 1
+  },
+  {
+    "ID": 811,
+    "name": "Secret Benefits",
+    "pool": 1
+  },
+  {
+    "ID": 812,
+    "name": "SendGrid",
+    "pool": 1
+  },
+  {
+    "ID": 814,
+    "name": "Sendwave",
+    "pool": 1
+  },
+  {
+    "ID": 815,
+    "name": "SEOClerks",
+    "pool": 1
+  },
+  {
+    "ID": 818,
+    "name": "Sezzle",
+    "pool": 1
+  },
+  {
+    "ID": 820,
+    "name": "SheerID",
+    "pool": 1
+  },
+  {
+    "ID": 825,
+    "name": "Shopkick",
+    "pool": 1
+  },
+  {
+    "ID": 828,
+    "name": "SidelineSwap",
+    "pool": 1
+  },
+  {
+    "ID": 829,
+    "name": "Signal",
+    "pool": 1
+  },
+  {
+    "ID": 830,
+    "name": "Simba",
+    "pool": 1
+  },
+  {
+    "ID": 832,
+    "name": "Simplex / SimplexCC",
+    "pool": 1
+  },
+  {
+    "ID": 836,
+    "name": "Skout",
+    "pool": 1
+  },
+  {
+    "ID": 837,
+    "name": "Skrill",
+    "pool": 1
+  },
+  {
+    "ID": 1076,
+    "name": "Skype",
+    "pool": 1
+  },
+  {
+    "ID": 1203,
+    "name": "SkyPrivate",
+    "pool": 1
+  },
+  {
+    "ID": 839,
+    "name": "Slide",
+    "pool": 1
+  },
+  {
+    "ID": 845,
+    "name": "Snagshout",
+    "pool": 1
+  },
+  {
+    "ID": 846,
+    "name": "Snapchat",
+    "pool": 1
+  },
+  {
+    "ID": 848,
+    "name": "Snap Finance",
+    "pool": 1
+  },
+  {
+    "ID": 851,
+    "name": "Sneakersnstuff",
+    "pool": 1
+  },
+  {
+    "ID": 853,
+    "name": "Societi",
+    "pool": 1
+  },
+  {
+    "ID": 854,
+    "name": "SoFI",
+    "pool": 1
+  },
+  {
+    "ID": 1204,
+    "name": "Spruce",
+    "pool": 1
+  },
+  {
+    "ID": 863,
+    "name": "Square",
+    "pool": 1
+  },
+  {
+    "ID": 1205,
+    "name": "Stash",
+    "pool": 1
+  },
+  {
+    "ID": 867,
+    "name": "Steady",
+    "pool": 1
+  },
+  {
+    "ID": 868,
+    "name": "Steam",
+    "pool": 1
+  },
+  {
+    "ID": 869,
+    "name": "SteemIt",
+    "pool": 1
+  },
+  {
+    "ID": 870,
+    "name": "Step",
+    "pool": 1
+  },
+  {
+    "ID": 1102,
+    "name": "Stir",
+    "pool": 1
+  },
+  {
+    "ID": 1285,
+    "name": "Streetbeat",
+    "pool": 1
+  },
+  {
+    "ID": 876,
+    "name": "Strike",
+    "pool": 1
+  },
+  {
+    "ID": 877,
+    "name": "Stripe",
+    "pool": 1
+  },
+  {
+    "ID": 878,
+    "name": "SugarDaddyMeet",
+    "pool": 1
+  },
+  {
+    "ID": 879,
+    "name": "SumUp",
+    "pool": 1
+  },
+  {
+    "ID": 881,
+    "name": "SuperPay",
+    "pool": 1
+  },
+  {
+    "ID": 1206,
+    "name": "SurePayroll",
+    "pool": 1
+  },
+  {
+    "ID": 883,
+    "name": "Surf",
+    "pool": 1
+  },
+  {
+    "ID": 885,
+    "name": "Survey Junkie",
+    "pool": 1
+  },
+  {
+    "ID": 886,
+    "name": "Survey Monkey Rewards",
+    "pool": 1
+  },
+  {
+    "ID": 888,
+    "name": "Surveytime",
+    "pool": 1
+  },
+  {
+    "ID": 891,
+    "name": "Sweatcoin",
+    "pool": 1
+  },
+  {
+    "ID": 892,
+    "name": "SweetRing",
+    "pool": 1
+  },
+  {
+    "ID": 894,
+    "name": "Swych",
+    "pool": 1
+  },
+  {
+    "ID": 1208,
+    "name": "Tada",
+    "pool": 1
+  },
+  {
+    "ID": 900,
+    "name": "TaoBao",
+    "pool": 1
+  },
+  {
+    "ID": 901,
+    "name": "Tapchamps",
+    "pool": 1
+  },
+  {
+    "ID": 902,
+    "name": "Target",
+    "pool": 1
+  },
+  {
+    "ID": 1209,
+    "name": "TaxSlayer",
+    "pool": 1
+  },
+  {
+    "ID": 904,
+    "name": "TCGPlayer",
+    "pool": 1
+  },
+  {
+    "ID": 905,
+    "name": "TD Ameritrade",
+    "pool": 1
+  },
+  {
+    "ID": 1210,
+    "name": "TechBubble",
+    "pool": 1
+  },
+  {
+    "ID": 907,
+    "name": "Telegram",
+    "pool": 1
+  },
+  {
+    "ID": 909,
+    "name": "Telnyx",
+    "pool": 1
+  },
+  {
+    "ID": 917,
+    "name": "ThinkOpinion",
+    "pool": 1
+  },
+  {
+    "ID": 919,
+    "name": "Thumbtack",
+    "pool": 1
+  },
+  {
+    "ID": 921,
+    "name": "Ticketmaster",
+    "pool": 1
+  },
+  {
+    "ID": 924,
+    "name": "TikTok",
+    "pool": 1
+  },
+  {
+    "ID": 926,
+    "name": "Tinder",
+    "pool": 1
+  },
+  {
+    "ID": 1211,
+    "name": "Token",
+    "pool": 1
+  },
+  {
+    "ID": 935,
+    "name": "TradingView",
+    "pool": 1
+  },
+  {
+    "ID": 1252,
+    "name": "TransformCredit",
+    "pool": 1
+  },
+  {
+    "ID": 1245,
+    "name": "Truth Social",
+    "pool": 1
+  },
+  {
+    "ID": 942,
+    "name": "TurboTax",
+    "pool": 1
+  },
+  {
+    "ID": 944,
+    "name": "Turgame",
+    "pool": 1
+  },
+  {
+    "ID": 945,
+    "name": "Turo",
+    "pool": 1
+  },
+  {
+    "ID": 946,
+    "name": "Twilio",
+    "pool": 1
+  },
+  {
+    "ID": 947,
+    "name": "Twitch",
+    "pool": 1
+  },
+  {
+    "ID": 948,
+    "name": "Twitter / X",
+    "pool": 1
+  },
+  {
+    "ID": 956,
+    "name": "Univision Mobile Money",
+    "pool": 1
+  },
+  {
+    "ID": 958,
+    "name": "Upaynet",
+    "pool": 1
+  },
+  {
+    "ID": 1264,
+    "name": "Upgrade",
+    "pool": 1
+  },
+  {
+    "ID": 959,
+    "name": "uphold",
+    "pool": 1
+  },
+  {
+    "ID": 960,
+    "name": "Uplift",
+    "pool": 1
+  },
+  {
+    "ID": 1214,
+    "name": "UpVoice",
+    "pool": 1
+  },
+  {
+    "ID": 961,
+    "name": "Upward",
+    "pool": 1
+  },
+  {
+    "ID": 962,
+    "name": "Upwork",
+    "pool": 1
+  },
+  {
+    "ID": 1215,
+    "name": "USAA",
+    "pool": 1
+  },
+  {
+    "ID": 964,
+    "name": "USA Survey",
+    "pool": 1
+  },
+  {
+    "ID": 967,
+    "name": "Valued Opinions",
+    "pool": 1
+  },
+  {
+    "ID": 1265,
+    "name": "Vanguard",
+    "pool": 1
+  },
+  {
+    "ID": 972,
+    "name": "Venmo",
+    "pool": 1
+  },
+  {
+    "ID": 975,
+    "name": "Vets Prevail",
+    "pool": 1
+  },
+  {
+    "ID": 1216,
+    "name": "ViaBill",
+    "pool": 1
+  },
+  {
+    "ID": 976,
+    "name": "ViaApp / ViaVan",
+    "pool": 1
+  },
+  {
+    "ID": 978,
+    "name": "Viber",
+    "pool": 1
+  },
+  {
+    "ID": 979,
+    "name": "Vidaplayer",
+    "pool": 1
+  },
+  {
+    "ID": 983,
+    "name": "Vinted",
+    "pool": 1
+  },
+  {
+    "ID": 985,
+    "name": "VK",
+    "pool": 1
+  },
+  {
+    "ID": 988,
+    "name": "VoilaNorbert",
+    "pool": 1
+  },
+  {
+    "ID": 991,
+    "name": "Voyager",
+    "pool": 1
+  },
+  {
+    "ID": 992,
+    "name": "Vrbo",
+    "pool": 1
+  },
+  {
+    "ID": 994,
+    "name": "Vumber",
+    "pool": 1
+  },
+  {
+    "ID": 1217,
+    "name": "Wager Web",
+    "pool": 1
+  },
+  {
+    "ID": 996,
+    "name": "Waleteros",
+    "pool": 1
+  },
+  {
+    "ID": 998,
+    "name": "WalletHub",
+    "pool": 1
+  },
+  {
+    "ID": 999,
+    "name": "Walmart",
+    "pool": 1
+  },
+  {
+    "ID": 1218,
+    "name": "Walmart Money Card",
+    "pool": 1
+  },
+  {
+    "ID": 1002,
+    "name": "Wealthfront",
+    "pool": 1
+  },
+  {
+    "ID": 1253,
+    "name": "Webull",
+    "pool": 1
+  },
+  {
+    "ID": 1006,
+    "name": "Weebly",
+    "pool": 1
+  },
+  {
+    "ID": 1007,
+    "name": "Weee!",
+    "pool": 1
+  },
+  {
+    "ID": 1008,
+    "name": "Weibo",
+    "pool": 1
+  },
+  {
+    "ID": 1009,
+    "name": "Wells Fargo",
+    "pool": 1
+  },
+  {
+    "ID": 1219,
+    "name": "Welspun Brain Trust",
+    "pool": 1
+  },
+  {
+    "ID": 1220,
+    "name": "Weverse",
+    "pool": 1
+  },
+  {
+    "ID": 1241,
+    "name": "Whatnot",
+    "pool": 1
+  },
+  {
+    "ID": 1012,
+    "name": "WhatsApp",
+    "pool": 1
+  },
+  {
+    "ID": 1271,
+    "name": "Winden",
+    "pool": 1
+  },
+  {
+    "ID": 1221,
+    "name": "Windows / Xbox Store",
+    "pool": 1
+  },
+  {
+    "ID": 1018,
+    "name": "Wingocard",
+    "pool": 1
+  },
+  {
+    "ID": 1222,
+    "name": "WireBarley",
+    "pool": 1
+  },
+  {
+    "ID": 1223,
+    "name": "Wise",
+    "pool": 1
+  },
+  {
+    "ID": 1224,
+    "name": "Walmart Family Mobile",
+    "pool": 1
+  },
+  {
+    "ID": 1024,
+    "name": "Womply",
+    "pool": 1
+  },
+  {
+    "ID": 1025,
+    "name": "WooCommerce",
+    "pool": 1
+  },
+  {
+    "ID": 1026,
+    "name": "Workers Credit Union",
+    "pool": 1
+  },
+  {
+    "ID": 1028,
+    "name": "Wyre",
+    "pool": 1
+  },
+  {
+    "ID": 1281,
+    "name": "X1CreditCard",
+    "pool": 1
+  },
+  {
+    "ID": 1029,
+    "name": "Xapo",
+    "pool": 1
+  },
+  {
+    "ID": 1225,
+    "name": "xcoins",
+    "pool": 1
+  },
+  {
+    "ID": 1034,
+    "name": "Yahoo",
+    "pool": 1
+  },
+  {
+    "ID": 1036,
+    "name": "Yandex",
+    "pool": 1
+  },
+  {
+    "ID": 1226,
+    "name": "Yeezy",
+    "pool": 1
+  },
+  {
+    "ID": 1038,
+    "name": "Yelp",
+    "pool": 1
+  },
+  {
+    "ID": 1039,
+    "name": "YFSResearch",
+    "pool": 1
+  },
+  {
+    "ID": 1043,
+    "name": "Yodlee",
+    "pool": 1
+  },
+  {
+    "ID": 1227,
+    "name": "Youtube",
+    "pool": 1
+  },
+  {
+    "ID": 1050,
+    "name": "Yubo",
+    "pool": 1
+  },
+  {
+    "ID": 1051,
+    "name": "Yuno Surveys",
+    "pool": 1
+  },
+  {
+    "ID": 1052,
+    "name": "YuroPay",
+    "pool": 1
+  },
+  {
+    "ID": 1229,
+    "name": "z.com",
+    "pool": 1
+  },
+  {
+    "ID": 1057,
+    "name": "Zeek",
+    "pool": 1
+  },
+  {
+    "ID": 1058,
+    "name": "Zelle",
+    "pool": 1
+  },
+  {
+    "ID": 1062,
+    "name": "Zillow",
+    "pool": 1
+  },
+  {
+    "ID": 1065,
+    "name": "Zogo",
+    "pool": 1
+  },
+  {
+    "ID": 1066,
+    "name": "Zoho",
+    "pool": 1
+  },
+  {
+    "ID": 1277,
+    "name": "Zolve",
+    "pool": 1
+  },
+  {
+    "ID": 1068,
+    "name": "ZoomBucks",
+    "pool": 1
+  },
+  {
+    "ID": 1069,
+    "name": "ZoomInfo",
+    "pool": 1
+  },
+  {
+    "ID": 1070,
+    "name": "Zoosk",
+    "pool": 1
+  },
+  {
+    "ID": 1071,
+    "name": "Zumper",
+    "pool": 1
+  },
+  {
+    "ID": 952,
+    "name": "Ubisoft",
+    "pool": 1
+  },
+  {
+    "ID": 133,
+    "name": "BrandedSurvey",
+    "pool": 1
+  },
+  {
+    "ID": 889,
+    "name": "Swagbucks / InboxDollars / MyPoints / ySense/ Noones",
+    "pool": 1
+  }
+]

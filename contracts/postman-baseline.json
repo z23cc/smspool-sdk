@@ -1,0 +1,5772 @@
+{
+  "collection": {
+    "id": "b2f10c80-0e84-45b9-a156-ebe58326e6b6",
+    "name": "SMSPool API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "contract_sha256": "c06cea363b24afd2dd8e3d564e543fe7fdc0610326d60b1102a9acbcadb3db7e",
+  "endpoints": [
+    {
+      "auth": "bearer",
+      "body_fields": [
+        {
+          "disabled": false,
+          "key": "service",
+          "type": "text"
+        }
+      ],
+      "body_mode": "formdata",
+      "group": "Informative endpoints",
+      "index": 1,
+      "invalid_json_responses": 0,
+      "method": "POST",
+      "name": "Retrieve country success rates per service",
+      "path": "/request/success_rate",
+      "query_fields": [
+        {
+          "disabled": true,
+          "key": "service",
+          "type": "text"
+        }
+      ],
+      "raw_url": "https://api.smspool.net/request/success_rate",
+      "responses": [
+        {
+          "code": 200,
+          "name": "200",
+          "shape": {
+            "items": {
+              "fields": {
+                "country": {
+                  "required": true,
+                  "shape": {
+                    "kind": "integer"
+                  }
+                },
+                "country_id": {
+                  "required": true,
+                  "shape": {
+                    "kind": "integer"
+                  }
+                },
+                "low_price": {
+                  "required": true,
+                  "shape": {
+                    "kind": "string"
+                  }
+                },
+                "name": {
+                  "required": true,
+                  "shape": {
+                    "kind": "string"
+                  }
+                },
+                "price": {
+                  "required": true,
+                  "shape": {
+                    "kind": "string"
+                  }
+                },
+                "short_name": {
+                  "required": true,
+                  "shape": {
+                    "kind": "string"
+                  }
+                },
+                "success_rate": {
+                  "required": true,
+                  "shape": {
+                    "kind": "string"
+                  }
+                }
+              },
+              "kind": "object"
+            },
+            "kind": "array"
+          }
+        },
+        {
+          "code": 400,
+          "name": "400",
+          "shape": {
+            "fields": {
+              "errors": {
+                "required": true,
+                "shape": {
+                  "items": {
+                    "fields": {
+                      "description": {
+                        "required": true,
+                        "shape": {
+                          "kind": "string"
+                        }
+                      },
+                      "message": {
+                        "required": true,
+                        "shape": {
+                          "kind": "string"
+                        }
+                      },
+                      "param": {
+                        "required": true,
+                        "shape": {
+                          "kind": "string"
+                        }
+                      }
+                    },
+                    "kind": "object"
+                  },
+                  "kind": "array"
+                }
+              },
+              "success": {
+                "required": true,
+                "shape": {
+                  "kind": "integer"
+                }
+              }
+            },
+            "kind": "object"
+          }
+        }
+      ]
+    },
+    {
+      "auth": "bearer",
+      "body_fields": [
+        {
+          "disabled": true,
+          "key": "key",
+          "type": "text"
+        }
+      ],
+      "body_mode": "formdata",
+      "group": "Informative endpoints",
+      "index": 2,
+      "invalid_json_responses": 0,
+      "method": "POST",
+      "name": "Balance",
+      "path": "/request/balance",
+      "query_fields": [],
+      "raw_url": "https://api.smspool.net/request/balance",
+      "responses": [
+        {
+          "code": 200,
+          "name": "200",
+          "shape": {
+            "fields": {
+              "balance": {
+                "required": true,
+                "shape": {
+                  "kind": "string"
+                }
+              }
+            },
+            "kind": "object"
+          }
+        },
+        {
+          "code": 400,
+          "name": "400",
+          "shape": {
+            "fields": {
+              "errors": {
+                "required": true,
+                "shape": {
+                  "items": {
+                    "fields": {
+                      "description": {
+                        "required": true,
+                        "shape": {
+                          "kind": "string"
+                        }
+                      },
+                      "message": {
+                        "required": true,
+                        "shape": {
+                          "kind": "string"
+                        }
+                      },
+                      "param": {
+                        "required": true,
+                        "shape": {
+                          "kind": "string"
+                        }
+                      }
+                    },
+                    "kind": "object"
+                  },
+                  "kind": "array"
+                }
+              },
+              "success": {
+                "required": true,
+                "shape": {
+                  "kind": "integer"
+                }
+              }
+            },
+            "kind": "object"
+          }
+        },
+        {
+          "code": 403,
+          "name": "403",
+          "shape": {
+            "fields": {
+              "errors": {
+                "required": true,
+                "shape": {
+                  "items": {
+                    "fields": {
+                      "description": {
+                        "required": true,
+                        "shape": {
+                          "kind": "string"
+                        }
+                      },
+                      "message": {
+                        "required": true,
+                        "shape": {
+                          "kind": "string"
+                        }
+                      },
+                      "param": {
+                        "required": true,
+                        "shape": {
+                          "kind": "string"
+                        }
+                      }
+                    },
+                    "kind": "object"
+                  },
+                  "kind": "array"
+                }
+              },
+              "success": {
+                "required": true,
+                "shape": {
+                  "kind": "integer"
+                }
+              }
+            },
+            "kind": "object"
+          }
+        }
+      ]
+    },
+    {
+      "auth": "bearer",
+      "body_fields": [
+        {
+          "disabled": false,
+          "key": "service",
+          "type": "text"
+        }
+      ],
+      "body_mode": "formdata",
+      "group": "Informative endpoints",
+      "index": 3,
+      "invalid_json_responses": 0,
+      "method": "POST",
+      "name": "Suggested Countries",
+      "path": "/request/suggested_countries",
+      "query_fields": [],
+      "raw_url": "https://api.smspool.net/request/suggested_countries",
+      "responses": [
+        {
+          "code": 200,
+          "name": "200",
+          "shape": {
+            "items": {
+              "fields": {
+                "country_id": {
+                  "required": true,
+                  "shape": {
+                    "kind": "integer"
+                  }
+                },
+                "name": {
+                  "required": true,
+                  "shape": {
+                    "kind": "string"
+                  }
+                },
+                "pool": {
+                  "required": true,
+                  "shape": {
+                    "kind": "integer"
+                  }
+                },
+                "price": {
+                  "required": true,
+                  "shape": {
+                    "kind": "string"
+                  }
+                },
+                "short_name": {
+                  "required": true,
+                  "shape": {
+                    "kind": "string"
+                  }
+                }
+              },
+              "kind": "object"
+            },
+            "kind": "array"
+          }
+        },
+        {
+          "code": 400,
+          "name": "400",
+          "shape": {
+            "fields": {
+              "errors": {
+                "required": true,
+                "shape": {
+                  "items": {
+                    "fields": {
+                      "description": {
+                        "required": true,
+                        "shape": {
+                          "kind": "string"
+                        }
+                      },
+                      "message": {
+                        "required": true,
+                        "shape": {
+                          "kind": "string"
+                        }
+                      },
+                      "param": {
+                        "required": true,
+                        "shape": {
+                          "kind": "string"
+                        }
+                      }
+                    },
+                    "kind": "object"
+                  },
+                  "kind": "array"
+                }
+              },
+              "success": {
+                "required": true,
+                "shape": {
+                  "kind": "integer"
+                }
+              }
+            },
+            "kind": "object"
+          }
+        }
+      ]
+    },
+    {
+      "auth": "bearer",
+      "body_fields": [
+        {
+          "disabled": false,
+          "key": "service",
+          "type": "text"
+        },
+        {
+          "disabled": false,
+          "key": "country",
+          "type": "text"
+        },
+        {
+          "disabled": true,
+          "key": "web",
+          "type": "text"
+        }
+      ],
+      "body_mode": "formdata",
+      "group": "Informative endpoints",
+      "index": 4,
+      "invalid_json_responses": 0,
+      "method": "POST",
+      "name": "Suggested Pools",
+      "path": "/pool/retrieve_valid",
+      "query_fields": [],
+      "raw_url": "https://api.smspool.net/pool/retrieve_valid",
+      "responses": [
+        {
+          "code": 200,
+          "name": "200",
+          "shape": {
+            "items": {
+              "fields": {
+                "custom_area": {
+                  "required": true,
+                  "shape": {
+                    "kind": "integer"
+                  }
+                },
+                "name": {
+                  "required": true,
+                  "shape": {
+                    "kind": "string"
+                  }
+                },
+                "pool": {
+                  "required": true,
+                  "shape": {
+                    "kind": "integer"
+                  }
+                },
+                "price": {
+                  "required": true,
+                  "shape": {
+                    "kind": "string"
+                  }
+                }
+              },
+              "kind": "object"
+            },
+            "kind": "array"
+          }
+        },
+        {
+          "code": 400,
+          "name": "400",
+          "shape": {
+            "fields": {
+              "errors": {
+                "required": true,
+                "shape": {
+                  "items": {
+                    "fields": {
+                      "description": {
+                        "required": true,
+                        "shape": {
+                          "kind": "string"
+                        }
+                      },
+                      "message": {
+                        "required": true,
+                        "shape": {
+                          "kind": "string"
+                        }
+                      },
+                      "param": {
+                        "required": true,
+                        "shape": {
+                          "kind": "string"
+                        }
+                      }
+                    },
+                    "kind": "object"
+                  },
+                  "kind": "array"
+                }
+              },
+              "success": {
+                "required": true,
+                "shape": {
+                  "kind": "integer"
+                }
+              }
+            },
+            "kind": "object"
+          }
+        }
+      ]
+    },
+    {
+      "auth": "bearer",
+      "body_fields": [],
+      "body_mode": "formdata",
+      "group": "Informative endpoints",
+      "index": 5,
+      "invalid_json_responses": 0,
+      "method": "GET",
+      "name": "Country list",
+      "path": "/country/retrieve_all",
+      "query_fields": [],
+      "raw_url": "https://api.smspool.net/country/retrieve_all",
+      "responses": [
+        {
+          "code": 200,
+          "name": "200",
+          "shape": {
+            "items": {
+              "fields": {
+                "ID": {
+                  "required": true,
+                  "shape": {
+                    "kind": "integer"
+                  }
+                },
+                "name": {
+                  "required": true,
+                  "shape": {
+                    "kind": "string"
+                  }
+                },
+                "region": {
+                  "required": true,
+                  "shape": {
+                    "kind": "string"
+                  }
+                },
+                "short_name": {
+                  "required": true,
+                  "shape": {
+                    "kind": "string"
+                  }
+                }
+              },
+              "kind": "object"
+            },
+            "kind": "array"
+          }
+        }
+      ]
+    },
+    {
+      "auth": "bearer",
+      "body_fields": [
+        {
+          "disabled": true,
+          "key": "country",
+          "type": "text"
+        }
+      ],
+      "body_mode": "formdata",
+      "group": "Informative endpoints",
+      "index": 6,
+      "invalid_json_responses": 0,
+      "method": "GET",
+      "name": "Service list",
+      "path": "/service/retrieve_all",
+      "query_fields": [],
+      "raw_url": "https://api.smspool.net/service/retrieve_all",
+      "responses": [
+        {
+          "code": 200,
+          "name": "200",
+          "shape": {
+            "items": {
+              "fields": {
+                "ID": {
+                  "required": true,
+                  "shape": {
+                    "kind": "integer"
+                  }
+                },
+                "favourite": {
+                  "required": true,
+                  "shape": {
+                    "kind": "integer"
+                  }
+                },
+                "name": {
+                  "required": true,
+                  "shape": {
+                    "kind": "string"
+                  }
+                }
+              },
+              "kind": "object"
+            },
+            "kind": "array"
+          }
+        }
+      ]
+    },
+    {
+      "auth": "bearer",
+      "body_fields": [],
+      "body_mode": "formdata",
+      "group": "Informative endpoints",
+      "index": 7,
+      "invalid_json_responses": 0,
+      "method": "POST",
+      "name": "Pool list",
+      "path": "/pool/retrieve_all",
+      "query_fields": [],
+      "raw_url": "https://api.smspool.net/pool/retrieve_all",
+      "responses": [
+        {
+          "code": 200,
+          "name": "200",
+          "shape": {
+            "items": {
+              "fields": {
+                "ID": {
+                  "required": true,
+                  "shape": {
+                    "kind": "integer"
+                  }
+                },
+                "name": {
+                  "required": true,
+                  "shape": {
+                    "kind": "string"
+                  }
+                }
+              },
+              "kind": "object"
+            },
+            "kind": "array"
+          }
+        }
+      ]
+    },
+    {
+      "auth": "bearer",
+      "body_fields": [
+        {
+          "disabled": false,
+          "key": "country",
+          "type": "default"
+        },
+        {
+          "disabled": false,
+          "key": "service",
+          "type": "default"
+        },
+        {
+          "disabled": true,
+          "key": "pool",
+          "type": "text"
+        },
+        {
+          "disabled": true,
+          "key": "max_price",
+          "type": "default"
+        },
+        {
+          "disabled": false,
+          "key": "pricing_option",
+          "type": "default"
+        },
+        {
+          "disabled": false,
+          "key": "quantity",
+          "type": "default"
+        },
+        {
+          "disabled": false,
+          "key": "areacode",
+          "type": "default"
+        },
+        {
+          "disabled": false,
+          "key": "exclude",
+          "type": "default"
+        },
+        {
+          "disabled": false,
+          "key": "create_token",
+          "type": "text"
+        },
+        {
+          "disabled": false,
+          "key": "activation_type",
+          "type": "text"
+        },
+        {
+          "disabled": false,
+          "key": "carrier",
+          "type": "text"
+        },
+        {
+          "disabled": false,
+          "key": "phonenumber",
+          "type": "text"
+        }
+      ],
+      "body_mode": "formdata",
+      "group": "SMS",
+      "index": 8,
+      "invalid_json_responses": 0,
+      "method": "POST",
+      "name": "Order SMS",
+      "path": "/purchase/sms",
+      "query_fields": [],
+      "raw_url": "https://api.smspool.net/purchase/sms",
+      "responses": [
+        {
+          "code": 422,
+          "name": "422 - OUT_OF_STOCK",
+          "shape": {
+            "fields": {
+              "errors": {
+                "required": true,
+                "shape": {
+                  "items": {
+                    "fields": {
+                      "message": {
+                        "required": true,
+                        "shape": {
+                          "kind": "string"
+                        }
+                      }
+                    },
+                    "kind": "object"
+                  },
+                  "kind": "array"
+                }
+              },
+              "message": {
+                "required": true,
+                "shape": {
+                  "kind": "string"
+                }
+              },
+              "pools": {
+                "required": true,
+                "shape": {
+                  "fields": {
+                    "Foxtrot": {
+                      "required": true,
+                      "shape": {
+                        "fields": {
+                          "errors": {
+                            "required": true,
+                            "shape": {
+                              "items": {
+                                "fields": {
+                                  "message": {
+                                    "required": true,
+                                    "shape": {
+                                      "kind": "string"
+                                    }
+                                  }
+                                },
+                                "kind": "object"
+                              },
+                              "kind": "array"
+                            }
+                          },
+                          "message": {
+                            "required": true,
+                            "shape": {
+                              "kind": "string"
+                            }
+                          },
+                          "success": {
+                            "required": true,
+                            "shape": {
+                              "kind": "integer"
+                            }
+                          },
+                          "type": {
+                            "required": true,
+                            "shape": {
+                              "kind": "string"
+                            }
+                          }
+                        },
+                        "kind": "object"
+                      }
+                    }
+                  },
+                  "kind": "object"
+                }
+              },
+              "success": {
+                "required": true,
+                "shape": {
+                  "kind": "integer"
+                }
+              },
+              "type": {
+                "required": true,
+                "shape": {
+                  "kind": "string"
+                }
+              }
+            },
+            "kind": "object"
+          }
+        },
+        {
+          "code": 200,
+          "name": "200 - successful order",
+          "shape": {
+            "fields": {
+              "cc": {
+                "required": true,
+                "shape": {
+                  "kind": "string"
+                }
+              },
+              "cost": {
+                "required": true,
+                "shape": {
+                  "kind": "string"
+                }
+              },
+              "cost_in_cents": {
+                "required": true,
+                "shape": {
+                  "kind": "integer"
+                }
+              },
+              "country": {
+                "required": true,
+                "shape": {
+                  "kind": "string"
+                }
+              },
+              "expiration": {
+                "required": true,
+                "shape": {
+                  "kind": "integer"
+                }
+              },
+              "expires_in": {
+                "required": true,
+                "shape": {
+                  "kind": "integer"
+                }
+              },
+              "message": {
+                "required": true,
+                "shape": {
+                  "kind": "string"
+                }
+              },
+              "number": {
+                "required": true,
+                "shape": {
+                  "kind": "integer"
+                }
+              },
+              "order_id": {
+                "required": true,
+                "shape": {
+                  "kind": "string"
+                }
+              },
+              "phonenumber": {
+                "required": true,
+                "shape": {
+                  "kind": "string"
+                }
+              },
+              "pool": {
+                "required": true,
+                "shape": {
+                  "kind": "integer"
+                }
+              },
+              "service": {
+                "required": true,
+                "shape": {
+                  "kind": "string"
+                }
+              },
+              "success": {
+                "required": true,
+                "shape": {
+                  "kind": "integer"
+                }
+              }
+            },
+            "kind": "object"
+          }
+        },
+        {
+          "code": 200,
+          "name": "200 - created SMS token",
+          "shape": {
+            "fields": {
+              "cc": {
+                "required": true,
+                "shape": {
+                  "kind": "string"
+                }
+              },
+              "message": {
+                "required": true,
+                "shape": {
+                  "kind": "string"
+                }
+              },
+              "phonenumber": {
+                "required": true,
+                "shape": {
+                  "kind": "string"
+                }
+              },
+              "success": {
+                "required": true,
+                "shape": {
+                  "kind": "integer"
+                }
+              },
+              "token": {
+                "required": true,
+                "shape": {
+                  "kind": "string"
+                }
+              },
+              "url": {
+                "required": true,
+                "shape": {
+                  "kind": "string"
+                }
+              }
+            },
+            "kind": "object"
+          }
+        },
+        {
+          "code": 422,
+          "name": "422 - no price found with min price",
+          "shape": {
+            "fields": {
+              "message": {
+                "required": true,
+                "shape": {
+                  "kind": "string"
+                }
+              },
+              "success": {
+                "required": true,
+                "shape": {
+                  "kind": "integer"
+                }
+              },
+              "type": {
+                "required": true,
+                "shape": {
+                  "kind": "string"
+                }
+              }
+            },
+            "kind": "object"
+          }
+        },
+        {
+          "code": 422,
+          "name": "422 - no balance",
+          "shape": {
+            "fields": {
+              "message": {
+                "required": true,
+                "shape": {
+                  "kind": "string"
+                }
+              },
+              "pools": {
+                "required": true,
+                "shape": {
+                  "fields": {
+                    "Foxtrot": {
+                      "required": true,
+                      "shape": {
+                        "fields": {
+                          "message": {
+                            "required": true,
+                            "shape": {
+                              "kind": "string"
+                            }
+                          },
+                          "success": {
+                            "required": true,
+                            "shape": {
+                              "kind": "integer"
+                            }
+                          },
+                          "type": {
+                            "required": true,
+                            "shape": {
+                              "kind": "string"
+                            }
+                          }
+                        },
+                        "kind": "object"
+                      }
+                    }
+                  },
+                  "kind": "object"
+                }
+              },
+              "success": {
+                "required": true,
+                "shape": {
+                  "kind": "integer"
+                }
+              },
+              "type": {
+                "required": true,
+                "shape": {
+                  "kind": "string"
+                }
+              }
+            },
+            "kind": "object"
+          }
+        }
+      ]
+    },
+    {
+      "auth": "bearer",
+      "body_fields": [
+        {
+          "disabled": false,
+          "key": "orderid",
+          "type": "text"
+        },
+        {
+          "disabled": false,
+          "key": "key",
+          "type": "text"
+        }
+      ],
+      "body_mode": "formdata",
+      "group": "SMS",
+      "index": 9,
+      "invalid_json_responses": 0,
+      "method": "POST",
+      "name": "Check SMS",
+      "path": "/sms/check",
+      "query_fields": [],
+      "raw_url": "https://api.smspool.net/sms/check",
+      "responses": [
+        {
+          "code": 200,
+          "name": "200 - order pending",
+          "shape": {
+            "fields": {
+              "expiration": {
+                "required": true,
+                "shape": {
+                  "kind": "integer"
+                }
+              },
+              "resend": {
+                "required": true,
+                "shape": {
+                  "kind": "integer"
+                }
+              },
+              "status": {
+                "required": true,
+                "shape": {
+                  "kind": "integer"
+                }
+              },
+              "time_left": {
+                "required": true,
+                "shape": {
+                  "kind": "integer"
+                }
+              }
+            },
+            "kind": "object"
+          }
+        },
+        {
+          "code": 200,
+          "name": "200 - order refunded",
+          "shape": {
+            "fields": {
+              "expiration": {
+                "required": true,
+                "shape": {
+                  "kind": "integer"
+                }
+              },
+              "message": {
+                "required": true,
+                "shape": {
+                  "kind": "string"
+                }
+              },
+              "resend": {
+                "required": true,
+                "shape": {
+                  "kind": "integer"
+                }
+              },
+              "status": {
+                "required": true,
+                "shape": {
+                  "kind": "integer"
+                }
+              },
+              "time_left": {
+                "required": true,
+                "shape": {
+                  "kind": "integer"
+                }
+              }
+            },
+            "kind": "object"
+          }
+        },
+        {
+          "code": 200,
+          "name": "200 - order complete",
+          "shape": {
+            "fields": {
+              "expiration": {
+                "required": true,
+                "shape": {
+                  "kind": "integer"
+                }
+              },
+              "full_sms": {
+                "required": true,
+                "shape": {
+                  "kind": "string"
+                }
+              },
+              "sms": {
+                "required": true,
+                "shape": {
+                  "kind": "string"
+                }
+              },
+              "status": {
+                "required": true,
+                "shape": {
+                  "kind": "integer"
+                }
+              }
+            },
+            "kind": "object"
+          }
+        }
+      ]
+    },
+    {
+      "auth": "bearer",
+      "body_fields": [
+        {
+          "disabled": true,
+          "key": "key",
+          "type": "text"
+        }
+      ],
+      "body_mode": "formdata",
+      "group": "SMS",
+      "index": 10,
+      "invalid_json_responses": 0,
+      "method": "POST",
+      "name": "Active orders",
+      "path": "/request/active",
+      "query_fields": [],
+      "raw_url": "https://api.smspool.net/request/active",
+      "responses": [
+        {
+          "code": 200,
+          "name": "200",
+          "shape": {
+            "items": {
+              "fields": {
+                "code": {
+                  "required": true,
+                  "shape": {
+                    "kind": "string"
+                  }
+                },
+                "cost": {
+                  "required": true,
+                  "shape": {
+                    "kind": "string"
+                  }
+                },
+                "expiry": {
+                  "required": true,
+                  "shape": {
+                    "kind": "integer"
+                  }
+                },
+                "full_code": {
+                  "required": true,
+                  "shape": {
+                    "kind": "string"
+                  }
+                },
+                "order_code": {
+                  "required": true,
+                  "shape": {
+                    "kind": "string"
+                  }
+                },
+                "phonenumber": {
+                  "required": true,
+                  "shape": {
+                    "kind": "string"
+                  }
+                },
+                "service": {
+                  "required": true,
+                  "shape": {
+                    "kind": "string"
+                  }
+                },
+                "short_name": {
+                  "required": true,
+                  "shape": {
+                    "kind": "string"
+                  }
+                },
+                "status": {
+                  "required": true,
+                  "shape": {
+                    "kind": "string"
+                  }
+                },
+                "time_left": {
+                  "required": true,
+                  "shape": {
+                    "kind": "integer"
+                  }
+                },
+                "timestamp": {
+                  "required": true,
+                  "shape": {
+                    "kind": "string"
+                  }
+                }
+              },
+              "kind": "object"
+            },
+            "kind": "array"
+          }
+        }
+      ]
+    },
+    {
+      "auth": "bearer",
+      "body_fields": [
+        {
+          "disabled": false,
+          "key": "orderid",
+          "type": "text"
+        },
+        {
+          "disabled": false,
+          "key": "key",
+          "type": "text"
+        }
+      ],
+      "body_mode": "formdata",
+      "group": "SMS",
+      "index": 11,
+      "invalid_json_responses": 0,
+      "method": "POST",
+      "name": "Cancel SMS",
+      "path": "/sms/cancel",
+      "query_fields": [],
+      "raw_url": "https://api.smspool.net/sms/cancel",
+      "responses": [
+        {
+          "code": 200,
+          "name": "200 - order cancelled",
+          "shape": {
+            "fields": {
+              "message": {
+                "required": true,
+                "shape": {
+                  "kind": "string"
+                }
+              },
+              "success": {
+                "required": true,
+                "shape": {
+                  "kind": "integer"
+                }
+              }
+            },
+            "kind": "object"
+          }
+        },
+        {
+          "code": 404,
+          "name": "404 - order not found",
+          "shape": {
+            "fields": {
+              "message": {
+                "required": true,
+                "shape": {
+                  "kind": "string"
+                }
+              },
+              "success": {
+                "required": true,
+                "shape": {
+                  "kind": "integer"
+                }
+              }
+            },
+            "kind": "object"
+          }
+        },
+        {
+          "code": 400,
+          "name": "400 - order cannot be cancelled yet",
+          "shape": {
+            "fields": {
+              "message": {
+                "required": true,
+                "shape": {
+                  "kind": "string"
+                }
+              },
+              "success": {
+                "required": true,
+                "shape": {
+                  "kind": "integer"
+                }
+              }
+            },
+            "kind": "object"
+          }
+        }
+      ]
+    },
+    {
+      "auth": "bearer",
+      "body_fields": [
+        {
+          "disabled": true,
+          "key": "key",
+          "type": "text"
+        }
+      ],
+      "body_mode": "formdata",
+      "group": "SMS",
+      "index": 12,
+      "invalid_json_responses": 0,
+      "method": "POST",
+      "name": "Cancel All SMS",
+      "path": "/sms/cancel_all",
+      "query_fields": [],
+      "raw_url": "https://api.smspool.net/sms/cancel_all",
+      "responses": [
+        {
+          "code": 200,
+          "name": "200",
+          "shape": {
+            "fields": {
+              "message": {
+                "required": true,
+                "shape": {
+                  "kind": "string"
+                }
+              },
+              "refunded_orders": {
+                "required": true,
+                "shape": {
+                  "items": {
+                    "kind": "unknown"
+                  },
+                  "kind": "array"
+                }
+              },
+              "success": {
+                "required": true,
+                "shape": {
+                  "kind": "integer"
+                }
+              }
+            },
+            "kind": "object"
+          }
+        }
+      ]
+    },
+    {
+      "auth": "bearer",
+      "body_fields": [
+        {
+          "disabled": true,
+          "key": "key",
+          "type": "text"
+        }
+      ],
+      "body_mode": "formdata",
+      "group": "SMS",
+      "index": 13,
+      "invalid_json_responses": 0,
+      "method": "POST",
+      "name": "Clear SMS Cache",
+      "path": "/sms/clear_cache",
+      "query_fields": [],
+      "raw_url": "https://api.smspool.net/sms/clear_cache",
+      "responses": [
+        {
+          "code": 200,
+          "name": "200",
+          "shape": {
+            "fields": {
+              "message": {
+                "required": true,
+                "shape": {
+                  "kind": "string"
+                }
+              },
+              "success": {
+                "required": true,
+                "shape": {
+                  "kind": "integer"
+                }
+              }
+            },
+            "kind": "object"
+          }
+        }
+      ]
+    },
+    {
+      "auth": "bearer",
+      "body_fields": [
+        {
+          "disabled": false,
+          "key": "orderid",
+          "type": "text"
+        },
+        {
+          "disabled": false,
+          "key": "key",
+          "type": "text"
+        }
+      ],
+      "body_mode": "formdata",
+      "group": "SMS",
+      "index": 14,
+      "invalid_json_responses": 0,
+      "method": "POST",
+      "name": "Activate SMS",
+      "path": "/sms/activate",
+      "query_fields": [],
+      "raw_url": "https://api.smspool.net/sms/activate",
+      "responses": [
+        {
+          "code": 200,
+          "name": "200 - activate SMS",
+          "shape": {
+            "fields": {
+              "message": {
+                "required": true,
+                "shape": {
+                  "kind": "string"
+                }
+              },
+              "success": {
+                "required": true,
+                "shape": {
+                  "kind": "integer"
+                }
+              }
+            },
+            "kind": "object"
+          }
+        },
+        {
+          "code": 400,
+          "name": "400 - incorrect pool",
+          "shape": {
+            "fields": {
+              "message": {
+                "required": true,
+                "shape": {
+                  "kind": "string"
+                }
+              },
+              "success": {
+                "required": true,
+                "shape": {
+                  "kind": "integer"
+                }
+              }
+            },
+            "kind": "object"
+          }
+        },
+        {
+          "code": 404,
+          "name": "404 - order not found",
+          "shape": {
+            "fields": {
+              "message": {
+                "required": true,
+                "shape": {
+                  "kind": "string"
+                }
+              },
+              "success": {
+                "required": true,
+                "shape": {
+                  "kind": "integer"
+                }
+              }
+            },
+            "kind": "object"
+          }
+        }
+      ]
+    },
+    {
+      "auth": "bearer",
+      "body_fields": [
+        {
+          "disabled": false,
+          "key": "orderid",
+          "type": "text"
+        },
+        {
+          "disabled": false,
+          "key": "key",
+          "type": "text"
+        }
+      ],
+      "body_mode": "formdata",
+      "group": "SMS",
+      "index": 15,
+      "invalid_json_responses": 0,
+      "method": "POST",
+      "name": "Reactivate SMS",
+      "path": "/sms/reactivate",
+      "query_fields": [],
+      "raw_url": "https://api.smspool.net/sms/reactivate",
+      "responses": [
+        {
+          "code": 200,
+          "name": "200 - order reactivated",
+          "shape": {
+            "fields": {
+              "message": {
+                "required": true,
+                "shape": {
+                  "kind": "string"
+                }
+              },
+              "success": {
+                "required": true,
+                "shape": {
+                  "kind": "integer"
+                }
+              }
+            },
+            "kind": "object"
+          }
+        }
+      ]
+    },
+    {
+      "auth": "bearer",
+      "body_fields": [
+        {
+          "disabled": false,
+          "key": "key",
+          "type": "text"
+        }
+      ],
+      "body_mode": "formdata",
+      "group": "SMS",
+      "index": 16,
+      "invalid_json_responses": 0,
+      "method": "POST",
+      "name": "Archive all orders",
+      "path": "/request/archive",
+      "query_fields": [],
+      "raw_url": "https://api.smspool.net/request/archive",
+      "responses": [
+        {
+          "code": 200,
+          "name": "200",
+          "shape": {
+            "fields": {
+              "message": {
+                "required": true,
+                "shape": {
+                  "kind": "string"
+                }
+              },
+              "success": {
+                "required": true,
+                "shape": {
+                  "kind": "integer"
+                }
+              }
+            },
+            "kind": "object"
+          }
+        }
+      ]
+    },
+    {
+      "auth": "bearer",
+      "body_fields": [
+        {
+          "disabled": false,
+          "key": "orderid",
+          "type": "text"
+        },
+        {
+          "disabled": true,
+          "key": "key",
+          "type": "text"
+        }
+      ],
+      "body_mode": "formdata",
+      "group": "SMS",
+      "index": 17,
+      "invalid_json_responses": 0,
+      "method": "POST",
+      "name": "Check Resend",
+      "path": "/sms/check_resend",
+      "query_fields": [],
+      "raw_url": "https://api.smspool.net/sms/check_resend",
+      "responses": [
+        {
+          "code": 200,
+          "name": "200 - available for resend",
+          "shape": {
+            "fields": {
+              "expires_in_hour": {
+                "required": true,
+                "shape": {
+                  "kind": "integer"
+                }
+              },
+              "message": {
+                "required": true,
+                "shape": {
+                  "kind": "string"
+                }
+              },
+              "resendCost": {
+                "required": true,
+                "shape": {
+                  "kind": "integer"
+                }
+              },
+              "resends": {
+                "required": true,
+                "shape": {
+                  "kind": "integer"
+                }
+              },
+              "success": {
+                "required": true,
+                "shape": {
+                  "kind": "integer"
+                }
+              }
+            },
+            "kind": "object"
+          }
+        },
+        {
+          "code": 404,
+          "name": "404 - order not found",
+          "shape": {
+            "fields": {
+              "message": {
+                "required": true,
+                "shape": {
+                  "kind": "string"
+                }
+              },
+              "success": {
+                "required": true,
+                "shape": {
+                  "kind": "integer"
+                }
+              }
+            },
+            "kind": "object"
+          }
+        },
+        {
+          "code": 400,
+          "name": "400 - resend not available",
+          "shape": {
+            "fields": {
+              "message": {
+                "required": true,
+                "shape": {
+                  "kind": "string"
+                }
+              },
+              "success": {
+                "required": true,
+                "shape": {
+                  "kind": "integer"
+                }
+              }
+            },
+            "kind": "object"
+          }
+        }
+      ]
+    },
+    {
+      "auth": "bearer",
+      "body_fields": [
+        {
+          "disabled": false,
+          "key": "orderid",
+          "type": "text"
+        },
+        {
+          "disabled": false,
+          "key": "key",
+          "type": "text"
+        }
+      ],
+      "body_mode": "formdata",
+      "group": "SMS",
+      "index": 18,
+      "invalid_json_responses": 0,
+      "method": "POST",
+      "name": "Resend",
+      "path": "/sms/resend",
+      "query_fields": [],
+      "raw_url": "https://api.smspool.net/sms/resend",
+      "responses": [
+        {
+          "code": 400,
+          "name": "400 - missing orderid",
+          "shape": {
+            "fields": {
+              "errors": {
+                "required": true,
+                "shape": {
+                  "items": {
+                    "fields": {
+                      "message": {
+                        "required": true,
+                        "shape": {
+                          "kind": "string"
+                        }
+                      },
+                      "param": {
+                        "required": true,
+                        "shape": {
+                          "kind": "string"
+                        }
+                      }
+                    },
+                    "kind": "object"
+                  },
+                  "kind": "array"
+                }
+              },
+              "success": {
+                "required": true,
+                "shape": {
+                  "kind": "integer"
+                }
+              }
+            },
+            "kind": "object"
+          }
+        },
+        {
+          "code": 400,
+          "name": "400 - no initial sms",
+          "shape": {
+            "fields": {
+              "message": {
+                "required": true,
+                "shape": {
+                  "kind": "string"
+                }
+              },
+              "success": {
+                "required": true,
+                "shape": {
+                  "kind": "integer"
+                }
+              }
+            },
+            "kind": "object"
+          }
+        },
+        {
+          "code": 400,
+          "name": "400 - resend not available Copy",
+          "shape": {
+            "fields": {
+              "message": {
+                "required": true,
+                "shape": {
+                  "kind": "string"
+                }
+              },
+              "success": {
+                "required": true,
+                "shape": {
+                  "kind": "integer"
+                }
+              }
+            },
+            "kind": "object"
+          }
+        },
+        {
+          "code": 404,
+          "name": "404 - order not found",
+          "shape": {
+            "fields": {
+              "message": {
+                "required": true,
+                "shape": {
+                  "kind": "string"
+                }
+              },
+              "success": {
+                "required": true,
+                "shape": {
+                  "kind": "integer"
+                }
+              }
+            },
+            "kind": "object"
+          }
+        },
+        {
+          "code": 200,
+          "name": "200 - order resent",
+          "shape": {
+            "fields": {
+              "charge": {
+                "required": true,
+                "shape": {
+                  "kind": "integer"
+                }
+              },
+              "message": {
+                "required": true,
+                "shape": {
+                  "kind": "string"
+                }
+              },
+              "order_id": {
+                "required": true,
+                "shape": {
+                  "kind": "string"
+                }
+              },
+              "success": {
+                "required": true,
+                "shape": {
+                  "kind": "integer"
+                }
+              }
+            },
+            "kind": "object"
+          }
+        }
+      ]
+    },
+    {
+      "auth": "bearer",
+      "body_fields": [
+        {
+          "disabled": false,
+          "key": "key",
+          "type": "text"
+        },
+        {
+          "disabled": false,
+          "key": "country",
+          "type": "text"
+        },
+        {
+          "disabled": false,
+          "key": "service",
+          "type": "text"
+        },
+        {
+          "disabled": false,
+          "key": "pool",
+          "type": "text"
+        }
+      ],
+      "body_mode": "formdata",
+      "group": "SMS",
+      "index": 19,
+      "invalid_json_responses": 0,
+      "method": "POST",
+      "name": "One-time SMS stock",
+      "path": "/sms/stock",
+      "query_fields": [],
+      "raw_url": "https://api.smspool.net/sms/stock",
+      "responses": [
+        {
+          "code": 200,
+          "name": "200",
+          "shape": {
+            "fields": {
+              "amount": {
+                "required": true,
+                "shape": {
+                  "kind": "integer"
+                }
+              },
+              "success": {
+                "required": true,
+                "shape": {
+                  "kind": "integer"
+                }
+              }
+            },
+            "kind": "object"
+          }
+        }
+      ]
+    },
+    {
+      "auth": "bearer",
+      "body_fields": [
+        {
+          "disabled": false,
+          "key": "key",
+          "type": "text"
+        },
+        {
+          "disabled": true,
+          "key": "country",
+          "type": "text"
+        },
+        {
+          "disabled": true,
+          "key": "service",
+          "type": "text"
+        },
+        {
+          "disabled": true,
+          "key": "pool",
+          "type": "text"
+        }
+      ],
+      "body_mode": "formdata",
+      "group": "SMS",
+      "index": 20,
+      "invalid_json_responses": 0,
+      "method": "POST",
+      "name": "One-time stock for all services",
+      "path": "/sms/all_stock",
+      "query_fields": [],
+      "raw_url": "https://api.smspool.net/sms/all_stock",
+      "responses": [
+        {
+          "code": 200,
+          "name": "200",
+          "shape": {
+            "items": {
+              "fields": {
+                "country": {
+                  "required": true,
+                  "shape": {
+                    "kind": "integer"
+                  }
+                },
+                "country_name": {
+                  "required": true,
+                  "shape": {
+                    "kind": "string"
+                  }
+                },
+                "last_update": {
+                  "required": true,
+                  "shape": {
+                    "kind": "string"
+                  }
+                },
+                "pool": {
+                  "required": true,
+                  "shape": {
+                    "kind": "integer"
+                  }
+                },
+                "pool_name": {
+                  "required": true,
+                  "shape": {
+                    "kind": "string"
+                  }
+                },
+                "price": {
+                  "required": true,
+                  "shape": {
+                    "kind": "string"
+                  }
+                },
+                "service": {
+                  "required": true,
+                  "shape": {
+                    "kind": "integer"
+                  }
+                },
+                "service_name": {
+                  "required": true,
+                  "shape": {
+                    "kind": "string"
+                  }
+                },
+                "stock": {
+                  "required": true,
+                  "shape": {
+                    "kind": "integer"
+                  }
+                }
+              },
+              "kind": "object"
+            },
+            "kind": "array"
+          }
+        }
+      ]
+    },
+    {
+      "auth": "bearer",
+      "body_fields": [
+        {
+          "disabled": false,
+          "key": "key",
+          "type": "text"
+        },
+        {
+          "disabled": false,
+          "key": "start",
+          "type": "text"
+        },
+        {
+          "disabled": false,
+          "key": "length",
+          "type": "text"
+        },
+        {
+          "disabled": false,
+          "key": "search",
+          "type": "text"
+        }
+      ],
+      "body_mode": "formdata",
+      "group": "SMS",
+      "index": 21,
+      "invalid_json_responses": 0,
+      "method": "POST",
+      "name": "Order History",
+      "path": "/request/history",
+      "query_fields": [],
+      "raw_url": "https://api.smspool.net/request/history",
+      "responses": [
+        {
+          "code": null,
+          "name": "200",
+          "shape": {
+            "items": {
+              "fields": {
+                "code": {
+                  "required": true,
+                  "shape": {
+                    "kind": "string"
+                  }
+                },
+                "completed_on": {
+                  "required": true,
+                  "shape": {
+                    "kind": "string"
+                  }
+                },
+                "cost": {
+                  "required": true,
+                  "shape": {
+                    "kind": "string"
+                  }
+                },
+                "expiry": {
+                  "required": true,
+                  "shape": {
+                    "kind": "integer"
+                  }
+                },
+                "full_code": {
+                  "required": true,
+                  "shape": {
+                    "kind": "string"
+                  }
+                },
+                "order_code": {
+                  "required": true,
+                  "shape": {
+                    "kind": "string"
+                  }
+                },
+                "phonenumber": {
+                  "required": true,
+                  "shape": {
+                    "kind": "string"
+                  }
+                },
+                "pool": {
+                  "required": true,
+                  "shape": {
+                    "kind": "integer"
+                  }
+                },
+                "service": {
+                  "required": true,
+                  "shape": {
+                    "kind": "string"
+                  }
+                },
+                "short_name": {
+                  "required": true,
+                  "shape": {
+                    "kind": "string"
+                  }
+                },
+                "status": {
+                  "required": true,
+                  "shape": {
+                    "kind": "string"
+                  }
+                },
+                "time_left": {
+                  "required": true,
+                  "shape": {
+                    "kind": "integer"
+                  }
+                },
+                "timestamp": {
+                  "required": true,
+                  "shape": {
+                    "kind": "string"
+                  }
+                }
+              },
+              "kind": "object"
+            },
+            "kind": "array"
+          }
+        },
+        {
+          "code": 403,
+          "name": "403",
+          "shape": {
+            "fields": {
+              "errors": {
+                "required": true,
+                "shape": {
+                  "items": {
+                    "fields": {
+                      "description": {
+                        "required": true,
+                        "shape": {
+                          "kind": "string"
+                        }
+                      },
+                      "message": {
+                        "required": true,
+                        "shape": {
+                          "kind": "string"
+                        }
+                      },
+                      "param": {
+                        "required": true,
+                        "shape": {
+                          "kind": "string"
+                        }
+                      }
+                    },
+                    "kind": "object"
+                  },
+                  "kind": "array"
+                }
+              },
+              "success": {
+                "required": true,
+                "shape": {
+                  "kind": "integer"
+                }
+              }
+            },
+            "kind": "object"
+          }
+        }
+      ]
+    },
+    {
+      "auth": "bearer",
+      "body_fields": [
+        {
+          "disabled": false,
+          "key": "key",
+          "type": "text"
+        },
+        {
+          "disabled": false,
+          "key": "service",
+          "type": "text"
+        },
+        {
+          "disabled": false,
+          "key": "country",
+          "type": "text"
+        },
+        {
+          "disabled": false,
+          "key": "pool",
+          "type": "text"
+        }
+      ],
+      "body_mode": "urlencoded",
+      "group": "SMS",
+      "index": 22,
+      "invalid_json_responses": 0,
+      "method": "POST",
+      "name": "Request available areacodes",
+      "path": "/request/areacodes",
+      "query_fields": [],
+      "raw_url": "https://api.smspool.net/request/areacodes",
+      "responses": []
+    },
+    {
+      "auth": "bearer",
+      "body_fields": [
+        {
+          "disabled": false,
+          "key": "key",
+          "type": "default"
+        }
+      ],
+      "body_mode": "formdata",
+      "group": "Preorders",
+      "index": 23,
+      "invalid_json_responses": 0,
+      "method": "POST",
+      "name": "Retrieve",
+      "path": "/preorder/retrieve",
+      "query_fields": [],
+      "raw_url": "https://api.smspool.net/preorder/retrieve",
+      "responses": [
+        {
+          "code": 200,
+          "name": "200 - orders retrieved",
+          "shape": {
+            "items": {
+              "fields": {
+                "cost": {
+                  "required": true,
+                  "shape": {
+                    "kind": "string"
+                  }
+                },
+                "country": {
+                  "required": true,
+                  "shape": {
+                    "kind": "integer"
+                  }
+                },
+                "country_name": {
+                  "required": true,
+                  "shape": {
+                    "kind": "string"
+                  }
+                },
+                "highest_offer": {
+                  "required": true,
+                  "shape": {
+                    "kind": "string"
+                  }
+                },
+                "order_code": {
+                  "required": true,
+                  "shape": {
+                    "kind": "string"
+                  }
+                },
+                "pool": {
+                  "required": true,
+                  "shape": {
+                    "kind": "integer"
+                  }
+                },
+                "pool_name": {
+                  "required": true,
+                  "shape": {
+                    "kind": "string"
+                  }
+                },
+                "service": {
+                  "required": true,
+                  "shape": {
+                    "kind": "integer"
+                  }
+                },
+                "service_name": {
+                  "required": true,
+                  "shape": {
+                    "kind": "string"
+                  }
+                },
+                "status": {
+                  "required": true,
+                  "shape": {
+                    "kind": "string"
+                  }
+                },
+                "time_left": {
+                  "required": true,
+                  "shape": {
+                    "kind": "integer"
+                  }
+                },
+                "timestamp": {
+                  "required": true,
+                  "shape": {
+                    "kind": "string"
+                  }
+                }
+              },
+              "kind": "object"
+            },
+            "kind": "array"
+          }
+        },
+        {
+          "code": 403,
+          "name": "403 - invalid API key",
+          "shape": {
+            "fields": {
+              "errors": {
+                "required": true,
+                "shape": {
+                  "items": {
+                    "fields": {
+                      "description": {
+                        "required": true,
+                        "shape": {
+                          "kind": "string"
+                        }
+                      },
+                      "message": {
+                        "required": true,
+                        "shape": {
+                          "kind": "string"
+                        }
+                      },
+                      "param": {
+                        "required": true,
+                        "shape": {
+                          "kind": "string"
+                        }
+                      }
+                    },
+                    "kind": "object"
+                  },
+                  "kind": "array"
+                }
+              },
+              "success": {
+                "required": true,
+                "shape": {
+                  "kind": "integer"
+                }
+              }
+            },
+            "kind": "object"
+          }
+        }
+      ]
+    },
+    {
+      "auth": "bearer",
+      "body_fields": [
+        {
+          "disabled": false,
+          "key": "key",
+          "type": "default"
+        },
+        {
+          "disabled": false,
+          "key": "orderid",
+          "type": "default"
+        }
+      ],
+      "body_mode": "formdata",
+      "group": "Preorders",
+      "index": 24,
+      "invalid_json_responses": 0,
+      "method": "POST",
+      "name": "Check",
+      "path": "/preorder/check",
+      "query_fields": [],
+      "raw_url": "https://api.smspool.net/preorder/check",
+      "responses": [
+        {
+          "code": 404,
+          "name": "404 - does not exist",
+          "shape": {
+            "fields": {
+              "message": {
+                "required": true,
+                "shape": {
+                  "kind": "string"
+                }
+              },
+              "success": {
+                "required": true,
+                "shape": {
+                  "kind": "integer"
+                }
+              }
+            },
+            "kind": "object"
+          }
+        },
+        {
+          "code": 200,
+          "name": "200 - pending preorder",
+          "shape": {
+            "fields": {
+              "cost": {
+                "required": true,
+                "shape": {
+                  "kind": "string"
+                }
+              },
+              "country": {
+                "required": true,
+                "shape": {
+                  "kind": "integer"
+                }
+              },
+              "pool": {
+                "required": true,
+                "shape": {
+                  "kind": "integer"
+                }
+              },
+              "preorder_code": {
+                "required": true,
+                "shape": {
+                  "kind": "string"
+                }
+              },
+              "service": {
+                "required": true,
+                "shape": {
+                  "kind": "integer"
+                }
+              },
+              "status": {
+                "required": true,
+                "shape": {
+                  "kind": "integer"
+                }
+              }
+            },
+            "kind": "object"
+          }
+        },
+        {
+          "code": 200,
+          "name": "200 - preorder finished",
+          "shape": {
+            "fields": {
+              "cost": {
+                "required": true,
+                "shape": {
+                  "kind": "string"
+                }
+              },
+              "country": {
+                "required": true,
+                "shape": {
+                  "kind": "integer"
+                }
+              },
+              "order_code": {
+                "required": true,
+                "shape": {
+                  "kind": "string"
+                }
+              },
+              "phonenumber": {
+                "required": true,
+                "shape": {
+                  "kind": "string"
+                }
+              },
+              "pool": {
+                "required": true,
+                "shape": {
+                  "kind": "integer"
+                }
+              },
+              "preorder_code": {
+                "required": true,
+                "shape": {
+                  "kind": "string"
+                }
+              },
+              "service": {
+                "required": true,
+                "shape": {
+                  "kind": "integer"
+                }
+              },
+              "status": {
+                "required": true,
+                "shape": {
+                  "kind": "integer"
+                }
+              }
+            },
+            "kind": "object"
+          }
+        }
+      ]
+    },
+    {
+      "auth": "bearer",
+      "body_fields": [
+        {
+          "disabled": false,
+          "key": "key",
+          "type": "default"
+        },
+        {
+          "disabled": false,
+          "key": "orderid",
+          "type": "text"
+        }
+      ],
+      "body_mode": "formdata",
+      "group": "Preorders",
+      "index": 25,
+      "invalid_json_responses": 0,
+      "method": "POST",
+      "name": "Cancel",
+      "path": "/preorder/cancel",
+      "query_fields": [],
+      "raw_url": "https://api.smspool.net/preorder/cancel",
+      "responses": [
+        {
+          "code": 400,
+          "name": "400 - already completed",
+          "shape": {
+            "fields": {
+              "message": {
+                "required": true,
+                "shape": {
+                  "kind": "string"
+                }
+              },
+              "success": {
+                "required": true,
+                "shape": {
+                  "kind": "integer"
+                }
+              }
+            },
+            "kind": "object"
+          }
+        },
+        {
+          "code": 200,
+          "name": "400 - does not exist",
+          "shape": {
+            "fields": {
+              "message": {
+                "required": true,
+                "shape": {
+                  "kind": "string"
+                }
+              },
+              "success": {
+                "required": true,
+                "shape": {
+                  "kind": "integer"
+                }
+              }
+            },
+            "kind": "object"
+          }
+        },
+        {
+          "code": 200,
+          "name": "200 - preorder refunded",
+          "shape": {
+            "fields": {
+              "message": {
+                "required": true,
+                "shape": {
+                  "kind": "string"
+                }
+              },
+              "success": {
+                "required": true,
+                "shape": {
+                  "kind": "integer"
+                }
+              }
+            },
+            "kind": "object"
+          }
+        }
+      ]
+    },
+    {
+      "auth": "bearer",
+      "body_fields": [
+        {
+          "disabled": false,
+          "key": "key",
+          "type": "default"
+        },
+        {
+          "disabled": false,
+          "key": "service",
+          "type": "text"
+        },
+        {
+          "disabled": false,
+          "key": "country",
+          "type": "text"
+        },
+        {
+          "disabled": false,
+          "key": "pool",
+          "type": "text"
+        },
+        {
+          "disabled": false,
+          "key": "areacode",
+          "type": "text"
+        },
+        {
+          "disabled": false,
+          "key": "max_price",
+          "type": "text"
+        }
+      ],
+      "body_mode": "formdata",
+      "group": "Preorders",
+      "index": 26,
+      "invalid_json_responses": 0,
+      "method": "POST",
+      "name": "Create",
+      "path": "/preorder/create",
+      "query_fields": [],
+      "raw_url": "https://api.smspool.net/preorder/create",
+      "responses": [
+        {
+          "code": 400,
+          "name": "400 - low price",
+          "shape": {
+            "fields": {
+              "message": {
+                "required": true,
+                "shape": {
+                  "kind": "string"
+                }
+              },
+              "minimum_price": {
+                "required": true,
+                "shape": {
+                  "kind": "number"
+                }
+              },
+              "success": {
+                "required": true,
+                "shape": {
+                  "kind": "integer"
+                }
+              }
+            },
+            "kind": "object"
+          }
+        },
+        {
+          "code": 200,
+          "name": "200 - preorder success",
+          "shape": {
+            "fields": {
+              "expires_in": {
+                "required": true,
+                "shape": {
+                  "kind": "integer"
+                }
+              },
+              "message": {
+                "required": true,
+                "shape": {
+                  "kind": "string"
+                }
+              },
+              "order_code": {
+                "required": true,
+                "shape": {
+                  "kind": "string"
+                }
+              },
+              "success": {
+                "required": true,
+                "shape": {
+                  "kind": "integer"
+                }
+              }
+            },
+            "kind": "object"
+          }
+        },
+        {
+          "code": 400,
+          "name": "400 - missing parameter",
+          "shape": {
+            "fields": {
+              "errors": {
+                "required": true,
+                "shape": {
+                  "items": {
+                    "fields": {
+                      "description": {
+                        "required": true,
+                        "shape": {
+                          "kind": "string"
+                        }
+                      },
+                      "message": {
+                        "required": true,
+                        "shape": {
+                          "kind": "string"
+                        }
+                      },
+                      "param": {
+                        "required": true,
+                        "shape": {
+                          "kind": "string"
+                        }
+                      }
+                    },
+                    "kind": "object"
+                  },
+                  "kind": "array"
+                }
+              },
+              "success": {
+                "required": true,
+                "shape": {
+                  "kind": "integer"
+                }
+              }
+            },
+            "kind": "object"
+          }
+        },
+        {
+          "code": 400,
+          "name": "400 - preorder price too low",
+          "shape": {
+            "fields": {
+              "highest_offer": {
+                "required": true,
+                "shape": {
+                  "kind": "string"
+                }
+              },
+              "message": {
+                "required": true,
+                "shape": {
+                  "kind": "string"
+                }
+              },
+              "success": {
+                "required": true,
+                "shape": {
+                  "kind": "integer"
+                }
+              }
+            },
+            "kind": "object"
+          }
+        }
+      ]
+    },
+    {
+      "auth": "bearer",
+      "body_fields": [
+        {
+          "disabled": false,
+          "key": "key",
+          "type": "default"
+        },
+        {
+          "disabled": false,
+          "key": "service",
+          "type": "text"
+        },
+        {
+          "disabled": false,
+          "key": "country",
+          "type": "text"
+        },
+        {
+          "disabled": false,
+          "key": "pool",
+          "type": "text"
+        }
+      ],
+      "body_mode": "formdata",
+      "group": "Preorders",
+      "index": 27,
+      "invalid_json_responses": 0,
+      "method": "POST",
+      "name": "Price",
+      "path": "/preorder/price",
+      "query_fields": [],
+      "raw_url": "https://api.smspool.net/preorder/price",
+      "responses": [
+        {
+          "code": 200,
+          "name": "No current bid",
+          "shape": {
+            "fields": {
+              "cost": {
+                "required": true,
+                "shape": {
+                  "kind": "integer"
+                }
+              }
+            },
+            "kind": "object"
+          }
+        },
+        {
+          "code": 200,
+          "name": "Current highest bid",
+          "shape": {
+            "fields": {
+              "cost": {
+                "required": true,
+                "shape": {
+                  "kind": "number"
+                }
+              }
+            },
+            "kind": "object"
+          }
+        }
+      ]
+    },
+    {
+      "auth": "bearer",
+      "body_fields": [
+        {
+          "disabled": false,
+          "key": "key",
+          "type": "default"
+        },
+        {
+          "disabled": false,
+          "key": "type",
+          "type": "default"
+        }
+      ],
+      "body_mode": "formdata",
+      "group": "Rental",
+      "index": 28,
+      "invalid_json_responses": 0,
+      "method": "POST",
+      "name": "Retrieve Rental IDs",
+      "path": "/rental/retrieve_all",
+      "query_fields": [],
+      "raw_url": "https://api.smspool.net/rental/retrieve_all",
+      "responses": [
+        {
+          "code": 200,
+          "name": "200",
+          "shape": {
+            "fields": {
+              "data": {
+                "required": true,
+                "shape": {
+                  "items": {
+                    "fields": {
+                      "ID": {
+                        "required": true,
+                        "shape": {
+                          "kind": "integer"
+                        }
+                      },
+                      "is_refundable": {
+                        "required": true,
+                        "shape": {
+                          "kind": "integer"
+                        }
+                      },
+                      "name": {
+                        "required": true,
+                        "shape": {
+                          "kind": "string"
+                        }
+                      },
+                      "pool": {
+                        "required": true,
+                        "shape": {
+                          "kind": "integer"
+                        }
+                      },
+                      "pricing": {
+                        "required": true,
+                        "shape": {
+                          "fields": {
+                            "1": {
+                              "required": false,
+                              "shape": {
+                                "kind": "integer"
+                              }
+                            },
+                            "15": {
+                              "required": false,
+                              "shape": {
+                                "kind": "integer"
+                              }
+                            },
+                            "3": {
+                              "required": false,
+                              "shape": {
+                                "kind": "integer"
+                              }
+                            },
+                            "30": {
+                              "required": true,
+                              "shape": {
+                                "kind": "integer"
+                              }
+                            },
+                            "7": {
+                              "required": false,
+                              "shape": {
+                                "kind": "integer"
+                              }
+                            }
+                          },
+                          "kind": "object"
+                        }
+                      },
+                      "priority": {
+                        "required": true,
+                        "shape": {
+                          "kind": "integer"
+                        }
+                      },
+                      "refund_min_days": {
+                        "required": true,
+                        "shape": {
+                          "kind": "integer"
+                        }
+                      },
+                      "refund_within": {
+                        "required": true,
+                        "shape": {
+                          "kind": "integer"
+                        }
+                      },
+                      "region": {
+                        "required": true,
+                        "shape": {
+                          "kind": "string"
+                        }
+                      },
+                      "single_service": {
+                        "required": true,
+                        "shape": {
+                          "kind": "union",
+                          "variants": [
+                            {
+                              "kind": "null"
+                            },
+                            {
+                              "decoded": {
+                                "fields": {
+                                  "30": {
+                                    "required": true,
+                                    "shape": {
+                                      "kind": "integer"
+                                    }
+                                  }
+                                },
+                                "kind": "object"
+                              },
+                              "encoding": "json",
+                              "kind": "string"
+                            }
+                          ]
+                        }
+                      },
+                      "single_service_extend": {
+                        "required": true,
+                        "shape": {
+                          "kind": "union",
+                          "variants": [
+                            {
+                              "kind": "null"
+                            },
+                            {
+                              "decoded": {
+                                "fields": {
+                                  "30": {
+                                    "required": true,
+                                    "shape": {
+                                      "kind": "integer"
+                                    }
+                                  }
+                                },
+                                "kind": "object"
+                              },
+                              "encoding": "json",
+                              "kind": "string"
+                            }
+                          ]
+                        }
+                      },
+                      "tag": {
+                        "required": true,
+                        "shape": {
+                          "kind": "string"
+                        }
+                      }
+                    },
+                    "kind": "object"
+                  },
+                  "kind": "array"
+                }
+              },
+              "success": {
+                "required": true,
+                "shape": {
+                  "kind": "integer"
+                }
+              }
+            },
+            "kind": "object"
+          }
+        },
+        {
+          "code": 404,
+          "name": "404 - no rentals found",
+          "shape": {
+            "fields": {
+              "message": {
+                "required": true,
+                "shape": {
+                  "kind": "string"
+                }
+              },
+              "success": {
+                "required": true,
+                "shape": {
+                  "kind": "integer"
+                }
+              }
+            },
+            "kind": "object"
+          }
+        }
+      ]
+    },
+    {
+      "auth": "bearer",
+      "body_fields": [
+        {
+          "disabled": false,
+          "key": "key",
+          "type": "default"
+        },
+        {
+          "disabled": false,
+          "key": "id",
+          "type": "default"
+        },
+        {
+          "disabled": false,
+          "key": "days",
+          "type": "text"
+        },
+        {
+          "disabled": false,
+          "key": "service_id",
+          "type": "text"
+        },
+        {
+          "disabled": false,
+          "key": "create_token",
+          "type": "text"
+        }
+      ],
+      "body_mode": "formdata",
+      "group": "Rental",
+      "index": 29,
+      "invalid_json_responses": 0,
+      "method": "POST",
+      "name": "Order Rental",
+      "path": "/purchase/rental",
+      "query_fields": [],
+      "raw_url": "https://api.smspool.net/purchase/rental",
+      "responses": [
+        {
+          "code": 400,
+          "name": "400 - invalid days entered",
+          "shape": {
+            "fields": {
+              "message": {
+                "required": true,
+                "shape": {
+                  "kind": "string"
+                }
+              },
+              "success": {
+                "required": true,
+                "shape": {
+                  "kind": "integer"
+                }
+              }
+            },
+            "kind": "object"
+          }
+        },
+        {
+          "code": 400,
+          "name": "400 - not enough balance",
+          "shape": {
+            "fields": {
+              "message": {
+                "required": true,
+                "shape": {
+                  "kind": "string"
+                }
+              },
+              "success": {
+                "required": true,
+                "shape": {
+                  "kind": "integer"
+                }
+              }
+            },
+            "kind": "object"
+          }
+        },
+        {
+          "code": 400,
+          "name": "400 - invalid rental ID",
+          "shape": {
+            "fields": {
+              "message": {
+                "required": true,
+                "shape": {
+                  "kind": "string"
+                }
+              },
+              "success": {
+                "required": true,
+                "shape": {
+                  "kind": "integer"
+                }
+              }
+            },
+            "kind": "object"
+          }
+        },
+        {
+          "code": 400,
+          "name": "400 - rental out of stock",
+          "shape": {
+            "fields": {
+              "message": {
+                "required": true,
+                "shape": {
+                  "kind": "string"
+                }
+              },
+              "success": {
+                "required": true,
+                "shape": {
+                  "kind": "integer"
+                }
+              }
+            },
+            "kind": "object"
+          }
+        },
+        {
+          "code": 200,
+          "name": "200 - order rental success",
+          "shape": {
+            "fields": {
+              "days": {
+                "required": true,
+                "shape": {
+                  "kind": "integer"
+                }
+              },
+              "expiry": {
+                "required": true,
+                "shape": {
+                  "kind": "integer"
+                }
+              },
+              "message": {
+                "required": true,
+                "shape": {
+                  "kind": "string"
+                }
+              },
+              "phonenumber": {
+                "required": true,
+                "shape": {
+                  "kind": "string"
+                }
+              },
+              "rental_code": {
+                "required": true,
+                "shape": {
+                  "kind": "string"
+                }
+              },
+              "success": {
+                "required": true,
+                "shape": {
+                  "kind": "integer"
+                }
+              }
+            },
+            "kind": "object"
+          }
+        }
+      ]
+    },
+    {
+      "auth": "bearer",
+      "body_fields": [
+        {
+          "disabled": false,
+          "key": "key",
+          "type": "default"
+        },
+        {
+          "disabled": false,
+          "key": "rental_code",
+          "type": "default"
+        }
+      ],
+      "body_mode": "formdata",
+      "group": "Rental",
+      "index": 30,
+      "invalid_json_responses": 0,
+      "method": "POST",
+      "name": "Refund Rental",
+      "path": "/rental/refund",
+      "query_fields": [],
+      "raw_url": "https://api.smspool.net/rental/refund",
+      "responses": [
+        {
+          "code": 404,
+          "name": "404 - rental not found",
+          "shape": {
+            "fields": {
+              "message": {
+                "required": true,
+                "shape": {
+                  "kind": "string"
+                }
+              },
+              "success": {
+                "required": true,
+                "shape": {
+                  "kind": "integer"
+                }
+              }
+            },
+            "kind": "object"
+          }
+        },
+        {
+          "code": 200,
+          "name": "200 - rental refunded",
+          "shape": {
+            "fields": {
+              "message": {
+                "required": true,
+                "shape": {
+                  "kind": "string"
+                }
+              },
+              "success": {
+                "required": true,
+                "shape": {
+                  "kind": "integer"
+                }
+              }
+            },
+            "kind": "object"
+          }
+        }
+      ]
+    },
+    {
+      "auth": "bearer",
+      "body_fields": [
+        {
+          "disabled": false,
+          "key": "key",
+          "type": "default"
+        },
+        {
+          "disabled": false,
+          "key": "days",
+          "type": "default"
+        },
+        {
+          "disabled": false,
+          "key": "rental_code",
+          "type": "default"
+        }
+      ],
+      "body_mode": "formdata",
+      "group": "Rental",
+      "index": 31,
+      "invalid_json_responses": 0,
+      "method": "POST",
+      "name": "Extend Rental",
+      "path": "/rental/extend",
+      "query_fields": [],
+      "raw_url": "https://api.smspool.net/rental/extend",
+      "responses": [
+        {
+          "code": 404,
+          "name": "400 - rental not found",
+          "shape": {
+            "fields": {
+              "message": {
+                "required": true,
+                "shape": {
+                  "kind": "string"
+                }
+              },
+              "success": {
+                "required": true,
+                "shape": {
+                  "kind": "integer"
+                }
+              }
+            },
+            "kind": "object"
+          }
+        },
+        {
+          "code": 200,
+          "name": "200 - rental extended",
+          "shape": {
+            "fields": {
+              "expiration_date": {
+                "required": true,
+                "shape": {
+                  "kind": "integer"
+                }
+              },
+              "message": {
+                "required": true,
+                "shape": {
+                  "kind": "string"
+                }
+              },
+              "success": {
+                "required": true,
+                "shape": {
+                  "kind": "integer"
+                }
+              }
+            },
+            "kind": "object"
+          }
+        }
+      ]
+    },
+    {
+      "auth": "bearer",
+      "body_fields": [
+        {
+          "disabled": false,
+          "key": "key",
+          "type": "default"
+        },
+        {
+          "disabled": false,
+          "key": "rental_code",
+          "type": "default"
+        }
+      ],
+      "body_mode": "formdata",
+      "group": "Rental",
+      "index": 32,
+      "invalid_json_responses": 0,
+      "method": "POST",
+      "name": "Enable Auto Extend Rental",
+      "path": "/rental/auto_extend",
+      "query_fields": [],
+      "raw_url": "https://api.smspool.net/rental/auto_extend",
+      "responses": [
+        {
+          "code": 200,
+          "name": "200 - auto extend updated",
+          "shape": {
+            "fields": {
+              "auto_extend": {
+                "required": true,
+                "shape": {
+                  "kind": "integer"
+                }
+              },
+              "message": {
+                "required": true,
+                "shape": {
+                  "kind": "string"
+                }
+              },
+              "success": {
+                "required": true,
+                "shape": {
+                  "kind": "integer"
+                }
+              }
+            },
+            "kind": "object"
+          }
+        }
+      ]
+    },
+    {
+      "auth": "bearer",
+      "body_fields": [
+        {
+          "disabled": true,
+          "key": "key",
+          "type": "default"
+        }
+      ],
+      "body_mode": "formdata",
+      "group": "Rental",
+      "index": 33,
+      "invalid_json_responses": 0,
+      "method": "POST",
+      "name": "Rental History",
+      "path": "/rental/history",
+      "query_fields": [],
+      "raw_url": "https://api.smspool.net/rental/history",
+      "responses": [
+        {
+          "code": 200,
+          "name": "200",
+          "shape": {
+            "items": {
+              "fields": {
+                "ID": {
+                  "required": true,
+                  "shape": {
+                    "kind": "integer"
+                  }
+                },
+                "action": {
+                  "required": true,
+                  "shape": {
+                    "kind": "string"
+                  }
+                },
+                "cost": {
+                  "required": true,
+                  "shape": {
+                    "kind": "string"
+                  }
+                },
+                "rental": {
+                  "required": true,
+                  "shape": {
+                    "kind": "string"
+                  }
+                },
+                "timestamp": {
+                  "required": true,
+                  "shape": {
+                    "kind": "string"
+                  }
+                }
+              },
+              "kind": "object"
+            },
+            "kind": "array"
+          }
+        }
+      ]
+    },
+    {
+      "auth": "bearer",
+      "body_fields": [
+        {
+          "disabled": true,
+          "key": "key",
+          "type": "default"
+        },
+        {
+          "disabled": false,
+          "key": "rental_code",
+          "type": "default"
+        }
+      ],
+      "body_mode": "formdata",
+      "group": "Rental",
+      "index": 34,
+      "invalid_json_responses": 0,
+      "method": "POST",
+      "name": "Retrieve Rental Messages",
+      "path": "/rental/retrieve_messages",
+      "query_fields": [],
+      "raw_url": "https://api.smspool.net/rental/retrieve_messages",
+      "responses": [
+        {
+          "code": 200,
+          "name": "200",
+          "shape": {
+            "fields": {
+              "messages": {
+                "required": true,
+                "shape": {
+                  "items": {
+                    "fields": {
+                      "ID": {
+                        "required": true,
+                        "shape": {
+                          "kind": "integer"
+                        }
+                      },
+                      "message": {
+                        "required": true,
+                        "shape": {
+                          "kind": "string"
+                        }
+                      },
+                      "sender": {
+                        "required": true,
+                        "shape": {
+                          "kind": "string"
+                        }
+                      },
+                      "timestamp": {
+                        "required": true,
+                        "shape": {
+                          "kind": "string"
+                        }
+                      }
+                    },
+                    "kind": "object"
+                  },
+                  "kind": "array"
+                }
+              },
+              "source": {
+                "required": true,
+                "shape": {
+                  "kind": "integer"
+                }
+              },
+              "success": {
+                "required": true,
+                "shape": {
+                  "kind": "integer"
+                }
+              }
+            },
+            "kind": "object"
+          }
+        },
+        {
+          "code": 404,
+          "name": "404",
+          "shape": {
+            "fields": {
+              "message": {
+                "required": true,
+                "shape": {
+                  "kind": "string"
+                }
+              },
+              "success": {
+                "required": true,
+                "shape": {
+                  "kind": "integer"
+                }
+              }
+            },
+            "kind": "object"
+          }
+        }
+      ]
+    },
+    {
+      "auth": "bearer",
+      "body_fields": [
+        {
+          "disabled": false,
+          "key": "key",
+          "type": "default"
+        },
+        {
+          "disabled": false,
+          "key": "rental_code",
+          "type": "default"
+        }
+      ],
+      "body_mode": "formdata",
+      "group": "Rental",
+      "index": 35,
+      "invalid_json_responses": 0,
+      "method": "POST",
+      "name": "Retrieve Rental Status",
+      "path": "/rental/retrieve_status",
+      "query_fields": [],
+      "raw_url": "https://api.smspool.net/rental/retrieve_status",
+      "responses": [
+        {
+          "code": 200,
+          "name": "200",
+          "shape": {
+            "fields": {
+              "status": {
+                "required": true,
+                "shape": {
+                  "fields": {
+                    "activeFor": {
+                      "required": true,
+                      "shape": {
+                        "kind": "integer"
+                      }
+                    },
+                    "auto_extend": {
+                      "required": true,
+                      "shape": {
+                        "kind": "integer"
+                      }
+                    },
+                    "available": {
+                      "required": true,
+                      "shape": {
+                        "kind": "integer"
+                      }
+                    },
+                    "expiry": {
+                      "required": true,
+                      "shape": {
+                        "kind": "integer"
+                      }
+                    },
+                    "phonenumber": {
+                      "required": true,
+                      "shape": {
+                        "kind": "string"
+                      }
+                    }
+                  },
+                  "kind": "object"
+                }
+              },
+              "success": {
+                "required": true,
+                "shape": {
+                  "kind": "integer"
+                }
+              }
+            },
+            "kind": "object"
+          }
+        },
+        {
+          "code": 404,
+          "name": "404",
+          "shape": {
+            "fields": {
+              "message": {
+                "required": true,
+                "shape": {
+                  "kind": "string"
+                }
+              },
+              "success": {
+                "required": true,
+                "shape": {
+                  "kind": "integer"
+                }
+              }
+            },
+            "kind": "object"
+          }
+        }
+      ]
+    },
+    {
+      "auth": "bearer",
+      "body_fields": [
+        {
+          "disabled": false,
+          "key": "key",
+          "type": "default"
+        },
+        {
+          "disabled": false,
+          "key": "rental_code",
+          "type": "default"
+        }
+      ],
+      "body_mode": "formdata",
+      "group": "Rental",
+      "index": 36,
+      "invalid_json_responses": 0,
+      "method": "POST",
+      "name": "Reset Rental",
+      "path": "/rental/reset",
+      "query_fields": [],
+      "raw_url": "https://api.smspool.net/rental/reset",
+      "responses": [
+        {
+          "code": 200,
+          "name": "200",
+          "shape": {
+            "fields": {
+              "message": {
+                "required": true,
+                "shape": {
+                  "kind": "string"
+                }
+              },
+              "success": {
+                "required": true,
+                "shape": {
+                  "kind": "integer"
+                }
+              }
+            },
+            "kind": "object"
+          }
+        },
+        {
+          "code": 404,
+          "name": "404",
+          "shape": {
+            "fields": {
+              "message": {
+                "required": true,
+                "shape": {
+                  "kind": "string"
+                }
+              },
+              "success": {
+                "required": true,
+                "shape": {
+                  "kind": "integer"
+                }
+              }
+            },
+            "kind": "object"
+          }
+        },
+        {
+          "code": 400,
+          "name": "400",
+          "shape": {
+            "fields": {
+              "message": {
+                "required": true,
+                "shape": {
+                  "kind": "string"
+                }
+              },
+              "success": {
+                "required": true,
+                "shape": {
+                  "kind": "integer"
+                }
+              }
+            },
+            "kind": "object"
+          }
+        }
+      ]
+    },
+    {
+      "auth": "bearer",
+      "body_fields": [
+        {
+          "disabled": false,
+          "key": "key",
+          "type": "default"
+        },
+        {
+          "disabled": false,
+          "key": "rental",
+          "type": "default"
+        }
+      ],
+      "body_mode": "formdata",
+      "group": "Rental",
+      "index": 37,
+      "invalid_json_responses": 0,
+      "method": "POST",
+      "name": "Retrieve Rental Services",
+      "path": "/rental/retrieve_services",
+      "query_fields": [],
+      "raw_url": "https://api.smspool.net/rental/retrieve_services",
+      "responses": [
+        {
+          "code": 200,
+          "name": "200",
+          "shape": {
+            "items": {
+              "fields": {
+                "ID": {
+                  "required": true,
+                  "shape": {
+                    "kind": "integer"
+                  }
+                },
+                "name": {
+                  "required": true,
+                  "shape": {
+                    "kind": "string"
+                  }
+                },
+                "pool": {
+                  "required": true,
+                  "shape": {
+                    "kind": "integer"
+                  }
+                }
+              },
+              "kind": "object"
+            },
+            "kind": "array"
+          }
+        }
+      ]
+    },
+    {
+      "auth": "bearer",
+      "body_fields": [
+        {
+          "disabled": false,
+          "key": "key",
+          "type": "default"
+        }
+      ],
+      "body_mode": "formdata",
+      "group": "Rental",
+      "index": 38,
+      "invalid_json_responses": 0,
+      "method": "POST",
+      "name": "Retrieve Active Rentals",
+      "path": "/rental/retrieve",
+      "query_fields": [],
+      "raw_url": "https://api.smspool.net/rental/retrieve",
+      "responses": [
+        {
+          "code": 200,
+          "name": "200",
+          "shape": {
+            "items": {
+              "fields": {
+                "country_name": {
+                  "required": true,
+                  "shape": {
+                    "kind": "string"
+                  }
+                },
+                "expiration_date": {
+                  "required": true,
+                  "shape": {
+                    "kind": "integer"
+                  }
+                },
+                "phonenumber": {
+                  "required": true,
+                  "shape": {
+                    "kind": "string"
+                  }
+                },
+                "rental": {
+                  "required": true,
+                  "shape": {
+                    "kind": "integer"
+                  }
+                },
+                "rental_code": {
+                  "required": true,
+                  "shape": {
+                    "kind": "string"
+                  }
+                },
+                "source": {
+                  "required": true,
+                  "shape": {
+                    "kind": "integer"
+                  }
+                },
+                "state": {
+                  "required": true,
+                  "shape": {
+                    "kind": "string"
+                  }
+                },
+                "type": {
+                  "required": true,
+                  "shape": {
+                    "kind": "integer"
+                  }
+                }
+              },
+              "kind": "object"
+            },
+            "kind": "array"
+          }
+        }
+      ]
+    },
+    {
+      "auth": "bearer",
+      "body_fields": [
+        {
+          "disabled": false,
+          "key": "key",
+          "type": "default"
+        },
+        {
+          "disabled": false,
+          "key": "id",
+          "type": "default"
+        }
+      ],
+      "body_mode": "formdata",
+      "group": "Rental",
+      "index": 39,
+      "invalid_json_responses": 0,
+      "method": "POST",
+      "name": "Retrieve Rental Pricing",
+      "path": "/rental/retrieve_pricing",
+      "query_fields": [],
+      "raw_url": "https://api.smspool.net/rental/retrieve_pricing",
+      "responses": [
+        {
+          "code": 200,
+          "name": "200",
+          "shape": {
+            "fields": {
+              "extend": {
+                "required": true,
+                "shape": {
+                  "fields": {
+                    "30": {
+                      "required": true,
+                      "shape": {
+                        "kind": "integer"
+                      }
+                    }
+                  },
+                  "kind": "object"
+                }
+              },
+              "pricing": {
+                "required": true,
+                "shape": {
+                  "fields": {
+                    "14": {
+                      "required": true,
+                      "shape": {
+                        "kind": "integer"
+                      }
+                    },
+                    "30": {
+                      "required": true,
+                      "shape": {
+                        "kind": "integer"
+                      }
+                    },
+                    "7": {
+                      "required": true,
+                      "shape": {
+                        "kind": "integer"
+                      }
+                    }
+                  },
+                  "kind": "object"
+                }
+              }
+            },
+            "kind": "object"
+          }
+        }
+      ]
+    },
+    {
+      "auth": "bearer",
+      "body_fields": [
+        {
+          "disabled": false,
+          "key": "key",
+          "type": "default"
+        },
+        {
+          "disabled": false,
+          "key": "id",
+          "type": "default"
+        },
+        {
+          "disabled": false,
+          "key": "days",
+          "type": "text"
+        }
+      ],
+      "body_mode": "formdata",
+      "group": "Rental",
+      "index": 40,
+      "invalid_json_responses": 0,
+      "method": "POST",
+      "name": "Retrieve Rental Stock",
+      "path": "/rental/stock",
+      "query_fields": [],
+      "raw_url": "https://api.smspool.net/rental/stock",
+      "responses": [
+        {
+          "code": 200,
+          "name": "200",
+          "shape": {
+            "fields": {
+              "count": {
+                "required": true,
+                "shape": {
+                  "kind": "integer"
+                }
+              },
+              "success": {
+                "required": true,
+                "shape": {
+                  "kind": "integer"
+                }
+              }
+            },
+            "kind": "object"
+          }
+        }
+      ]
+    },
+    {
+      "auth": "bearer",
+      "body_fields": [
+        {
+          "disabled": false,
+          "key": "key",
+          "type": "default"
+        },
+        {
+          "disabled": false,
+          "key": "rental_code",
+          "type": "default"
+        }
+      ],
+      "body_mode": "formdata",
+      "group": "Rental",
+      "index": 41,
+      "invalid_json_responses": 0,
+      "method": "POST",
+      "name": "Retrieve Rental Info",
+      "path": "/rental/info",
+      "query_fields": [],
+      "raw_url": "https://api.smspool.net/rental/info",
+      "responses": [
+        {
+          "code": 200,
+          "name": "200",
+          "shape": {
+            "fields": {
+              "auto_extend": {
+                "required": true,
+                "shape": {
+                  "kind": "integer"
+                }
+              },
+              "country_name": {
+                "required": true,
+                "shape": {
+                  "kind": "string"
+                }
+              },
+              "expiration_date": {
+                "required": true,
+                "shape": {
+                  "kind": "integer"
+                }
+              },
+              "phonenumber": {
+                "required": true,
+                "shape": {
+                  "kind": "string"
+                }
+              },
+              "price": {
+                "required": true,
+                "shape": {
+                  "kind": "string"
+                }
+              },
+              "refund": {
+                "required": true,
+                "shape": {
+                  "kind": "integer"
+                }
+              },
+              "rental": {
+                "required": true,
+                "shape": {
+                  "kind": "integer"
+                }
+              },
+              "rental_code": {
+                "required": true,
+                "shape": {
+                  "kind": "string"
+                }
+              },
+              "service": {
+                "required": true,
+                "shape": {
+                  "kind": "integer"
+                }
+              },
+              "service_name": {
+                "required": true,
+                "shape": {
+                  "kind": "string"
+                }
+              },
+              "source": {
+                "required": true,
+                "shape": {
+                  "kind": "integer"
+                }
+              },
+              "type": {
+                "required": true,
+                "shape": {
+                  "kind": "integer"
+                }
+              }
+            },
+            "kind": "object"
+          }
+        },
+        {
+          "code": 404,
+          "name": "404 - rental not found",
+          "shape": {
+            "fields": {
+              "message": {
+                "required": true,
+                "shape": {
+                  "kind": "string"
+                }
+              },
+              "success": {
+                "required": true,
+                "shape": {
+                  "kind": "integer"
+                }
+              }
+            },
+            "kind": "object"
+          }
+        }
+      ]
+    },
+    {
+      "auth": "bearer",
+      "body_fields": [
+        {
+          "disabled": false,
+          "key": "key",
+          "type": "text"
+        },
+        {
+          "disabled": true,
+          "key": "country",
+          "type": "text"
+        },
+        {
+          "disabled": true,
+          "key": "service",
+          "type": "text"
+        },
+        {
+          "disabled": true,
+          "key": "pool",
+          "type": "text"
+        },
+        {
+          "disabled": true,
+          "key": "max_price",
+          "type": "text"
+        }
+      ],
+      "body_mode": "formdata",
+      "group": "Pricing",
+      "index": 42,
+      "invalid_json_responses": 0,
+      "method": "POST",
+      "name": "Retrieve all pricing",
+      "path": "/request/pricing",
+      "query_fields": [],
+      "raw_url": "https://api.smspool.net/request/pricing",
+      "responses": [
+        {
+          "code": null,
+          "name": "200",
+          "shape": {
+            "items": {
+              "fields": {
+                "country": {
+                  "required": true,
+                  "shape": {
+                    "kind": "integer"
+                  }
+                },
+                "country_name": {
+                  "required": true,
+                  "shape": {
+                    "kind": "string"
+                  }
+                },
+                "pool": {
+                  "required": true,
+                  "shape": {
+                    "kind": "integer"
+                  }
+                },
+                "price": {
+                  "required": true,
+                  "shape": {
+                    "kind": "string"
+                  }
+                },
+                "service": {
+                  "required": true,
+                  "shape": {
+                    "kind": "integer"
+                  }
+                },
+                "service_name": {
+                  "required": true,
+                  "shape": {
+                    "kind": "string"
+                  }
+                },
+                "short_name": {
+                  "required": true,
+                  "shape": {
+                    "kind": "string"
+                  }
+                }
+              },
+              "kind": "object"
+            },
+            "kind": "array"
+          }
+        }
+      ]
+    },
+    {
+      "auth": "bearer",
+      "body_fields": [
+        {
+          "disabled": true,
+          "key": "key",
+          "type": "text"
+        },
+        {
+          "disabled": false,
+          "key": "country",
+          "type": "text"
+        },
+        {
+          "disabled": false,
+          "key": "service",
+          "type": "text"
+        },
+        {
+          "disabled": false,
+          "key": "pool",
+          "type": "text"
+        }
+      ],
+      "body_mode": "formdata",
+      "group": "Pricing",
+      "index": 43,
+      "invalid_json_responses": 0,
+      "method": "POST",
+      "name": "Retrieve specific price & Success Rate",
+      "path": "/request/price",
+      "query_fields": [],
+      "raw_url": "https://api.smspool.net/request/price",
+      "responses": [
+        {
+          "code": 200,
+          "name": "200",
+          "shape": {
+            "fields": {
+              "high_price": {
+                "required": true,
+                "shape": {
+                  "kind": "string"
+                }
+              },
+              "pool": {
+                "required": true,
+                "shape": {
+                  "kind": "integer"
+                }
+              },
+              "price": {
+                "required": true,
+                "shape": {
+                  "kind": "string"
+                }
+              },
+              "success_rate": {
+                "required": true,
+                "shape": {
+                  "kind": "integer"
+                }
+              }
+            },
+            "kind": "object"
+          }
+        },
+        {
+          "code": 400,
+          "name": "400",
+          "shape": {
+            "fields": {
+              "errors": {
+                "required": true,
+                "shape": {
+                  "items": {
+                    "fields": {
+                      "description": {
+                        "required": true,
+                        "shape": {
+                          "kind": "string"
+                        }
+                      },
+                      "message": {
+                        "required": true,
+                        "shape": {
+                          "kind": "string"
+                        }
+                      },
+                      "param": {
+                        "required": true,
+                        "shape": {
+                          "kind": "string"
+                        }
+                      }
+                    },
+                    "kind": "object"
+                  },
+                  "kind": "array"
+                }
+              },
+              "success": {
+                "required": true,
+                "shape": {
+                  "kind": "integer"
+                }
+              }
+            },
+            "kind": "object"
+          }
+        }
+      ]
+    },
+    {
+      "auth": "bearer",
+      "body_fields": [
+        {
+          "disabled": true,
+          "key": "key",
+          "type": "text"
+        },
+        {
+          "disabled": false,
+          "key": "phonenumber",
+          "type": "text"
+        }
+      ],
+      "body_mode": "formdata",
+      "group": "Carrier",
+      "index": 44,
+      "invalid_json_responses": 0,
+      "method": "POST",
+      "name": "Lookup",
+      "path": "/carrier/paid_lookup",
+      "query_fields": [],
+      "raw_url": "https://api.smspool.net/carrier/paid_lookup",
+      "responses": [
+        {
+          "code": 200,
+          "name": "200",
+          "shape": {
+            "fields": {
+              "carrier": {
+                "required": true,
+                "shape": {
+                  "kind": "string"
+                }
+              },
+              "carrier_type": {
+                "required": true,
+                "shape": {
+                  "kind": "string"
+                }
+              },
+              "country": {
+                "required": true,
+                "shape": {
+                  "kind": "string"
+                }
+              },
+              "phonenumber": {
+                "required": true,
+                "shape": {
+                  "kind": "string"
+                }
+              },
+              "success": {
+                "required": true,
+                "shape": {
+                  "kind": "boolean"
+                }
+              }
+            },
+            "kind": "object"
+          }
+        },
+        {
+          "code": 400,
+          "name": "400",
+          "shape": {
+            "fields": {
+              "errors": {
+                "required": true,
+                "shape": {
+                  "items": {
+                    "fields": {
+                      "description": {
+                        "required": true,
+                        "shape": {
+                          "kind": "string"
+                        }
+                      },
+                      "message": {
+                        "required": true,
+                        "shape": {
+                          "kind": "string"
+                        }
+                      },
+                      "param": {
+                        "required": true,
+                        "shape": {
+                          "kind": "string"
+                        }
+                      }
+                    },
+                    "kind": "object"
+                  },
+                  "kind": "array"
+                }
+              },
+              "success": {
+                "required": true,
+                "shape": {
+                  "kind": "integer"
+                }
+              }
+            },
+            "kind": "object"
+          }
+        }
+      ]
+    },
+    {
+      "auth": "bearer",
+      "body_fields": [
+        {
+          "disabled": false,
+          "key": "id",
+          "type": "text"
+        },
+        {
+          "disabled": false,
+          "key": "password",
+          "type": "text"
+        },
+        {
+          "disabled": false,
+          "key": "balance",
+          "type": "text"
+        },
+        {
+          "disabled": false,
+          "key": "active",
+          "type": "text"
+        }
+      ],
+      "body_mode": "formdata",
+      "group": "Business / User",
+      "index": 45,
+      "invalid_json_responses": 0,
+      "method": "POST",
+      "name": "Update",
+      "path": "/business/user/update",
+      "query_fields": [],
+      "raw_url": "https://api.smspool.net/business/user/update",
+      "responses": [
+        {
+          "code": 200,
+          "name": "200",
+          "shape": {
+            "fields": {
+              "query": {
+                "required": true,
+                "shape": {
+                  "fields": {
+                    "balance": {
+                      "required": true,
+                      "shape": {
+                        "fields": {
+                          "message": {
+                            "required": true,
+                            "shape": {
+                              "kind": "string"
+                            }
+                          },
+                          "success": {
+                            "required": true,
+                            "shape": {
+                              "kind": "integer"
+                            }
+                          }
+                        },
+                        "kind": "object"
+                      }
+                    },
+                    "password": {
+                      "required": true,
+                      "shape": {
+                        "fields": {
+                          "message": {
+                            "required": true,
+                            "shape": {
+                              "kind": "string"
+                            }
+                          },
+                          "success": {
+                            "required": true,
+                            "shape": {
+                              "kind": "integer"
+                            }
+                          }
+                        },
+                        "kind": "object"
+                      }
+                    }
+                  },
+                  "kind": "object"
+                }
+              },
+              "success": {
+                "required": true,
+                "shape": {
+                  "kind": "integer"
+                }
+              }
+            },
+            "kind": "object"
+          }
+        },
+        {
+          "code": 404,
+          "name": "404",
+          "shape": {
+            "fields": {
+              "message": {
+                "required": true,
+                "shape": {
+                  "kind": "string"
+                }
+              },
+              "success": {
+                "required": true,
+                "shape": {
+                  "kind": "integer"
+                }
+              }
+            },
+            "kind": "object"
+          }
+        }
+      ]
+    },
+    {
+      "auth": "bearer",
+      "body_fields": [
+        {
+          "disabled": false,
+          "key": "id",
+          "type": "text"
+        }
+      ],
+      "body_mode": "formdata",
+      "group": "Business / User",
+      "index": 46,
+      "invalid_json_responses": 0,
+      "method": "POST",
+      "name": "History",
+      "path": "/business/user/history",
+      "query_fields": [],
+      "raw_url": "https://api.smspool.net/business/user/history",
+      "responses": [
+        {
+          "code": 200,
+          "name": "200",
+          "shape": {
+            "fields": {
+              "history": {
+                "required": true,
+                "shape": {
+                  "items": {
+                    "kind": "unknown"
+                  },
+                  "kind": "array"
+                }
+              },
+              "success": {
+                "required": true,
+                "shape": {
+                  "kind": "integer"
+                }
+              }
+            },
+            "kind": "object"
+          }
+        },
+        {
+          "code": 404,
+          "name": "404",
+          "shape": {
+            "fields": {
+              "message": {
+                "required": true,
+                "shape": {
+                  "kind": "string"
+                }
+              },
+              "success": {
+                "required": true,
+                "shape": {
+                  "kind": "integer"
+                }
+              }
+            },
+            "kind": "object"
+          }
+        }
+      ]
+    },
+    {
+      "auth": "bearer",
+      "body_fields": [],
+      "body_mode": "none",
+      "group": "Business",
+      "index": 47,
+      "invalid_json_responses": 0,
+      "method": "GET",
+      "name": "Retrieve users",
+      "path": "/business/users",
+      "query_fields": [],
+      "raw_url": "api.smspool.net/business/users",
+      "responses": [
+        {
+          "code": 200,
+          "name": "200",
+          "shape": {
+            "items": {
+              "fields": {
+                "ID": {
+                  "required": true,
+                  "shape": {
+                    "kind": "integer"
+                  }
+                },
+                "active": {
+                  "required": true,
+                  "shape": {
+                    "kind": "integer"
+                  }
+                },
+                "apikey": {
+                  "required": true,
+                  "shape": {
+                    "kind": "string"
+                  }
+                },
+                "balance": {
+                  "required": true,
+                  "shape": {
+                    "kind": "string"
+                  }
+                },
+                "username": {
+                  "required": true,
+                  "shape": {
+                    "kind": "string"
+                  }
+                }
+              },
+              "kind": "object"
+            },
+            "kind": "array"
+          }
+        }
+      ]
+    },
+    {
+      "auth": "bearer",
+      "body_fields": [
+        {
+          "disabled": false,
+          "key": "username",
+          "type": "text"
+        },
+        {
+          "disabled": false,
+          "key": "password",
+          "type": "text"
+        }
+      ],
+      "body_mode": "formdata",
+      "group": "Business",
+      "index": 48,
+      "invalid_json_responses": 0,
+      "method": "POST",
+      "name": "Register user",
+      "path": "/business/create",
+      "query_fields": [],
+      "raw_url": "https://api.smspool.net/business/create",
+      "responses": [
+        {
+          "code": 200,
+          "name": "200",
+          "shape": {
+            "fields": {
+              "message": {
+                "required": true,
+                "shape": {
+                  "kind": "string"
+                }
+              },
+              "success": {
+                "required": true,
+                "shape": {
+                  "kind": "integer"
+                }
+              }
+            },
+            "kind": "object"
+          }
+        },
+        {
+          "code": 400,
+          "name": "400",
+          "shape": {
+            "fields": {
+              "errors": {
+                "required": true,
+                "shape": {
+                  "items": {
+                    "fields": {
+                      "message": {
+                        "required": true,
+                        "shape": {
+                          "kind": "string"
+                        }
+                      },
+                      "param": {
+                        "required": true,
+                        "shape": {
+                          "kind": "string"
+                        }
+                      }
+                    },
+                    "kind": "object"
+                  },
+                  "kind": "array"
+                }
+              },
+              "success": {
+                "required": true,
+                "shape": {
+                  "kind": "integer"
+                }
+              }
+            },
+            "kind": "object"
+          }
+        }
+      ]
+    },
+    {
+      "auth": "bearer",
+      "body_fields": [
+        {
+          "disabled": false,
+          "key": "key",
+          "type": "text"
+        },
+        {
+          "disabled": false,
+          "key": "plan",
+          "type": "text"
+        }
+      ],
+      "body_mode": "formdata",
+      "group": "eSIMs",
+      "index": 49,
+      "invalid_json_responses": 0,
+      "method": "POST",
+      "name": "Purchase eSIM",
+      "path": "/esim/purchase",
+      "query_fields": [],
+      "raw_url": "https://api.smspool.net/esim/purchase",
+      "responses": [
+        {
+          "code": 200,
+          "name": "200",
+          "shape": {
+            "fields": {
+              "message": {
+                "required": true,
+                "shape": {
+                  "kind": "string"
+                }
+              },
+              "success": {
+                "required": true,
+                "shape": {
+                  "kind": "integer"
+                }
+              },
+              "transactionId": {
+                "required": true,
+                "shape": {
+                  "kind": "string"
+                }
+              }
+            },
+            "kind": "object"
+          }
+        }
+      ]
+    },
+    {
+      "auth": "bearer",
+      "body_fields": [
+        {
+          "disabled": false,
+          "key": "key",
+          "type": "text"
+        },
+        {
+          "disabled": false,
+          "key": "start",
+          "type": "text"
+        },
+        {
+          "disabled": false,
+          "key": "length",
+          "type": "text"
+        },
+        {
+          "disabled": false,
+          "key": "Search",
+          "type": "text"
+        }
+      ],
+      "body_mode": "formdata",
+      "group": "eSIMs",
+      "index": 50,
+      "invalid_json_responses": 0,
+      "method": "POST",
+      "name": "View eSIM countries",
+      "path": "/esim/pricing",
+      "query_fields": [],
+      "raw_url": "https://api.smspool.net/esim/pricing",
+      "responses": [
+        {
+          "code": 200,
+          "name": "200",
+          "shape": {
+            "fields": {
+              "data": {
+                "required": true,
+                "shape": {
+                  "items": {
+                    "fields": {
+                      "ID": {
+                        "required": true,
+                        "shape": {
+                          "kind": "integer"
+                        }
+                      },
+                      "countryCode": {
+                        "required": true,
+                        "shape": {
+                          "kind": "string"
+                        }
+                      },
+                      "dataInGb": {
+                        "required": true,
+                        "shape": {
+                          "kind": "union",
+                          "variants": [
+                            {
+                              "kind": "integer"
+                            },
+                            {
+                              "kind": "number"
+                            }
+                          ]
+                        }
+                      },
+                      "extendable": {
+                        "required": true,
+                        "shape": {
+                          "kind": "integer"
+                        }
+                      },
+                      "name": {
+                        "required": true,
+                        "shape": {
+                          "kind": "string"
+                        }
+                      },
+                      "network": {
+                        "required": true,
+                        "shape": {
+                          "decoded": {
+                            "items": {
+                              "fields": {
+                                "country": {
+                                  "required": true,
+                                  "shape": {
+                                    "kind": "string"
+                                  }
+                                },
+                                "network": {
+                                  "required": true,
+                                  "shape": {
+                                    "items": {
+                                      "fields": {
+                                        "networkType": {
+                                          "required": true,
+                                          "shape": {
+                                            "kind": "string"
+                                          }
+                                        },
+                                        "operatorName": {
+                                          "required": true,
+                                          "shape": {
+                                            "kind": "string"
+                                          }
+                                        }
+                                      },
+                                      "kind": "object"
+                                    },
+                                    "kind": "array"
+                                  }
+                                }
+                              },
+                              "kind": "object"
+                            },
+                            "kind": "array"
+                          },
+                          "encoding": "json",
+                          "kind": "string"
+                        }
+                      },
+                      "price": {
+                        "required": true,
+                        "shape": {
+                          "kind": "string"
+                        }
+                      },
+                      "speed": {
+                        "required": true,
+                        "shape": {
+                          "kind": "string"
+                        }
+                      }
+                    },
+                    "kind": "object"
+                  },
+                  "kind": "array"
+                }
+              },
+              "rows": {
+                "required": true,
+                "shape": {
+                  "kind": "integer"
+                }
+              }
+            },
+            "kind": "object"
+          }
+        }
+      ]
+    },
+    {
+      "auth": "bearer",
+      "body_fields": [
+        {
+          "disabled": false,
+          "key": "key",
+          "type": "text"
+        },
+        {
+          "disabled": false,
+          "key": "start",
+          "type": "text"
+        },
+        {
+          "disabled": false,
+          "key": "length",
+          "type": "text"
+        },
+        {
+          "disabled": false,
+          "key": "search",
+          "type": "text"
+        }
+      ],
+      "body_mode": "formdata",
+      "group": "eSIMs",
+      "index": 51,
+      "invalid_json_responses": 0,
+      "method": "POST",
+      "name": "View eSIM history",
+      "path": "/esim/history",
+      "query_fields": [],
+      "raw_url": "https://api.smspool.net/esim/history",
+      "responses": [
+        {
+          "code": 200,
+          "name": "200",
+          "shape": {
+            "fields": {
+              "data": {
+                "required": true,
+                "shape": {
+                  "items": {
+                    "fields": {
+                      "cost": {
+                        "required": true,
+                        "shape": {
+                          "kind": "string"
+                        }
+                      },
+                      "countryCode": {
+                        "required": true,
+                        "shape": {
+                          "kind": "string"
+                        }
+                      },
+                      "dataInGb": {
+                        "required": true,
+                        "shape": {
+                          "kind": "integer"
+                        }
+                      },
+                      "expiration": {
+                        "required": true,
+                        "shape": {
+                          "kind": "string"
+                        }
+                      },
+                      "label": {
+                        "required": true,
+                        "shape": {
+                          "kind": "string"
+                        }
+                      },
+                      "name": {
+                        "required": true,
+                        "shape": {
+                          "kind": "string"
+                        }
+                      },
+                      "plan": {
+                        "required": true,
+                        "shape": {
+                          "kind": "integer"
+                        }
+                      },
+                      "status": {
+                        "required": true,
+                        "shape": {
+                          "kind": "integer"
+                        }
+                      },
+                      "timestamp": {
+                        "required": true,
+                        "shape": {
+                          "kind": "string"
+                        }
+                      },
+                      "transactionId": {
+                        "required": true,
+                        "shape": {
+                          "kind": "string"
+                        }
+                      }
+                    },
+                    "kind": "object"
+                  },
+                  "kind": "array"
+                }
+              },
+              "limit": {
+                "required": true,
+                "shape": {
+                  "kind": "integer"
+                }
+              },
+              "page": {
+                "required": true,
+                "shape": {
+                  "kind": "integer"
+                }
+              },
+              "rows": {
+                "required": true,
+                "shape": {
+                  "kind": "integer"
+                }
+              }
+            },
+            "kind": "object"
+          }
+        }
+      ]
+    },
+    {
+      "auth": "bearer",
+      "body_fields": [
+        {
+          "disabled": false,
+          "key": "key",
+          "type": "text"
+        },
+        {
+          "disabled": false,
+          "key": "country",
+          "type": "text"
+        }
+      ],
+      "body_mode": "formdata",
+      "group": "eSIMs",
+      "index": 52,
+      "invalid_json_responses": 0,
+      "method": "POST",
+      "name": "View eSIM plans per country",
+      "path": "/esim/plans",
+      "query_fields": [],
+      "raw_url": "https://api.smspool.net/esim/plans",
+      "responses": [
+        {
+          "code": 200,
+          "name": "200",
+          "shape": {
+            "items": {
+              "fields": {
+                "ID": {
+                  "required": true,
+                  "shape": {
+                    "kind": "integer"
+                  }
+                },
+                "dataInGb": {
+                  "required": true,
+                  "shape": {
+                    "kind": "union",
+                    "variants": [
+                      {
+                        "kind": "integer"
+                      },
+                      {
+                        "kind": "number"
+                      }
+                    ]
+                  }
+                },
+                "duration": {
+                  "required": true,
+                  "shape": {
+                    "kind": "integer"
+                  }
+                },
+                "extendable": {
+                  "required": true,
+                  "shape": {
+                    "kind": "integer"
+                  }
+                },
+                "ip": {
+                  "required": true,
+                  "shape": {
+                    "kind": "string"
+                  }
+                },
+                "network": {
+                  "required": true,
+                  "shape": {
+                    "decoded": {
+                      "items": {
+                        "fields": {
+                          "country": {
+                            "required": true,
+                            "shape": {
+                              "kind": "string"
+                            }
+                          },
+                          "network": {
+                            "required": true,
+                            "shape": {
+                              "items": {
+                                "fields": {
+                                  "networkType": {
+                                    "required": true,
+                                    "shape": {
+                                      "kind": "string"
+                                    }
+                                  },
+                                  "operatorName": {
+                                    "required": true,
+                                    "shape": {
+                                      "kind": "string"
+                                    }
+                                  }
+                                },
+                                "kind": "object"
+                              },
+                              "kind": "array"
+                            }
+                          }
+                        },
+                        "kind": "object"
+                      },
+                      "kind": "array"
+                    },
+                    "encoding": "json",
+                    "kind": "string"
+                  }
+                },
+                "price": {
+                  "required": true,
+                  "shape": {
+                    "kind": "string"
+                  }
+                },
+                "speed": {
+                  "required": true,
+                  "shape": {
+                    "kind": "string"
+                  }
+                }
+              },
+              "kind": "object"
+            },
+            "kind": "array"
+          }
+        }
+      ]
+    },
+    {
+      "auth": "bearer",
+      "body_fields": [
+        {
+          "disabled": false,
+          "key": "key",
+          "type": "text"
+        },
+        {
+          "disabled": false,
+          "key": "transactionId",
+          "type": "text"
+        }
+      ],
+      "body_mode": "formdata",
+      "group": "eSIMs",
+      "index": 53,
+      "invalid_json_responses": 0,
+      "method": "POST",
+      "name": "View eSIM profile",
+      "path": "/esim/profile",
+      "query_fields": [],
+      "raw_url": "https://api.smspool.net/esim/profile",
+      "responses": [
+        {
+          "code": 200,
+          "name": "200",
+          "shape": {
+            "fields": {
+              "ac": {
+                "required": true,
+                "shape": {
+                  "kind": "string"
+                }
+              },
+              "activated": {
+                "required": true,
+                "shape": {
+                  "kind": "integer"
+                }
+              },
+              "activationCode": {
+                "required": true,
+                "shape": {
+                  "kind": "string"
+                }
+              },
+              "apn": {
+                "required": true,
+                "shape": {
+                  "kind": "string"
+                }
+              },
+              "countryCode": {
+                "required": true,
+                "shape": {
+                  "kind": "string"
+                }
+              },
+              "label": {
+                "required": true,
+                "shape": {
+                  "kind": "null"
+                }
+              },
+              "pin": {
+                "required": true,
+                "shape": {
+                  "kind": "string"
+                }
+              },
+              "plan": {
+                "required": true,
+                "shape": {
+                  "kind": "integer"
+                }
+              },
+              "puk": {
+                "required": true,
+                "shape": {
+                  "kind": "string"
+                }
+              },
+              "remainingData": {
+                "required": true,
+                "shape": {
+                  "kind": "string"
+                }
+              },
+              "smdp": {
+                "required": true,
+                "shape": {
+                  "kind": "string"
+                }
+              },
+              "success": {
+                "required": true,
+                "shape": {
+                  "kind": "integer"
+                }
+              },
+              "topup": {
+                "required": true,
+                "shape": {
+                  "kind": "integer"
+                }
+              },
+              "totalData": {
+                "required": true,
+                "shape": {
+                  "kind": "string"
+                }
+              },
+              "transactionId": {
+                "required": true,
+                "shape": {
+                  "kind": "string"
+                }
+              }
+            },
+            "kind": "object"
+          }
+        }
+      ]
+    },
+    {
+      "auth": "bearer",
+      "body_fields": [
+        {
+          "disabled": false,
+          "key": "key",
+          "type": "text"
+        },
+        {
+          "disabled": false,
+          "key": "transactionId",
+          "type": "text"
+        }
+      ],
+      "body_mode": "formdata",
+      "group": "eSIMs",
+      "index": 54,
+      "invalid_json_responses": 0,
+      "method": "POST",
+      "name": "Delete eSIM",
+      "path": "/esim/delete",
+      "query_fields": [],
+      "raw_url": "https://api.smspool.net/esim/delete",
+      "responses": [
+        {
+          "code": 200,
+          "name": "200",
+          "shape": {
+            "fields": {
+              "message": {
+                "required": true,
+                "shape": {
+                  "kind": "string"
+                }
+              },
+              "success": {
+                "required": true,
+                "shape": {
+                  "kind": "integer"
+                }
+              }
+            },
+            "kind": "object"
+          }
+        }
+      ]
+    },
+    {
+      "auth": "bearer",
+      "body_fields": [
+        {
+          "disabled": false,
+          "key": "transactionId",
+          "type": "text"
+        },
+        {
+          "disabled": false,
+          "key": "plan",
+          "type": "text"
+        }
+      ],
+      "body_mode": "formdata",
+      "group": "eSIMs",
+      "index": 55,
+      "invalid_json_responses": 0,
+      "method": "POST",
+      "name": "Top up eSIM",
+      "path": "/esim/topup",
+      "query_fields": [],
+      "raw_url": "https://api.smspool.net/esim/topup",
+      "responses": [
+        {
+          "code": 200,
+          "name": "Top up eSIM",
+          "shape": {
+            "fields": {
+              "message": {
+                "required": true,
+                "shape": {
+                  "kind": "string"
+                }
+              },
+              "success": {
+                "required": true,
+                "shape": {
+                  "kind": "integer"
+                }
+              }
+            },
+            "kind": "object"
+          }
+        }
+      ]
+    },
+    {
+      "auth": "bearer",
+      "body_fields": [
+        {
+          "disabled": false,
+          "key": "plan",
+          "type": "text"
+        }
+      ],
+      "body_mode": "formdata",
+      "group": "eSIMs",
+      "index": 56,
+      "invalid_json_responses": 0,
+      "method": "POST",
+      "name": "Top Up Plans",
+      "path": "/esim/topup_plans",
+      "query_fields": [],
+      "raw_url": "https://api.smspool.net/esim/topup_plans",
+      "responses": [
+        {
+          "code": 200,
+          "name": "200",
+          "shape": {
+            "items": {
+              "fields": {
+                "ID": {
+                  "required": true,
+                  "shape": {
+                    "kind": "integer"
+                  }
+                },
+                "dataInGb": {
+                  "required": true,
+                  "shape": {
+                    "kind": "integer"
+                  }
+                },
+                "duration": {
+                  "required": true,
+                  "shape": {
+                    "kind": "integer"
+                  }
+                },
+                "extendable": {
+                  "required": true,
+                  "shape": {
+                    "kind": "integer"
+                  }
+                },
+                "ip": {
+                  "required": true,
+                  "shape": {
+                    "kind": "string"
+                  }
+                },
+                "network": {
+                  "required": true,
+                  "shape": {
+                    "decoded": {
+                      "items": {
+                        "fields": {
+                          "country": {
+                            "required": true,
+                            "shape": {
+                              "kind": "string"
+                            }
+                          },
+                          "network": {
+                            "required": true,
+                            "shape": {
+                              "items": {
+                                "fields": {
+                                  "networkType": {
+                                    "required": true,
+                                    "shape": {
+                                      "kind": "string"
+                                    }
+                                  },
+                                  "operatorName": {
+                                    "required": true,
+                                    "shape": {
+                                      "kind": "string"
+                                    }
+                                  }
+                                },
+                                "kind": "object"
+                              },
+                              "kind": "array"
+                            }
+                          }
+                        },
+                        "kind": "object"
+                      },
+                      "kind": "array"
+                    },
+                    "encoding": "json",
+                    "kind": "string"
+                  }
+                },
+                "price": {
+                  "required": true,
+                  "shape": {
+                    "kind": "string"
+                  }
+                },
+                "speed": {
+                  "required": true,
+                  "shape": {
+                    "kind": "string"
+                  }
+                }
+              },
+              "kind": "object"
+            },
+            "kind": "array"
+          }
+        }
+      ]
+    },
+    {
+      "auth": "bearer",
+      "body_fields": [
+        {
+          "disabled": false,
+          "key": "amount",
+          "type": "text"
+        }
+      ],
+      "body_mode": "formdata",
+      "group": "Voucher",
+      "index": 57,
+      "invalid_json_responses": 0,
+      "method": "POST",
+      "name": "Generate voucher",
+      "path": "/voucher/generate",
+      "query_fields": [],
+      "raw_url": "https://api.smspool.net/voucher/generate",
+      "responses": []
+    },
+    {
+      "auth": "bearer",
+      "body_fields": [],
+      "body_mode": "formdata",
+      "group": "Voucher",
+      "index": 58,
+      "invalid_json_responses": 0,
+      "method": "POST",
+      "name": "Retrieve vouchers",
+      "path": "/voucher/retrieve",
+      "query_fields": [],
+      "raw_url": "https://api.smspool.net/voucher/retrieve",
+      "responses": []
+    },
+    {
+      "auth": "bearer",
+      "body_fields": [
+        {
+          "disabled": false,
+          "key": "voucher",
+          "type": "text"
+        }
+      ],
+      "body_mode": "urlencoded",
+      "group": "Voucher",
+      "index": 59,
+      "invalid_json_responses": 0,
+      "method": "POST",
+      "name": "Delete voucher",
+      "path": "/voucher/delete",
+      "query_fields": [],
+      "raw_url": "https://api.smspool.net/voucher/delete",
+      "responses": []
+    },
+    {
+      "auth": "bearer",
+      "body_fields": [
+        {
+          "disabled": false,
+          "key": "amount",
+          "type": "text"
+        },
+        {
+          "disabled": false,
+          "key": "quantity",
+          "type": "text"
+        }
+      ],
+      "body_mode": "formdata",
+      "group": "Voucher",
+      "index": 60,
+      "invalid_json_responses": 0,
+      "method": "POST",
+      "name": "Bulk generate vouchers",
+      "path": "/voucher/generate",
+      "query_fields": [],
+      "raw_url": "https://api.smspool.net/voucher/generate",
+      "responses": []
+    }
+  ],
+  "format_version": 1,
+  "known_warnings": [
+    "GET /country/retrieve_all: Postman defines a formdata body; SDK should verify query semantics",
+    "GET /service/retrieve_all: Postman defines a formdata body; SDK should verify query semantics",
+    "POST /request/areacodes: no response examples; typed response remains unverified",
+    "GET /business/users: URL protocol is missing, expected https",
+    "POST /voucher/generate: no response examples; typed response remains unverified",
+    "POST /voucher/retrieve: no response examples; typed response remains unverified",
+    "POST /voucher/delete: no response examples; typed response remains unverified",
+    "POST /voucher/generate: multiple operations share one route: Voucher / Generate voucher and Voucher / Bulk generate vouchers; request fields must disambiguate them",
+    "POST /voucher/generate: no response examples; typed response remains unverified"
+  ],
+  "source": "postman.json",
+  "summary": {
+    "body_modes": {
+      "formdata": 57,
+      "none": 1,
+      "urlencoded": 2
+    },
+    "endpoint_count": 60,
+    "endpoints_without_examples": 5,
+    "error_count": 0,
+    "groups": {
+      "Business": 2,
+      "Business / User": 2,
+      "Carrier": 1,
+      "Informative endpoints": 7,
+      "Preorders": 5,
+      "Pricing": 2,
+      "Rental": 14,
+      "SMS": 15,
+      "Voucher": 4,
+      "eSIMs": 8
+    },
+    "methods": {
+      "GET": 3,
+      "POST": 57
+    },
+    "response_example_count": 103,
+    "warning_count": 9
+  }
+}

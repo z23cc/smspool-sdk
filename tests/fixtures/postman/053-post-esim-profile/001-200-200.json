@@ -1,0 +1,17 @@
+{
+  "ac": "LPA:1$rsp-eu.simlessly.com$ABCDEFGHI123456",
+  "activated": 0,
+  "activationCode": "ABCDEFGHI123456",
+  "apn": "plus",
+  "countryCode": "AM",
+  "label": null,
+  "pin": "2811",
+  "plan": 17,
+  "puk": "08992817",
+  "remainingData": "3 GB",
+  "smdp": "rsp-eu.simlessly.com",
+  "success": 1,
+  "topup": 2,
+  "totalData": "3 GB",
+  "transactionId": "ABCDEFGHI123456"
+}

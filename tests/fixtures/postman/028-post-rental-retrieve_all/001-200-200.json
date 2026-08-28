@@ -1,0 +1,75 @@
+{
+  "data": [
+    {
+      "ID": 6,
+      "is_refundable": 1,
+      "name": "United States",
+      "pool": 7,
+      "pricing": {
+        "30": 20
+      },
+      "priority": 10,
+      "refund_min_days": 28,
+      "refund_within": 2,
+      "region": "North America",
+      "single_service": null,
+      "single_service_extend": null,
+      "tag": "United States"
+    },
+    {
+      "ID": 2,
+      "is_refundable": 1,
+      "name": "United Kingdom",
+      "pool": 2,
+      "pricing": {
+        "1": 15,
+        "15": 63,
+        "3": 20,
+        "30": 110
+      },
+      "priority": 0,
+      "refund_min_days": 28,
+      "refund_within": 2,
+      "region": "Europe",
+      "single_service": null,
+      "single_service_extend": null,
+      "tag": "United Kingdom"
+    },
+    {
+      "ID": 4,
+      "is_refundable": 1,
+      "name": "Russia",
+      "pool": 2,
+      "pricing": {
+        "15": 20,
+        "3": 10,
+        "30": 30,
+        "7": 15
+      },
+      "priority": 0,
+      "refund_min_days": 28,
+      "refund_within": 2,
+      "region": "Europe",
+      "single_service": null,
+      "single_service_extend": null,
+      "tag": "Russia"
+    },
+    {
+      "ID": 7,
+      "is_refundable": 1,
+      "name": "United States",
+      "pool": 11,
+      "pricing": {
+        "30": 30
+      },
+      "priority": 0,
+      "refund_min_days": 28,
+      "refund_within": 2,
+      "region": "North America",
+      "single_service": "{\"30\":10}",
+      "single_service_extend": "{\"30\":10}",
+      "tag": "United States (Single service)"
+    }
+  ],
+  "success": 1
+}

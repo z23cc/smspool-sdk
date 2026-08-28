@@ -1,0 +1,15 @@
+{
+  "cc": "1",
+  "cost": "0.24",
+  "cost_in_cents": 24,
+  "country": "United States",
+  "expiration": 1705309968,
+  "expires_in": 1200,
+  "message": "You have succesfully ordered a Service number from pool: Foxtrot for 0.24.",
+  "number": 1234567890,
+  "order_id": "ABCDEFGH",
+  "phonenumber": "234567890",
+  "pool": 1,
+  "service": "Service",
+  "success": 1
+}

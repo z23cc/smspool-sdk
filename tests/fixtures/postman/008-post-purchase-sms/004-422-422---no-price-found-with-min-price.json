@@ -1,0 +1,5 @@
+{
+  "message": "We could not find a suitable pool below the price of: 0.01",
+  "success": 0,
+  "type": "PRICE_NOT_FOUND"
+}

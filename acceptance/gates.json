@@ -1,0 +1,110 @@
+{
+  "format_version": 1,
+  "profiles": {
+    "foundation": ["META-001", "TOOL-001", "DOC-001", "CONTRACT-001"],
+    "sdk": ["META-001", "TOOL-001", "DOC-001", "CONTRACT-001", "RUST-001", "RUST-002", "RUST-003", "FIXTURE-001", "WIRE-001", "SEC-001"],
+    "production": ["META-001", "TOOL-001", "DOC-001", "CONTRACT-001", "RUST-001", "RUST-002", "RUST-003", "FIXTURE-001", "WIRE-001", "SEC-001", "LIVE-001", "OPS-001", "PILOT-001"]
+  },
+  "gates": [
+    {
+      "id": "META-001",
+      "title": "Machine-readable gate definition is valid",
+      "status": "active",
+      "kind": "automated",
+      "command": ["{python}", "scripts/acceptance.py", "validate"]
+    },
+    {
+      "id": "TOOL-001",
+      "title": "Foundation tooling regression tests pass",
+      "status": "active",
+      "kind": "automated",
+      "command": ["{python}", "-B", "-m", "unittest", "discover", "-s", "scripts", "-p", "test_tooling.py"]
+    },
+    {
+      "id": "DOC-001",
+      "title": "Required architecture and acceptance documents exist",
+      "status": "active",
+      "kind": "automated",
+      "command": ["{python}", "scripts/acceptance.py", "check-docs"]
+    },
+    {
+      "id": "CONTRACT-001",
+      "title": "Postman contract is valid and generated artifacts are current",
+      "status": "active",
+      "kind": "automated",
+      "command": ["{python}", "scripts/postman_contract.py", "check"]
+    },
+    {
+      "id": "RUST-001",
+      "title": "Rust formatting is clean",
+      "status": "active",
+      "kind": "automated",
+      "activation": "Activate after Cargo.toml and the first Rust module are added.",
+      "command": ["cargo", "fmt", "--all", "--", "--check"]
+    },
+    {
+      "id": "RUST-002",
+      "title": "Clippy passes for every target and feature",
+      "status": "active",
+      "kind": "automated",
+      "activation": "Activate after the Rust crate exists.",
+      "command": ["cargo", "clippy", "--all-targets", "--all-features", "--", "-D", "warnings"]
+    },
+    {
+      "id": "RUST-003",
+      "title": "Rust unit and integration tests pass",
+      "status": "active",
+      "kind": "automated",
+      "activation": "Activate after the Rust crate exists.",
+      "command": ["cargo", "test", "--all-features"]
+    },
+    {
+      "id": "FIXTURE-001",
+      "title": "Postman fixtures decode and every public operation matches its request contract",
+      "status": "active",
+      "kind": "automated",
+      "activation": "Activate when typed response models and the fixture test target exist.",
+      "command": ["cargo", "test", "--test", "postman_fixtures"]
+    },
+    {
+      "id": "WIRE-001",
+      "title": "Transport, auth, retry, and outcome-unknown behavior pass mock tests",
+      "status": "active",
+      "kind": "automated",
+      "activation": "Activate when the transport integration test target exists.",
+      "command": ["cargo", "test", "--test", "transport_contract"]
+    },
+    {
+      "id": "SEC-001",
+      "title": "Debug and tracing output redact credentials and customer data",
+      "status": "active",
+      "kind": "automated",
+      "activation": "Activate when redaction tests exist.",
+      "command": ["cargo", "test", "--test", "redaction"]
+    },
+    {
+      "id": "LIVE-001",
+      "title": "Explicit read-only live smoke test passes against SMSPool",
+      "status": "pending",
+      "kind": "manual",
+      "evidence_max_age_days": 7,
+      "activation": "Requires an opt-in script, SMSPOOL_API_KEY, and confirmation that no paid endpoint is called."
+    },
+    {
+      "id": "OPS-001",
+      "title": "Metrics, alerts, concurrency limits, and durable polling recovery are verified",
+      "status": "pending",
+      "kind": "manual",
+      "evidence_max_age_days": 30,
+      "activation": "Requires the consuming Axum service and its production-like environment."
+    },
+    {
+      "id": "PILOT-001",
+      "title": "Controlled production pilot completes without unresolved reconciliation failures",
+      "status": "pending",
+      "kind": "manual",
+      "evidence_max_age_days": 30,
+      "activation": "Requires an operator-approved pilot window and recorded evidence."
+    }
+  ]
+}

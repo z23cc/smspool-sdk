@@ -1,0 +1,7 @@
+{
+  "expires_in_hour": 115,
+  "message": "This phonenumber is available for resend!",
+  "resendCost": 0,
+  "resends": 2,
+  "success": 1
+}

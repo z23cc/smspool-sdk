@@ -1,0 +1,5 @@
+{
+  "message": "The cost you entered is lower than the minimum price for this service.",
+  "minimum_price": 0.25,
+  "success": 0
+}

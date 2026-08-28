@@ -1,0 +1,12 @@
+{
+  "message": "<p>Pool <b>Foxtrot</b>: Insufficient balance, the price is: 0.24 while you only have: 0.00</p>",
+  "pools": {
+    "Foxtrot": {
+      "message": "<p><b>Foxtrot</b> Insufficient balance, the price is: 0.24 while you only have: 0.00</p>",
+      "success": 0,
+      "type": "BALANCE_ERROR"
+    }
+  },
+  "success": 0,
+  "type": "BALANCE_ERROR"
+}

@@ -1,0 +1,10 @@
+{
+  "errors": [
+    {
+      "description": "Service name or service ID which can be retrieved at the /service/retrieve_all endpoint",
+      "message": "You are missing a required parameter for this request.",
+      "param": "service"
+    }
+  ],
+  "success": 0
+}

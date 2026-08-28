@@ -1,0 +1,13 @@
+{
+  "errors": [
+    {
+      "message": "You are missing a required parameter for this request.",
+      "param": "username"
+    },
+    {
+      "message": "You are missing a required parameter for this request.",
+      "param": "password"
+    }
+  ],
+  "success": 0
+}

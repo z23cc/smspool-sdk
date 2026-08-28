@@ -1,0 +1,828 @@
+{
+  "fixtures": [
+    {
+      "endpoint": "POST /request/success_rate",
+      "file": "001-post-request-success_rate/001-200-200.json",
+      "group": "Informative endpoints",
+      "name": "Retrieve country success rates per service",
+      "response_name": "200",
+      "status": 200
+    },
+    {
+      "endpoint": "POST /request/success_rate",
+      "file": "001-post-request-success_rate/002-400-400.json",
+      "group": "Informative endpoints",
+      "name": "Retrieve country success rates per service",
+      "response_name": "400",
+      "status": 400
+    },
+    {
+      "endpoint": "POST /request/balance",
+      "file": "002-post-request-balance/001-200-200.json",
+      "group": "Informative endpoints",
+      "name": "Balance",
+      "response_name": "200",
+      "status": 200
+    },
+    {
+      "endpoint": "POST /request/balance",
+      "file": "002-post-request-balance/002-400-400.json",
+      "group": "Informative endpoints",
+      "name": "Balance",
+      "response_name": "400",
+      "status": 400
+    },
+    {
+      "endpoint": "POST /request/balance",
+      "file": "002-post-request-balance/003-403-403.json",
+      "group": "Informative endpoints",
+      "name": "Balance",
+      "response_name": "403",
+      "status": 403
+    },
+    {
+      "endpoint": "POST /request/suggested_countries",
+      "file": "003-post-request-suggested_countries/001-200-200.json",
+      "group": "Informative endpoints",
+      "name": "Suggested Countries",
+      "response_name": "200",
+      "status": 200
+    },
+    {
+      "endpoint": "POST /request/suggested_countries",
+      "file": "003-post-request-suggested_countries/002-400-400.json",
+      "group": "Informative endpoints",
+      "name": "Suggested Countries",
+      "response_name": "400",
+      "status": 400
+    },
+    {
+      "endpoint": "POST /pool/retrieve_valid",
+      "file": "004-post-pool-retrieve_valid/001-200-200.json",
+      "group": "Informative endpoints",
+      "name": "Suggested Pools",
+      "response_name": "200",
+      "status": 200
+    },
+    {
+      "endpoint": "POST /pool/retrieve_valid",
+      "file": "004-post-pool-retrieve_valid/002-400-400.json",
+      "group": "Informative endpoints",
+      "name": "Suggested Pools",
+      "response_name": "400",
+      "status": 400
+    },
+    {
+      "endpoint": "GET /country/retrieve_all",
+      "file": "005-get-country-retrieve_all/001-200-200.json",
+      "group": "Informative endpoints",
+      "name": "Country list",
+      "response_name": "200",
+      "status": 200
+    },
+    {
+      "endpoint": "GET /service/retrieve_all",
+      "file": "006-get-service-retrieve_all/001-200-200.json",
+      "group": "Informative endpoints",
+      "name": "Service list",
+      "response_name": "200",
+      "status": 200
+    },
+    {
+      "endpoint": "POST /pool/retrieve_all",
+      "file": "007-post-pool-retrieve_all/001-200-200.json",
+      "group": "Informative endpoints",
+      "name": "Pool list",
+      "response_name": "200",
+      "status": 200
+    },
+    {
+      "endpoint": "POST /purchase/sms",
+      "file": "008-post-purchase-sms/001-422-422---out_of_stock.json",
+      "group": "SMS",
+      "name": "Order SMS",
+      "response_name": "422 - OUT_OF_STOCK",
+      "status": 422
+    },
+    {
+      "endpoint": "POST /purchase/sms",
+      "file": "008-post-purchase-sms/002-200-200---successful-order.json",
+      "group": "SMS",
+      "name": "Order SMS",
+      "response_name": "200 - successful order",
+      "status": 200
+    },
+    {
+      "endpoint": "POST /purchase/sms",
+      "file": "008-post-purchase-sms/003-200-200---created-sms-token.json",
+      "group": "SMS",
+      "name": "Order SMS",
+      "response_name": "200 - created SMS token",
+      "status": 200
+    },
+    {
+      "endpoint": "POST /purchase/sms",
+      "file": "008-post-purchase-sms/004-422-422---no-price-found-with-min-price.json",
+      "group": "SMS",
+      "name": "Order SMS",
+      "response_name": "422 - no price found with min price",
+      "status": 422
+    },
+    {
+      "endpoint": "POST /purchase/sms",
+      "file": "008-post-purchase-sms/005-422-422---no-balance.json",
+      "group": "SMS",
+      "name": "Order SMS",
+      "response_name": "422 - no balance",
+      "status": 422
+    },
+    {
+      "endpoint": "POST /sms/check",
+      "file": "009-post-sms-check/001-200-200---order-pending.json",
+      "group": "SMS",
+      "name": "Check SMS",
+      "response_name": "200 - order pending",
+      "status": 200
+    },
+    {
+      "endpoint": "POST /sms/check",
+      "file": "009-post-sms-check/002-200-200---order-refunded.json",
+      "group": "SMS",
+      "name": "Check SMS",
+      "response_name": "200 - order refunded",
+      "status": 200
+    },
+    {
+      "endpoint": "POST /sms/check",
+      "file": "009-post-sms-check/003-200-200---order-complete.json",
+      "group": "SMS",
+      "name": "Check SMS",
+      "response_name": "200 - order complete",
+      "status": 200
+    },
+    {
+      "endpoint": "POST /request/active",
+      "file": "010-post-request-active/001-200-200.json",
+      "group": "SMS",
+      "name": "Active orders",
+      "response_name": "200",
+      "status": 200
+    },
+    {
+      "endpoint": "POST /sms/cancel",
+      "file": "011-post-sms-cancel/001-200-200---order-cancelled.json",
+      "group": "SMS",
+      "name": "Cancel SMS",
+      "response_name": "200 - order cancelled",
+      "status": 200
+    },
+    {
+      "endpoint": "POST /sms/cancel",
+      "file": "011-post-sms-cancel/002-404-404---order-not-found.json",
+      "group": "SMS",
+      "name": "Cancel SMS",
+      "response_name": "404 - order not found",
+      "status": 404
+    },
+    {
+      "endpoint": "POST /sms/cancel",
+      "file": "011-post-sms-cancel/003-400-400---order-cannot-be-cancelled-yet.json",
+      "group": "SMS",
+      "name": "Cancel SMS",
+      "response_name": "400 - order cannot be cancelled yet",
+      "status": 400
+    },
+    {
+      "endpoint": "POST /sms/cancel_all",
+      "file": "012-post-sms-cancel_all/001-200-200.json",
+      "group": "SMS",
+      "name": "Cancel All SMS",
+      "response_name": "200",
+      "status": 200
+    },
+    {
+      "endpoint": "POST /sms/clear_cache",
+      "file": "013-post-sms-clear_cache/001-200-200.json",
+      "group": "SMS",
+      "name": "Clear SMS Cache",
+      "response_name": "200",
+      "status": 200
+    },
+    {
+      "endpoint": "POST /sms/activate",
+      "file": "014-post-sms-activate/001-200-200---activate-sms.json",
+      "group": "SMS",
+      "name": "Activate SMS",
+      "response_name": "200 - activate SMS",
+      "status": 200
+    },
+    {
+      "endpoint": "POST /sms/activate",
+      "file": "014-post-sms-activate/002-400-400---incorrect-pool.json",
+      "group": "SMS",
+      "name": "Activate SMS",
+      "response_name": "400 - incorrect pool",
+      "status": 400
+    },
+    {
+      "endpoint": "POST /sms/activate",
+      "file": "014-post-sms-activate/003-404-404---order-not-found.json",
+      "group": "SMS",
+      "name": "Activate SMS",
+      "response_name": "404 - order not found",
+      "status": 404
+    },
+    {
+      "endpoint": "POST /sms/reactivate",
+      "file": "015-post-sms-reactivate/001-200-200---order-reactivated.json",
+      "group": "SMS",
+      "name": "Reactivate SMS",
+      "response_name": "200 - order reactivated",
+      "status": 200
+    },
+    {
+      "endpoint": "POST /request/archive",
+      "file": "016-post-request-archive/001-200-200.json",
+      "group": "SMS",
+      "name": "Archive all orders",
+      "response_name": "200",
+      "status": 200
+    },
+    {
+      "endpoint": "POST /sms/check_resend",
+      "file": "017-post-sms-check_resend/001-200-200---available-for-resend.json",
+      "group": "SMS",
+      "name": "Check Resend",
+      "response_name": "200 - available for resend",
+      "status": 200
+    },
+    {
+      "endpoint": "POST /sms/check_resend",
+      "file": "017-post-sms-check_resend/002-404-404---order-not-found.json",
+      "group": "SMS",
+      "name": "Check Resend",
+      "response_name": "404 - order not found",
+      "status": 404
+    },
+    {
+      "endpoint": "POST /sms/check_resend",
+      "file": "017-post-sms-check_resend/003-400-400---resend-not-available.json",
+      "group": "SMS",
+      "name": "Check Resend",
+      "response_name": "400 - resend not available",
+      "status": 400
+    },
+    {
+      "endpoint": "POST /sms/resend",
+      "file": "018-post-sms-resend/001-400-400---missing-orderid.json",
+      "group": "SMS",
+      "name": "Resend",
+      "response_name": "400 - missing orderid",
+      "status": 400
+    },
+    {
+      "endpoint": "POST /sms/resend",
+      "file": "018-post-sms-resend/002-400-400---no-initial-sms.json",
+      "group": "SMS",
+      "name": "Resend",
+      "response_name": "400 - no initial sms",
+      "status": 400
+    },
+    {
+      "endpoint": "POST /sms/resend",
+      "file": "018-post-sms-resend/003-400-400---resend-not-available-copy.json",
+      "group": "SMS",
+      "name": "Resend",
+      "response_name": "400 - resend not available Copy",
+      "status": 400
+    },
+    {
+      "endpoint": "POST /sms/resend",
+      "file": "018-post-sms-resend/004-404-404---order-not-found.json",
+      "group": "SMS",
+      "name": "Resend",
+      "response_name": "404 - order not found",
+      "status": 404
+    },
+    {
+      "endpoint": "POST /sms/resend",
+      "file": "018-post-sms-resend/005-200-200---order-resent.json",
+      "group": "SMS",
+      "name": "Resend",
+      "response_name": "200 - order resent",
+      "status": 200
+    },
+    {
+      "endpoint": "POST /sms/stock",
+      "file": "019-post-sms-stock/001-200-200.json",
+      "group": "SMS",
+      "name": "One-time SMS stock",
+      "response_name": "200",
+      "status": 200
+    },
+    {
+      "endpoint": "POST /sms/all_stock",
+      "file": "020-post-sms-all_stock/001-200-200.json",
+      "group": "SMS",
+      "name": "One-time stock for all services",
+      "response_name": "200",
+      "status": 200
+    },
+    {
+      "endpoint": "POST /request/history",
+      "file": "021-post-request-history/001-unknown-200.json",
+      "group": "SMS",
+      "name": "Order History",
+      "response_name": "200",
+      "status": null
+    },
+    {
+      "endpoint": "POST /request/history",
+      "file": "021-post-request-history/002-403-403.json",
+      "group": "SMS",
+      "name": "Order History",
+      "response_name": "403",
+      "status": 403
+    },
+    {
+      "endpoint": "POST /preorder/retrieve",
+      "file": "023-post-preorder-retrieve/001-200-200---orders-retrieved.json",
+      "group": "Preorders",
+      "name": "Retrieve",
+      "response_name": "200 - orders retrieved",
+      "status": 200
+    },
+    {
+      "endpoint": "POST /preorder/retrieve",
+      "file": "023-post-preorder-retrieve/002-403-403---invalid-api-key.json",
+      "group": "Preorders",
+      "name": "Retrieve",
+      "response_name": "403 - invalid API key",
+      "status": 403
+    },
+    {
+      "endpoint": "POST /preorder/check",
+      "file": "024-post-preorder-check/001-404-404---does-not-exist.json",
+      "group": "Preorders",
+      "name": "Check",
+      "response_name": "404 - does not exist",
+      "status": 404
+    },
+    {
+      "endpoint": "POST /preorder/check",
+      "file": "024-post-preorder-check/002-200-200---pending-preorder.json",
+      "group": "Preorders",
+      "name": "Check",
+      "response_name": "200 - pending preorder",
+      "status": 200
+    },
+    {
+      "endpoint": "POST /preorder/check",
+      "file": "024-post-preorder-check/003-200-200---preorder-finished.json",
+      "group": "Preorders",
+      "name": "Check",
+      "response_name": "200 - preorder finished",
+      "status": 200
+    },
+    {
+      "endpoint": "POST /preorder/cancel",
+      "file": "025-post-preorder-cancel/001-400-400---already-completed.json",
+      "group": "Preorders",
+      "name": "Cancel",
+      "response_name": "400 - already completed",
+      "status": 400
+    },
+    {
+      "endpoint": "POST /preorder/cancel",
+      "file": "025-post-preorder-cancel/002-200-400---does-not-exist.json",
+      "group": "Preorders",
+      "name": "Cancel",
+      "response_name": "400 - does not exist",
+      "status": 200
+    },
+    {
+      "endpoint": "POST /preorder/cancel",
+      "file": "025-post-preorder-cancel/003-200-200---preorder-refunded.json",
+      "group": "Preorders",
+      "name": "Cancel",
+      "response_name": "200 - preorder refunded",
+      "status": 200
+    },
+    {
+      "endpoint": "POST /preorder/create",
+      "file": "026-post-preorder-create/001-400-400---low-price.json",
+      "group": "Preorders",
+      "name": "Create",
+      "response_name": "400 - low price",
+      "status": 400
+    },
+    {
+      "endpoint": "POST /preorder/create",
+      "file": "026-post-preorder-create/002-200-200---preorder-success.json",
+      "group": "Preorders",
+      "name": "Create",
+      "response_name": "200 - preorder success",
+      "status": 200
+    },
+    {
+      "endpoint": "POST /preorder/create",
+      "file": "026-post-preorder-create/003-400-400---missing-parameter.json",
+      "group": "Preorders",
+      "name": "Create",
+      "response_name": "400 - missing parameter",
+      "status": 400
+    },
+    {
+      "endpoint": "POST /preorder/create",
+      "file": "026-post-preorder-create/004-400-400---preorder-price-too-low.json",
+      "group": "Preorders",
+      "name": "Create",
+      "response_name": "400 - preorder price too low",
+      "status": 400
+    },
+    {
+      "endpoint": "POST /preorder/price",
+      "file": "027-post-preorder-price/001-200-no-current-bid.json",
+      "group": "Preorders",
+      "name": "Price",
+      "response_name": "No current bid",
+      "status": 200
+    },
+    {
+      "endpoint": "POST /preorder/price",
+      "file": "027-post-preorder-price/002-200-current-highest-bid.json",
+      "group": "Preorders",
+      "name": "Price",
+      "response_name": "Current highest bid",
+      "status": 200
+    },
+    {
+      "endpoint": "POST /rental/retrieve_all",
+      "file": "028-post-rental-retrieve_all/001-200-200.json",
+      "group": "Rental",
+      "name": "Retrieve Rental IDs",
+      "response_name": "200",
+      "status": 200
+    },
+    {
+      "endpoint": "POST /rental/retrieve_all",
+      "file": "028-post-rental-retrieve_all/002-404-404---no-rentals-found.json",
+      "group": "Rental",
+      "name": "Retrieve Rental IDs",
+      "response_name": "404 - no rentals found",
+      "status": 404
+    },
+    {
+      "endpoint": "POST /purchase/rental",
+      "file": "029-post-purchase-rental/001-400-400---invalid-days-entered.json",
+      "group": "Rental",
+      "name": "Order Rental",
+      "response_name": "400 - invalid days entered",
+      "status": 400
+    },
+    {
+      "endpoint": "POST /purchase/rental",
+      "file": "029-post-purchase-rental/002-400-400---not-enough-balance.json",
+      "group": "Rental",
+      "name": "Order Rental",
+      "response_name": "400 - not enough balance",
+      "status": 400
+    },
+    {
+      "endpoint": "POST /purchase/rental",
+      "file": "029-post-purchase-rental/003-400-400---invalid-rental-id.json",
+      "group": "Rental",
+      "name": "Order Rental",
+      "response_name": "400 - invalid rental ID",
+      "status": 400
+    },
+    {
+      "endpoint": "POST /purchase/rental",
+      "file": "029-post-purchase-rental/004-400-400---rental-out-of-stock.json",
+      "group": "Rental",
+      "name": "Order Rental",
+      "response_name": "400 - rental out of stock",
+      "status": 400
+    },
+    {
+      "endpoint": "POST /purchase/rental",
+      "file": "029-post-purchase-rental/005-200-200---order-rental-success.json",
+      "group": "Rental",
+      "name": "Order Rental",
+      "response_name": "200 - order rental success",
+      "status": 200
+    },
+    {
+      "endpoint": "POST /rental/refund",
+      "file": "030-post-rental-refund/001-404-404---rental-not-found.json",
+      "group": "Rental",
+      "name": "Refund Rental",
+      "response_name": "404 - rental not found",
+      "status": 404
+    },
+    {
+      "endpoint": "POST /rental/refund",
+      "file": "030-post-rental-refund/002-200-200---rental-refunded.json",
+      "group": "Rental",
+      "name": "Refund Rental",
+      "response_name": "200 - rental refunded",
+      "status": 200
+    },
+    {
+      "endpoint": "POST /rental/extend",
+      "file": "031-post-rental-extend/001-404-400---rental-not-found.json",
+      "group": "Rental",
+      "name": "Extend Rental",
+      "response_name": "400 - rental not found",
+      "status": 404
+    },
+    {
+      "endpoint": "POST /rental/extend",
+      "file": "031-post-rental-extend/002-200-200---rental-extended.json",
+      "group": "Rental",
+      "name": "Extend Rental",
+      "response_name": "200 - rental extended",
+      "status": 200
+    },
+    {
+      "endpoint": "POST /rental/auto_extend",
+      "file": "032-post-rental-auto_extend/001-200-200---auto-extend-updated.json",
+      "group": "Rental",
+      "name": "Enable Auto Extend Rental",
+      "response_name": "200 - auto extend updated",
+      "status": 200
+    },
+    {
+      "endpoint": "POST /rental/history",
+      "file": "033-post-rental-history/001-200-200.json",
+      "group": "Rental",
+      "name": "Rental History",
+      "response_name": "200",
+      "status": 200
+    },
+    {
+      "endpoint": "POST /rental/retrieve_messages",
+      "file": "034-post-rental-retrieve_messages/001-200-200.json",
+      "group": "Rental",
+      "name": "Retrieve Rental Messages",
+      "response_name": "200",
+      "status": 200
+    },
+    {
+      "endpoint": "POST /rental/retrieve_messages",
+      "file": "034-post-rental-retrieve_messages/002-404-404.json",
+      "group": "Rental",
+      "name": "Retrieve Rental Messages",
+      "response_name": "404",
+      "status": 404
+    },
+    {
+      "endpoint": "POST /rental/retrieve_status",
+      "file": "035-post-rental-retrieve_status/001-200-200.json",
+      "group": "Rental",
+      "name": "Retrieve Rental Status",
+      "response_name": "200",
+      "status": 200
+    },
+    {
+      "endpoint": "POST /rental/retrieve_status",
+      "file": "035-post-rental-retrieve_status/002-404-404.json",
+      "group": "Rental",
+      "name": "Retrieve Rental Status",
+      "response_name": "404",
+      "status": 404
+    },
+    {
+      "endpoint": "POST /rental/reset",
+      "file": "036-post-rental-reset/001-200-200.json",
+      "group": "Rental",
+      "name": "Reset Rental",
+      "response_name": "200",
+      "status": 200
+    },
+    {
+      "endpoint": "POST /rental/reset",
+      "file": "036-post-rental-reset/002-404-404.json",
+      "group": "Rental",
+      "name": "Reset Rental",
+      "response_name": "404",
+      "status": 404
+    },
+    {
+      "endpoint": "POST /rental/reset",
+      "file": "036-post-rental-reset/003-400-400.json",
+      "group": "Rental",
+      "name": "Reset Rental",
+      "response_name": "400",
+      "status": 400
+    },
+    {
+      "endpoint": "POST /rental/retrieve_services",
+      "file": "037-post-rental-retrieve_services/001-200-200.json",
+      "group": "Rental",
+      "name": "Retrieve Rental Services",
+      "response_name": "200",
+      "status": 200
+    },
+    {
+      "endpoint": "POST /rental/retrieve",
+      "file": "038-post-rental-retrieve/001-200-200.json",
+      "group": "Rental",
+      "name": "Retrieve Active Rentals",
+      "response_name": "200",
+      "status": 200
+    },
+    {
+      "endpoint": "POST /rental/retrieve_pricing",
+      "file": "039-post-rental-retrieve_pricing/001-200-200.json",
+      "group": "Rental",
+      "name": "Retrieve Rental Pricing",
+      "response_name": "200",
+      "status": 200
+    },
+    {
+      "endpoint": "POST /rental/stock",
+      "file": "040-post-rental-stock/001-200-200.json",
+      "group": "Rental",
+      "name": "Retrieve Rental Stock",
+      "response_name": "200",
+      "status": 200
+    },
+    {
+      "endpoint": "POST /rental/info",
+      "file": "041-post-rental-info/001-200-200.json",
+      "group": "Rental",
+      "name": "Retrieve Rental Info",
+      "response_name": "200",
+      "status": 200
+    },
+    {
+      "endpoint": "POST /rental/info",
+      "file": "041-post-rental-info/002-404-404---rental-not-found.json",
+      "group": "Rental",
+      "name": "Retrieve Rental Info",
+      "response_name": "404 - rental not found",
+      "status": 404
+    },
+    {
+      "endpoint": "POST /request/pricing",
+      "file": "042-post-request-pricing/001-unknown-200.json",
+      "group": "Pricing",
+      "name": "Retrieve all pricing",
+      "response_name": "200",
+      "status": null
+    },
+    {
+      "endpoint": "POST /request/price",
+      "file": "043-post-request-price/001-200-200.json",
+      "group": "Pricing",
+      "name": "Retrieve specific price & Success Rate",
+      "response_name": "200",
+      "status": 200
+    },
+    {
+      "endpoint": "POST /request/price",
+      "file": "043-post-request-price/002-400-400.json",
+      "group": "Pricing",
+      "name": "Retrieve specific price & Success Rate",
+      "response_name": "400",
+      "status": 400
+    },
+    {
+      "endpoint": "POST /carrier/paid_lookup",
+      "file": "044-post-carrier-paid_lookup/001-200-200.json",
+      "group": "Carrier",
+      "name": "Lookup",
+      "response_name": "200",
+      "status": 200
+    },
+    {
+      "endpoint": "POST /carrier/paid_lookup",
+      "file": "044-post-carrier-paid_lookup/002-400-400.json",
+      "group": "Carrier",
+      "name": "Lookup",
+      "response_name": "400",
+      "status": 400
+    },
+    {
+      "endpoint": "POST /business/user/update",
+      "file": "045-post-business-user-update/001-200-200.json",
+      "group": "Business / User",
+      "name": "Update",
+      "response_name": "200",
+      "status": 200
+    },
+    {
+      "endpoint": "POST /business/user/update",
+      "file": "045-post-business-user-update/002-404-404.json",
+      "group": "Business / User",
+      "name": "Update",
+      "response_name": "404",
+      "status": 404
+    },
+    {
+      "endpoint": "POST /business/user/history",
+      "file": "046-post-business-user-history/001-200-200.json",
+      "group": "Business / User",
+      "name": "History",
+      "response_name": "200",
+      "status": 200
+    },
+    {
+      "endpoint": "POST /business/user/history",
+      "file": "046-post-business-user-history/002-404-404.json",
+      "group": "Business / User",
+      "name": "History",
+      "response_name": "404",
+      "status": 404
+    },
+    {
+      "endpoint": "GET /business/users",
+      "file": "047-get-business-users/001-200-200.json",
+      "group": "Business",
+      "name": "Retrieve users",
+      "response_name": "200",
+      "status": 200
+    },
+    {
+      "endpoint": "POST /business/create",
+      "file": "048-post-business-create/001-200-200.json",
+      "group": "Business",
+      "name": "Register user",
+      "response_name": "200",
+      "status": 200
+    },
+    {
+      "endpoint": "POST /business/create",
+      "file": "048-post-business-create/002-400-400.json",
+      "group": "Business",
+      "name": "Register user",
+      "response_name": "400",
+      "status": 400
+    },
+    {
+      "endpoint": "POST /esim/purchase",
+      "file": "049-post-esim-purchase/001-200-200.json",
+      "group": "eSIMs",
+      "name": "Purchase eSIM",
+      "response_name": "200",
+      "status": 200
+    },
+    {
+      "endpoint": "POST /esim/pricing",
+      "file": "050-post-esim-pricing/001-200-200.json",
+      "group": "eSIMs",
+      "name": "View eSIM countries",
+      "response_name": "200",
+      "status": 200
+    },
+    {
+      "endpoint": "POST /esim/history",
+      "file": "051-post-esim-history/001-200-200.json",
+      "group": "eSIMs",
+      "name": "View eSIM history",
+      "response_name": "200",
+      "status": 200
+    },
+    {
+      "endpoint": "POST /esim/plans",
+      "file": "052-post-esim-plans/001-200-200.json",
+      "group": "eSIMs",
+      "name": "View eSIM plans per country",
+      "response_name": "200",
+      "status": 200
+    },
+    {
+      "endpoint": "POST /esim/profile",
+      "file": "053-post-esim-profile/001-200-200.json",
+      "group": "eSIMs",
+      "name": "View eSIM profile",
+      "response_name": "200",
+      "status": 200
+    },
+    {
+      "endpoint": "POST /esim/delete",
+      "file": "054-post-esim-delete/001-200-200.json",
+      "group": "eSIMs",
+      "name": "Delete eSIM",
+      "response_name": "200",
+      "status": 200
+    },
+    {
+      "endpoint": "POST /esim/topup",
+      "file": "055-post-esim-topup/001-200-top-up-esim.json",
+      "group": "eSIMs",
+      "name": "Top up eSIM",
+      "response_name": "Top up eSIM",
+      "status": 200
+    },
+    {
+      "endpoint": "POST /esim/topup_plans",
+      "file": "056-post-esim-topup_plans/001-200-200.json",
+      "group": "eSIMs",
+      "name": "Top Up Plans",
+      "response_name": "200",
+      "status": 200
+    }
+  ]
+}

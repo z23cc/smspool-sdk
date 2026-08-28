@@ -1,0 +1,119 @@
+[
+  {
+    "country": 1,
+    "country_id": 1,
+    "low_price": "0.24",
+    "name": "United States",
+    "price": "0.80",
+    "short_name": "US",
+    "success_rate": "100"
+  },
+  {
+    "country": 2,
+    "country_id": 2,
+    "low_price": "0.10",
+    "name": "United Kingdom",
+    "price": "0.10",
+    "short_name": "GB",
+    "success_rate": "1"
+  },
+  {
+    "country": 4,
+    "country_id": 4,
+    "low_price": "0.10",
+    "name": "Russia",
+    "price": "0.10",
+    "short_name": "RU",
+    "success_rate": "2"
+  },
+  {
+    "country": 7,
+    "country_id": 7,
+    "low_price": "0.10",
+    "name": "Kazakhstan",
+    "price": "0.10",
+    "short_name": "KZ",
+    "success_rate": "100"
+  },
+  {
+    "country": 18,
+    "country_id": 18,
+    "low_price": "0.10",
+    "name": "Kyrgyzstan",
+    "price": "0.10",
+    "short_name": "KG",
+    "success_rate": "100"
+  },
+  {
+    "country": 23,
+    "country_id": 23,
+    "low_price": "0.10",
+    "name": "France",
+    "price": "0.10",
+    "short_name": "FR",
+    "success_rate": "100"
+  },
+  {
+    "country": 29,
+    "country_id": 29,
+    "low_price": "0.10",
+    "name": "Israel",
+    "price": "0.10",
+    "short_name": "IL",
+    "success_rate": "100"
+  },
+  {
+    "country": 32,
+    "country_id": 32,
+    "low_price": "0.10",
+    "name": "Ireland",
+    "price": "0.10",
+    "short_name": "IE",
+    "success_rate": "100"
+  },
+  {
+    "country": 52,
+    "country_id": 52,
+    "low_price": "0.10",
+    "name": "Thailand",
+    "price": "0.10",
+    "short_name": "TH",
+    "success_rate": "1"
+  },
+  {
+    "country": 53,
+    "country_id": 53,
+    "low_price": "0.10",
+    "name": "Mexico",
+    "price": "0.10",
+    "short_name": "MX",
+    "success_rate": "100"
+  },
+  {
+    "country": 62,
+    "country_id": 62,
+    "low_price": "0.10",
+    "name": "Pakistan",
+    "price": "0.10",
+    "short_name": "PK",
+    "success_rate": "100"
+  },
+  {
+    "country": 72,
+    "country_id": 72,
+    "low_price": "0.10",
+    "name": "Cyprus",
+    "price": "0.10",
+    "short_name": "CY",
+    "success_rate": "100"
+  },
+  {
+    "country": 149,
+    "country_id": 149,
+    "low_price": "0.10",
+    "name": "Czech Republic",
+    "price": "0.10",
+    "short_name": "CZ",
+    "success_rate": "100"
+  }
+]

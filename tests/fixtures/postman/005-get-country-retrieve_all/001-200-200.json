@@ -1,0 +1,872 @@
+[
+  {
+    "ID": 1,
+    "name": "United States",
+    "region": "North America",
+    "short_name": "US"
+  },
+  {
+    "ID": 53,
+    "name": "Mexico",
+    "region": "North America",
+    "short_name": "MX"
+  },
+  {
+    "ID": 128,
+    "name": "Guadeloupe",
+    "region": "North America",
+    "short_name": "GP"
+  },
+  {
+    "ID": 148,
+    "name": "Anguilla",
+    "region": "North America",
+    "short_name": "AI"
+  },
+  {
+    "ID": 2,
+    "name": "United Kingdom",
+    "region": "Europe",
+    "short_name": "GB"
+  },
+  {
+    "ID": 3,
+    "name": "Netherlands",
+    "region": "Europe",
+    "short_name": "NL"
+  },
+  {
+    "ID": 4,
+    "name": "Russia",
+    "region": "Europe",
+    "short_name": "RU"
+  },
+  {
+    "ID": 5,
+    "name": "Latvia",
+    "region": "Europe",
+    "short_name": "LV"
+  },
+  {
+    "ID": 6,
+    "name": "Sweden",
+    "region": "Europe",
+    "short_name": "SE"
+  },
+  {
+    "ID": 8,
+    "name": "Portugal",
+    "region": "Europe",
+    "short_name": "PT"
+  },
+  {
+    "ID": 10,
+    "name": "Estonia",
+    "region": "Europe",
+    "short_name": "EE"
+  },
+  {
+    "ID": 13,
+    "name": "Romania",
+    "region": "Europe",
+    "short_name": "RO"
+  },
+  {
+    "ID": 19,
+    "name": "Denmark",
+    "region": "Europe",
+    "short_name": "DK"
+  },
+  {
+    "ID": 21,
+    "name": "Poland",
+    "region": "Europe",
+    "short_name": "PL"
+  },
+  {
+    "ID": 23,
+    "name": "France",
+    "region": "Europe",
+    "short_name": "FR"
+  },
+  {
+    "ID": 24,
+    "name": "Germany",
+    "region": "Europe",
+    "short_name": "DE"
+  },
+  {
+    "ID": 25,
+    "name": "Ukraine",
+    "region": "Europe",
+    "short_name": "UA"
+  },
+  {
+    "ID": 32,
+    "name": "Ireland",
+    "region": "Europe",
+    "short_name": "IE"
+  },
+  {
+    "ID": 37,
+    "name": "Serbia",
+    "region": "Europe",
+    "short_name": "RS"
+  },
+  {
+    "ID": 47,
+    "name": "Lithuania",
+    "region": "Europe",
+    "short_name": "LT"
+  },
+  {
+    "ID": 48,
+    "name": "Croatia",
+    "region": "Europe",
+    "short_name": "HR"
+  },
+  {
+    "ID": 50,
+    "name": "Austria",
+    "region": "Europe",
+    "short_name": "AT"
+  },
+  {
+    "ID": 51,
+    "name": "Belarus",
+    "region": "Europe",
+    "short_name": "BY"
+  },
+  {
+    "ID": 55,
+    "name": "Spain",
+    "region": "Europe",
+    "short_name": "ES"
+  },
+  {
+    "ID": 57,
+    "name": "Slovenia",
+    "region": "Europe",
+    "short_name": "SI"
+  },
+  {
+    "ID": 75,
+    "name": "Belgium",
+    "region": "Europe",
+    "short_name": "BE"
+  },
+  {
+    "ID": 76,
+    "name": "Bulgaria",
+    "region": "Europe",
+    "short_name": "BG"
+  },
+  {
+    "ID": 77,
+    "name": "Hungary",
+    "region": "Europe",
+    "short_name": "HU"
+  },
+  {
+    "ID": 78,
+    "name": "Moldova",
+    "region": "Europe",
+    "short_name": "MD"
+  },
+  {
+    "ID": 79,
+    "name": "Italy",
+    "region": "Europe",
+    "short_name": "IT"
+  },
+  {
+    "ID": 102,
+    "name": "Greece",
+    "region": "Europe",
+    "short_name": "GR"
+  },
+  {
+    "ID": 104,
+    "name": "Iceland",
+    "region": "Europe",
+    "short_name": "IS"
+  },
+  {
+    "ID": 112,
+    "name": "Slovakia",
+    "region": "Europe",
+    "short_name": "SK"
+  },
+  {
+    "ID": 115,
+    "name": "Monaco",
+    "region": "Europe",
+    "short_name": "MC"
+  },
+  {
+    "ID": 123,
+    "name": "Albania",
+    "region": "Europe",
+    "short_name": "AL"
+  },
+  {
+    "ID": 130,
+    "name": "Finland",
+    "region": "Europe",
+    "short_name": "FI"
+  },
+  {
+    "ID": 131,
+    "name": "Luxembourg",
+    "region": "Europe",
+    "short_name": "LU"
+  },
+  {
+    "ID": 133,
+    "name": "Montenegro",
+    "region": "Europe",
+    "short_name": "ME"
+  },
+  {
+    "ID": 134,
+    "name": "Switzerland",
+    "region": "Europe",
+    "short_name": "CH"
+  },
+  {
+    "ID": 135,
+    "name": "Norway",
+    "region": "Europe",
+    "short_name": "NO"
+  },
+  {
+    "ID": 149,
+    "name": "Czech Republic",
+    "region": "Europe",
+    "short_name": "CZ"
+  },
+  {
+    "ID": 7,
+    "name": "Kazakhstan",
+    "region": "Asia",
+    "short_name": "KZ"
+  },
+  {
+    "ID": 9,
+    "name": "Indonesia",
+    "region": "Asia",
+    "short_name": "ID"
+  },
+  {
+    "ID": 11,
+    "name": "Vietnam",
+    "region": "Asia",
+    "short_name": "VN"
+  },
+  {
+    "ID": 12,
+    "name": "Philippines",
+    "region": "Asia",
+    "short_name": "PH"
+  },
+  {
+    "ID": 15,
+    "name": "India",
+    "region": "Asia",
+    "short_name": "IN"
+  },
+  {
+    "ID": 18,
+    "name": "Kyrgyzstan",
+    "region": "Asia",
+    "short_name": "KG"
+  },
+  {
+    "ID": 20,
+    "name": "Malaysia",
+    "region": "Asia",
+    "short_name": "MY"
+  },
+  {
+    "ID": 29,
+    "name": "Israel",
+    "region": "Asia",
+    "short_name": "IL"
+  },
+  {
+    "ID": 33,
+    "name": "Cambodia",
+    "region": "Asia",
+    "short_name": "KH"
+  },
+  {
+    "ID": 34,
+    "name": "Laos",
+    "region": "Asia",
+    "short_name": "LA"
+  },
+  {
+    "ID": 38,
+    "name": "Yemen",
+    "region": "Asia",
+    "short_name": "YE"
+  },
+  {
+    "ID": 44,
+    "name": "Uzbekistan",
+    "region": "Asia",
+    "short_name": "UZ"
+  },
+  {
+    "ID": 49,
+    "name": "Iraq",
+    "region": "Asia",
+    "short_name": "IQ"
+  },
+  {
+    "ID": 52,
+    "name": "Thailand",
+    "region": "Asia",
+    "short_name": "TH"
+  },
+  {
+    "ID": 54,
+    "name": "Taiwan",
+    "region": "Asia",
+    "short_name": "TW"
+  },
+  {
+    "ID": 58,
+    "name": "Bangladesh",
+    "region": "Asia",
+    "short_name": "BD"
+  },
+  {
+    "ID": 60,
+    "name": "Turkey",
+    "region": "Asia",
+    "short_name": "TR"
+  },
+  {
+    "ID": 62,
+    "name": "Pakistan",
+    "region": "Asia",
+    "short_name": "PK"
+  },
+  {
+    "ID": 67,
+    "name": "Mongolia",
+    "region": "Asia",
+    "short_name": "MN"
+  },
+  {
+    "ID": 69,
+    "name": "Afghanistan",
+    "region": "Asia",
+    "short_name": "AF"
+  },
+  {
+    "ID": 72,
+    "name": "Cyprus",
+    "region": "Asia",
+    "short_name": "CY"
+  },
+  {
+    "ID": 74,
+    "name": "Nepal",
+    "region": "Asia",
+    "short_name": "NP"
+  },
+  {
+    "ID": 88,
+    "name": "Kuwait",
+    "region": "Asia",
+    "short_name": "KW"
+  },
+  {
+    "ID": 91,
+    "name": "Oman",
+    "region": "Asia",
+    "short_name": "OM"
+  },
+  {
+    "ID": 92,
+    "name": "Qatar",
+    "region": "Asia",
+    "short_name": "QA"
+  },
+  {
+    "ID": 95,
+    "name": "Jordan",
+    "region": "Asia",
+    "short_name": "JO"
+  },
+  {
+    "ID": 98,
+    "name": "Brunei",
+    "region": "Asia",
+    "short_name": "BN"
+  },
+  {
+    "ID": 101,
+    "name": "Georgia",
+    "region": "Asia",
+    "short_name": "GE"
+  },
+  {
+    "ID": 114,
+    "name": "Tajikistan",
+    "region": "Asia",
+    "short_name": "TJ"
+  },
+  {
+    "ID": 116,
+    "name": "Bahrain",
+    "region": "Asia",
+    "short_name": "BH"
+  },
+  {
+    "ID": 118,
+    "name": "Armenia",
+    "region": "Asia",
+    "short_name": "AM"
+  },
+  {
+    "ID": 121,
+    "name": "Lebanon",
+    "region": "Asia",
+    "short_name": "LB"
+  },
+  {
+    "ID": 126,
+    "name": "Bhutan",
+    "region": "Asia",
+    "short_name": "BT"
+  },
+  {
+    "ID": 127,
+    "name": "Maldives",
+    "region": "Asia",
+    "short_name": "MV"
+  },
+  {
+    "ID": 129,
+    "name": "Turkmenistan",
+    "region": "Asia",
+    "short_name": "TM"
+  },
+  {
+    "ID": 141,
+    "name": "Singapore",
+    "region": "Asia",
+    "short_name": "SG"
+  },
+  {
+    "ID": 14,
+    "name": "Nigeria",
+    "region": "Africa",
+    "short_name": "NG"
+  },
+  {
+    "ID": 16,
+    "name": "Kenya",
+    "region": "Africa",
+    "short_name": "KE"
+  },
+  {
+    "ID": 27,
+    "name": "Tanzania",
+    "region": "Africa",
+    "short_name": "TZ"
+  },
+  {
+    "ID": 30,
+    "name": "Madagascar",
+    "region": "Africa",
+    "short_name": "MG"
+  },
+  {
+    "ID": 31,
+    "name": "Egypt",
+    "region": "Africa",
+    "short_name": "EG"
+  },
+  {
+    "ID": 36,
+    "name": "Gambia",
+    "region": "Africa",
+    "short_name": "GM"
+  },
+  {
+    "ID": 41,
+    "name": "Morocco",
+    "region": "Africa",
+    "short_name": "MA"
+  },
+  {
+    "ID": 42,
+    "name": "Ghana",
+    "region": "Africa",
+    "short_name": "GH"
+  },
+  {
+    "ID": 45,
+    "name": "Cameroon",
+    "region": "Africa",
+    "short_name": "CM"
+  },
+  {
+    "ID": 46,
+    "name": "Chad",
+    "region": "Africa",
+    "short_name": "TD"
+  },
+  {
+    "ID": 56,
+    "name": "Algeria",
+    "region": "Africa",
+    "short_name": "DZ"
+  },
+  {
+    "ID": 59,
+    "name": "Senegal",
+    "region": "Africa",
+    "short_name": "SN"
+  },
+  {
+    "ID": 63,
+    "name": "Guinea",
+    "region": "Africa",
+    "short_name": "GN"
+  },
+  {
+    "ID": 64,
+    "name": "Mali",
+    "region": "Africa",
+    "short_name": "ML"
+  },
+  {
+    "ID": 66,
+    "name": "Ethiopia",
+    "region": "Africa",
+    "short_name": "ET"
+  },
+  {
+    "ID": 70,
+    "name": "Uganda",
+    "region": "Africa",
+    "short_name": "UG"
+  },
+  {
+    "ID": 71,
+    "name": "Angola",
+    "region": "Africa",
+    "short_name": "AO"
+  },
+  {
+    "ID": 73,
+    "name": "Mozambique",
+    "region": "Africa",
+    "short_name": "MZ"
+  },
+  {
+    "ID": 82,
+    "name": "Tunisia",
+    "region": "Africa",
+    "short_name": "TN"
+  },
+  {
+    "ID": 86,
+    "name": "Zimbabwe",
+    "region": "Africa",
+    "short_name": "ZW"
+  },
+  {
+    "ID": 87,
+    "name": "Togo",
+    "region": "Africa",
+    "short_name": "TG"
+  },
+  {
+    "ID": 90,
+    "name": "Swaziland",
+    "region": "Africa",
+    "short_name": "SZ"
+  },
+  {
+    "ID": 94,
+    "name": "Mauritania",
+    "region": "Africa",
+    "short_name": "MR"
+  },
+  {
+    "ID": 96,
+    "name": "Burundi",
+    "region": "Africa",
+    "short_name": "BI"
+  },
+  {
+    "ID": 97,
+    "name": "Benin",
+    "region": "Africa",
+    "short_name": "BJ"
+  },
+  {
+    "ID": 99,
+    "name": "Botswana",
+    "region": "Africa",
+    "short_name": "BW"
+  },
+  {
+    "ID": 105,
+    "name": "Comoros",
+    "region": "Africa",
+    "short_name": "KM"
+  },
+  {
+    "ID": 106,
+    "name": "Liberia",
+    "region": "Africa",
+    "short_name": "LR"
+  },
+  {
+    "ID": 107,
+    "name": "Lesotho",
+    "region": "Africa",
+    "short_name": "LS"
+  },
+  {
+    "ID": 108,
+    "name": "Malawi",
+    "region": "Africa",
+    "short_name": "MW"
+  },
+  {
+    "ID": 109,
+    "name": "Namibia",
+    "region": "Africa",
+    "short_name": "NA"
+  },
+  {
+    "ID": 110,
+    "name": "Niger",
+    "region": "Africa",
+    "short_name": "NE"
+  },
+  {
+    "ID": 111,
+    "name": "Rwanda",
+    "region": "Africa",
+    "short_name": "RW"
+  },
+  {
+    "ID": 117,
+    "name": "Zambia",
+    "region": "Africa",
+    "short_name": "ZM"
+  },
+  {
+    "ID": 119,
+    "name": "Somalia",
+    "region": "Africa",
+    "short_name": "SO"
+  },
+  {
+    "ID": 122,
+    "name": "Gabon",
+    "region": "Africa",
+    "short_name": "GA"
+  },
+  {
+    "ID": 125,
+    "name": "Mauritius",
+    "region": "Africa",
+    "short_name": "MU"
+  },
+  {
+    "ID": 132,
+    "name": "Djibouti",
+    "region": "Africa",
+    "short_name": "DJ"
+  },
+  {
+    "ID": 137,
+    "name": "Eritrea",
+    "region": "Africa",
+    "short_name": "ER"
+  },
+  {
+    "ID": 139,
+    "name": "Seychelles",
+    "region": "Africa",
+    "short_name": "SC"
+  },
+  {
+    "ID": 153,
+    "name": "South Africa",
+    "region": "Africa",
+    "short_name": "ZA"
+  },
+  {
+    "ID": 35,
+    "name": "Haiti",
+    "region": "South America",
+    "short_name": "HT"
+  },
+  {
+    "ID": 39,
+    "name": "Colombia",
+    "region": "South America",
+    "short_name": "CO"
+  },
+  {
+    "ID": 43,
+    "name": "Argentina",
+    "region": "South America",
+    "short_name": "AR"
+  },
+  {
+    "ID": 61,
+    "name": "Peru",
+    "region": "South America",
+    "short_name": "PE"
+  },
+  {
+    "ID": 65,
+    "name": "Venezuela",
+    "region": "South America",
+    "short_name": "VE"
+  },
+  {
+    "ID": 68,
+    "name": "Brazil",
+    "region": "South America",
+    "short_name": "BR"
+  },
+  {
+    "ID": 80,
+    "name": "Paraguay",
+    "region": "South America",
+    "short_name": "PY"
+  },
+  {
+    "ID": 84,
+    "name": "Bolivia",
+    "region": "South America",
+    "short_name": "BO"
+  },
+  {
+    "ID": 89,
+    "name": "Ecuador",
+    "region": "South America",
+    "short_name": "EC"
+  },
+  {
+    "ID": 103,
+    "name": "Guyana",
+    "region": "South America",
+    "short_name": "GY"
+  },
+  {
+    "ID": 113,
+    "name": "Suriname",
+    "region": "South America",
+    "short_name": "SR"
+  },
+  {
+    "ID": 120,
+    "name": "Chile",
+    "region": "South America",
+    "short_name": "CL"
+  },
+  {
+    "ID": 124,
+    "name": "Uruguay",
+    "region": "South America",
+    "short_name": "UY"
+  },
+  {
+    "ID": 138,
+    "name": "Aruba",
+    "region": "South America",
+    "short_name": "AW"
+  },
+  {
+    "ID": 136,
+    "name": "Australia",
+    "region": "Oceania",
+    "short_name": "AU"
+  },
+  {
+    "ID": 140,
+    "name": "Fiji",
+    "region": "Oceania",
+    "short_name": "FJ"
+  },
+  {
+    "ID": 81,
+    "name": "Honduras",
+    "region": "Central America",
+    "short_name": "HN"
+  },
+  {
+    "ID": 83,
+    "name": "Nicaragua",
+    "region": "Central America",
+    "short_name": "NI"
+  },
+  {
+    "ID": 85,
+    "name": "Guatemala",
+    "region": "Central America",
+    "short_name": "GT"
+  },
+  {
+    "ID": 93,
+    "name": "Panama",
+    "region": "Central America",
+    "short_name": "PA"
+  },
+  {
+    "ID": 100,
+    "name": "Belize",
+    "region": "Central America",
+    "short_name": "BZ"
+  },
+  {
+    "ID": 142,
+    "name": "Jamaica",
+    "region": "Carribeans",
+    "short_name": "JM"
+  },
+  {
+    "ID": 143,
+    "name": "Barbados",
+    "region": "Carribeans",
+    "short_name": "BB"
+  },
+  {
+    "ID": 144,
+    "name": "Bahamas",
+    "region": "Carribeans",
+    "short_name": "BS"
+  },
+  {
+    "ID": 145,
+    "name": "Dominica",
+    "region": "Carribeans",
+    "short_name": "DM"
+  },
+  {
+    "ID": 146,
+    "name": "Grenada",
+    "region": "Carribeans",
+    "short_name": "GD"
+  },
+  {
+    "ID": 147,
+    "name": "Montserrat",
+    "region": "Carribeans",
+    "short_name": "MS"
+  }
+]

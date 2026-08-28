@@ -1,0 +1,14 @@
+# Rust
+/target/
+
+# Python acceptance tooling
+__pycache__/
+*.py[cod]
+
+# Local credentials and environment
+.env
+.env.*
+!.env.example
+
+# Environment-specific manual acceptance attestations
+/acceptance/evidence.json

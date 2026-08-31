@@ -60,7 +60,7 @@
     },
     {
       "id": "FIXTURE-001",
-      "title": "Postman fixtures decode and every public operation matches its request contract",
+      "title": "Postman fixtures decode and every descriptor/request wire is verified (all_stock refusal is intentional)",
       "status": "active",
       "kind": "automated",
       "activation": "Activate when typed response models and the fixture test target exist.",
@@ -80,7 +80,7 @@
       "status": "active",
       "kind": "automated",
       "activation": "Activate when redaction tests exist.",
-      "command": ["cargo", "test", "--test", "redaction"]
+      "command": ["cargo", "test", "--all-features", "--test", "redaction"]
     },
     {
       "id": "LIVE-001",

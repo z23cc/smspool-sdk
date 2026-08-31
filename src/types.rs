@@ -150,6 +150,26 @@ macro_rules! decimal_type {
 decimal_type!(Money);
 decimal_type!(DecimalValue);
 
+/// Signed, ephemeral money difference used for refund corroboration.
+#[derive(Clone, Copy, Debug, Eq, Ord, PartialEq, PartialOrd)]
+pub struct SignedMoneyDelta(Decimal);
+
+impl SignedMoneyDelta {
+    pub const fn new(value: Decimal) -> Self {
+        Self(value)
+    }
+
+    pub const fn value(self) -> Decimal {
+        self.0
+    }
+}
+
+impl fmt::Display for SignedMoneyDelta {
+    fn fmt(&self, formatter: &mut fmt::Formatter<'_>) -> fmt::Result {
+        self.0.fmt(formatter)
+    }
+}
+
 macro_rules! unit_type {
     ($name:ident, $inner:ty) => {
         #[derive(

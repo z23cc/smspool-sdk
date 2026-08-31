@@ -17,9 +17,27 @@ impl PricingApi {
         Self { client }
     }
 
+    /// Requires at least one filter.
+    ///
+    /// The unfiltered catalog was measured live at ~17.2 MiB, far above the client's response
+    /// limit, so an unfiltered call could only ever fail with
+    /// [`Error::ResponseTooLarge`]. Rejecting it locally turns that into an actionable error
+    /// before anything is sent.
+    ///
+    /// Filtering is necessary but not automatically sufficient: `max_price=0.10` measured
+    /// ~557 KiB and a single `country` ~327 KiB, both within the 1 MiB default but without much
+    /// headroom. Scope queries as tightly as possible, or raise
+    /// [`crate::ClientBuilder::max_response_bytes`] deliberately.
     pub async fn all(&self, filters: &PricingFilters) -> Result<Vec<PricingEntry>, Error> {
+        let fields = filters.fields();
+        if fields.is_empty() {
+            return Err(Error::InvalidRequest {
+                field: "pricing_filters",
+                reason: "at least one filter is required; note that a broad filter can still exceed the response limit",
+            });
+        }
         self.client
-            .execute_endpoint(&endpoint::PRICING_ALL, wire(filters.fields()))
+            .execute_endpoint(&endpoint::PRICING_ALL, wire(fields))
             .await
     }
 

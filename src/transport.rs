@@ -178,6 +178,101 @@ impl AttemptFailure {
     }
 }
 
+async fn acquire_admission(
+    client: &Client,
+    endpoint: &Endpoint,
+) -> Result<tokio::sync::OwnedSemaphorePermit, AttemptFailure> {
+    let Some(interval) = client.inner.qps_interval else {
+        return tokio::time::timeout(
+            client.inner.concurrency_wait_timeout,
+            client.inner.semaphore.clone().acquire_owned(),
+        )
+        .await
+        .map_err(|_| {
+            AttemptFailure::final_error(Error::Timeout {
+                endpoint: endpoint.name,
+                phase: TimeoutPhase::ConcurrencyPermit,
+            })
+        })?
+        .map_err(|_| {
+            AttemptFailure::final_error(Error::Transport {
+                endpoint: endpoint.name,
+                kind: TransportErrorKind::Other,
+            })
+        });
+    };
+
+    // The QPS deadline is independent from the in-flight concurrency deadline. Do not hold a
+    // concurrency permit while waiting for a future start slot; after acquiring a permit, recheck
+    // the shared schedule before committing the slot.
+    let qps_deadline = tokio::time::Instant::now() + client.inner.qps_wait_timeout;
+    loop {
+        let next_start = tokio::time::timeout_at(qps_deadline, async {
+            client.inner.qps_state.lock().await.next_start
+        })
+        .await
+        .map_err(|_| {
+            AttemptFailure::final_error(Error::Timeout {
+                endpoint: endpoint.name,
+                phase: TimeoutPhase::QpsAdmission,
+            })
+        })?;
+        if let Some(next_start) = next_start {
+            if next_start > tokio::time::Instant::now()
+                && tokio::time::timeout_at(qps_deadline, tokio::time::sleep_until(next_start))
+                    .await
+                    .is_err()
+            {
+                return Err(AttemptFailure::final_error(Error::Timeout {
+                    endpoint: endpoint.name,
+                    phase: TimeoutPhase::QpsAdmission,
+                }));
+            }
+        }
+
+        let permit = tokio::time::timeout(
+            client.inner.concurrency_wait_timeout,
+            client.inner.semaphore.clone().acquire_owned(),
+        )
+        .await
+        .map_err(|_| {
+            AttemptFailure::final_error(Error::Timeout {
+                endpoint: endpoint.name,
+                phase: TimeoutPhase::ConcurrencyPermit,
+            })
+        })?
+        .map_err(|_| {
+            AttemptFailure::final_error(Error::Transport {
+                endpoint: endpoint.name,
+                kind: TransportErrorKind::Other,
+            })
+        })?;
+
+        let mut state = tokio::time::timeout_at(qps_deadline, client.inner.qps_state.lock())
+            .await
+            .map_err(|_| {
+                AttemptFailure::final_error(Error::Timeout {
+                    endpoint: endpoint.name,
+                    phase: TimeoutPhase::QpsAdmission,
+                })
+            })?;
+        let now = tokio::time::Instant::now();
+        if state.next_start.is_some_and(|next_start| next_start > now) {
+            drop(state);
+            drop(permit);
+            if now >= qps_deadline {
+                return Err(AttemptFailure::final_error(Error::Timeout {
+                    endpoint: endpoint.name,
+                    phase: TimeoutPhase::QpsAdmission,
+                }));
+            }
+            continue;
+        }
+        state.next_start = Some(now + interval);
+        return Ok(permit);
+    }
+}
+
 async fn execute_attempt<T>(
     client: &Client,
     endpoint: &Endpoint,
@@ -191,23 +286,7 @@ where
     let request =
         build_request(client, endpoint, wire, url).map_err(AttemptFailure::final_error)?;
 
-    let _permit = tokio::time::timeout(
-        client.inner.concurrency_wait_timeout,
-        client.inner.semaphore.acquire(),
-    )
-    .await
-    .map_err(|_| {
-        AttemptFailure::final_error(Error::Timeout {
-            endpoint: endpoint.name,
-            phase: TimeoutPhase::ConcurrencyPermit,
-        })
-    })?
-    .map_err(|_| {
-        AttemptFailure::final_error(Error::Transport {
-            endpoint: endpoint.name,
-            kind: TransportErrorKind::Other,
-        })
-    })?;
+    let _permit = acquire_admission(client, endpoint).await?;
 
     let response = match tokio::time::timeout(
         client.inner.request_timeout,

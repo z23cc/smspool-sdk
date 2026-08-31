@@ -1,6 +1,6 @@
 # Production acceptance standard
 
-本文档定义“文档基础完成”“SDK 可测试”和“允许生产试运行”三个不同层级。验收脚本遵循 fail-closed：未实现、未激活或必须人工确认的 gate 都不会被静默跳过。
+本文档定义“文档基础完成”“SDK 可测试”和“允许生产试运行”三个不同层级。验收脚本遵循 fail-closed：未实现、未激活或必须人工确认的 gate 都不会被静默跳过。当前已补充一份独立的脱敏 live 观察记录和 PostgreSQL 恢复演练入口，但两者都不会自动激活 manual gates。
 
 机器可读事实来源为 [`../acceptance/gates.json`](../acceptance/gates.json)；本文解释其判定语义。二者不一致时必须修复，不能仅修改脚本获得绿色结果。
 
@@ -57,7 +57,7 @@
 | RUST-001 | active | automated | `cargo fmt --all -- --check` 通过 |
 | RUST-002 | active | automated | all targets/all features Clippy 在 `-D warnings` 下通过 |
 | RUST-003 | active | automated | `cargo test --all-features` 通过 |
-| FIXTURE-001 | active | automated | 103/103 fixture 解码，并对 60/60 公共操作校验 baseline method/path/body mode/inherited Bearer/active field names 与确定性 values |
+| FIXTURE-001 | active | automated | 103/103 fixture 解码，并对 60/60 descriptor/request wire 校验 baseline method/path/body mode/inherited Bearer/active field names 与确定性 values；`sms/all_stock` 的本地拒绝是有意行为 |
 | WIRE-001 | active | automated | method/path/body/auth、200+失败、429、retry 和 OutcomeUnknown mock 测试通过 |
 | SEC-001 | active | automated | Debug/tracing 不泄露凭据和客户数据 |
 | LIVE-001 | pending | manual | 明确 opt-in 的只读线上 smoke 通过且保存脱敏证据 |
@@ -126,7 +126,11 @@ fixture 数量必须与提取 manifest 匹配，不能只抽样验证容易通�
 
 ## Live-test safety
 
-任何真实 SMSPool 测试默认关闭。`LIVE-001` 的未来脚本必须满足：
+任何真实 SMSPool 测试默认关闭。当前 [`acceptance/live-observations.json`](../acceptance/live-observations.json) 是操作员提供的、不可复现的脱敏观察；它记录了选定核心流程，但 `gate_eligible` 明确为 `false`，不具备 revision、审批人和不可变外部引用，因此不能替代 `acceptance/evidence.json`。
+
+已记录的有限事实：Poland / GMX / pool 3 的 USD 0.02 报价与一次购买成功、初次 check pending、首次 cancel 返回大于 60 秒时间锁、后续 cancel 解码成功、观察到 USD 0.02 余额差额；`sms/all_stock` 超过 1 MiB 与 16 MiB。未记录 API key、号码、短信/验证码、完整订单 ID 和绝对余额。余额差额可能受并发账户活动影响，精确时间锁签名也未保留。
+
+`LIVE-001` 的未来正式脚本仍必须满足：
 
 - 同时要求显式命令行开关和 `SMSPOOL_API_KEY`；
 - 默认只调用事先确认的只读/无扣费端点；
@@ -145,9 +149,21 @@ python3 scripts/acceptance.py evidence-template LIVE-001 > acceptance/evidence.j
 
 ## Operational acceptance
 
-生产 Axum 服务而非 SDK 仓库负责提供以下证据：
+仓库提供可运行的 Axum + PostgreSQL 示例和一个显式 ignored 的恢复测试，但生产 Axum 服务而非 SDK 仓库负责提供以下证据：
 
-- 订单及轮询状态持久化，进程重启后可恢复；
+```bash
+# 编译示例（不连接数据库、不发起 provider 请求）
+cargo check --example axum --features postgres-example
+# 使用真实 PostgreSQL 演练 claim/租约/重启恢复；失败或缺少环境时不会伪造 OPS 通过
+DATABASE_URL=postgres://... SMSPOOL_ORDER_KEY=$(openssl rand -hex 32) \\
+  cargo test --features postgres-example --test postgres_recovery -- --ignored --nocapture
+```
+
+该测试使用真实 sqlx/PostgreSQL 表、事务、`FOR UPDATE SKIP LOCKED`、租约过期和重新 claim，并把 provider check 请求指向本地 scripted server；它验证数据层恢复语义，不验证供应商线上可用性、生产容量、告警或 shutdown 压力。
+
+本次仓库演练记录（2026-08-29）：`postgres:16-alpine` 一次性容器中 `postgres_claim_restart_and_read_only_recovery` 以 `--ignored` 运行，1/1 通过；随后 `target/debug/examples/axum` 使用同一 PostgreSQL 数据库启动两次，`/healthz` 两次返回 `{"status":"ok"}`，每次均以 SIGINT 优雅退出。该记录不含数据库 URL、加密 key 或 provider 数据，仍不激活 `OPS-001`。
+
+- 订单及轮询状态持久化，进程重启后可恢复（示例仅保存加密 provider order ID、不可逆指纹和非敏感元数据；付费请求前应先记录 intent，`OutcomeUnknown` 只进入 `reconcile_only`）；
 - 全局并发上限和批量 active polling；
 - 429、供应商 5xx、timeout、decode drift、OutcomeUnknown 的指标和告警；
 - OutcomeUnknown 对账 runbook；
@@ -162,9 +178,9 @@ python3 scripts/acceptance.py evidence-template LIVE-001 > acceptance/evidence.j
 
 - `foundation`、`sdk` 所有 gate 通过；
 - LIVE-001 有时间、版本、账号环境和脱敏结果记录；
-- 核心请求编码和认证经过真实验证；
+- 核心请求编码和认证经过真实验证；当前 live 观察仅覆盖选定核心路径，不能覆盖全部 endpoint；
 - 至少演练一次下单响应丢失后的 OutcomeUnknown 对账；
-- 至少演练一次进程重启后的轮询恢复；
+- 至少演练一次进程重启后的轮询恢复；仓库测试命令必须在真实 PostgreSQL 环境显式运行并保存操作证据；
 - 并发/429 压力测试没有无界任务或请求风暴；
 - pilot 有请求量、金额和停止条件；
 - experimental endpoint 不被生产关键路径依赖。
@@ -188,4 +204,7 @@ python3 scripts/acceptance.py evidence-template LIVE-001
 
 # 当前仓库完整 SDK 检查（纯离线）
 python3 scripts/acceptance.py run sdk
+
+# 可选：检查脱敏 live 观察 schema（不会激活 LIVE-001）
+python3 scripts/acceptance.py validate
 ```

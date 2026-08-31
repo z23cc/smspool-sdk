@@ -1,0 +1,187 @@
+{
+  "format_version": 1,
+  "observations": [
+    {
+      "record_id": "live-sms-observation-2026-08-29",
+      "gate": "LIVE-001",
+      "gate_eligible": false,
+      "source": "operator-supplied-sanitized-observation",
+      "verified_operations": [
+        "request/pricing",
+        "request/price",
+        "pool/retrieve_valid",
+        "purchase/sms",
+        "sms/check",
+        "sms/cancel",
+        "request/balance"
+      ],
+      "facts": {
+        "country": "Poland",
+        "service": "GMX",
+        "pool": 3,
+        "quoted_price_usd": "0.02",
+        "purchased_price_usd": "0.02",
+        "purchase_decoded": true,
+        "initial_check": "pending",
+        "first_cancel": "explicit_time_lock_greater_than_60_seconds",
+        "later_cancel": "decoded_successfully",
+        "observed_refund_delta_usd": "0.02",
+        "all_stock_exceeded_bytes": [
+          1048576,
+          16777216
+        ]
+      },
+      "redactions": [
+        "API key",
+        "phone number",
+        "SMS body and code",
+        "full provider order identifier",
+        "absolute account balances"
+      ],
+      "limitations": [
+        "This is not revision-bound manual gate evidence.",
+        "Mutation idempotency was not proven.",
+        "Delivery guarantee and SMS receipt were not proven.",
+        "Durable restart recovery was not proven by this observation.",
+        "No production pilot was performed.",
+        "Balance delta may be confounded by concurrent account activity.",
+        "The exact vendor time-lock signature was not retained in this record; it was later captured verbatim in record live-cancel-reconciliation-2026-08-30 (HTTP 400, no machine_type)."
+      ]
+    },
+    {
+      "record_id": "live-cancel-reconciliation-2026-08-30",
+      "gate": "LIVE-001",
+      "gate_eligible": false,
+      "source": "operator-supplied-sanitized-observation",
+      "verified_operations": [
+        "request/pricing",
+        "sms/stock",
+        "purchase/sms",
+        "sms/cancel",
+        "sms/check",
+        "request/active",
+        "request/balance"
+      ],
+      "facts": {
+        "country": "Indonesia",
+        "service": "OlaCabs",
+        "pool": 3,
+        "quoted_price_usd": "0.02",
+        "purchased_price_usd": "0.02",
+        "purchase_decoded": true,
+        "initial_check": "pending",
+        "first_cancel": "time_lock_rejected_http_400",
+        "later_cancel": "cancellation_accepted_on_attempt_8",
+        "observed_refund_delta_usd": "0.02",
+        "price_cap_usd": "0.10",
+        "offers_under_cap": 4575,
+        "cancel_time_lock_status": 400,
+        "cancel_time_lock_machine_type_present": false,
+        "cancel_time_lock_message": "This phone number cannot be cancelled yet, please try again later!",
+        "cancel_time_lock_cleared_after_seconds": 132,
+        "cancel_attempts": 8,
+        "reconciliation_checks": 8,
+        "configured_max_reconciliation_checks": 3,
+        "disposition": "CancellationAccepted",
+        "terminal_check": "Terminated",
+        "terminal_active": "Absent",
+        "expected_refund_match": "Matches",
+        "net_account_change_usd": "0.00",
+        "outcome_unknown_observed": false,
+        "all_stock_fail_closed_without_request": true,
+        "qps_cap_requests_per_second": 2,
+        "qps_paced_calls": 6,
+        "qps_paced_elapsed_ms": 2889,
+        "qps_starved_calls": 5,
+        "qps_starved_cap_requests_per_second": 1,
+        "qps_admission_timeout_ms": 100,
+        "qps_admission_timeouts": 4
+      },
+      "redactions": [
+        "API key",
+        "phone number",
+        "SMS body and code",
+        "full provider order identifier",
+        "absolute account balances"
+      ],
+      "limitations": [
+        "This is not revision-bound manual gate evidence.",
+        "Mutation idempotency was not proven.",
+        "Delivery guarantee and SMS receipt were not proven; the order was cancelled while pending.",
+        "Durable restart recovery was not proven by this observation.",
+        "No production pilot was performed.",
+        "Balance delta may be confounded by concurrent account activity.",
+        "The time-lock message is one account/deployment sample and may vary; it carries no machine_type, so only a message-based CancelTimeLockRule can match it.",
+        "The observed 132s time-lock clearance is a single sample and is not a vendor guarantee.",
+        "Rental, eSIM, carrier lookup, preorder, and voucher mutations remain unverified."
+      ]
+    },
+    {
+      "record_id": "live-receive-decode-2026-08-31",
+      "gate": "LIVE-001",
+      "gate_eligible": false,
+      "source": "operator-supplied-sanitized-observation",
+      "verified_operations": [
+        "request/pricing",
+        "sms/stock",
+        "purchase/sms",
+        "sms/check",
+        "sms/cancel",
+        "request/active",
+        "request/history"
+      ],
+      "facts": {
+        "country": "Indonesia",
+        "service": "Swiggy",
+        "pool": 3,
+        "quoted_price_usd": "0.02",
+        "purchased_price_usd": "0.02",
+        "purchase_decoded": true,
+        "initial_check": "pending",
+        "first_cancel": "not-attempted-until-wait-deadline",
+        "later_cancel": "cancellation_accepted_after_240s_wait",
+        "observed_refund_delta_usd": "0.02",
+        "wait_for_sms_deadline_seconds": 240,
+        "wait_for_sms_outcome": "Deadline-with-last-observed-retained",
+        "inbound_sms_received_on_purchased_number": false,
+        "zero_stock_offers_listed_by_pricing": true,
+        "receive_decode_samples": 2,
+        "receive_variant": "Received",
+        "receive_is_terminal": true,
+        "receive_status_code": 3,
+        "receive_sms_and_full_sms_both_present": true,
+        "receive_fields_differ": true,
+        "receive_full_contains_short": true,
+        "receive_short_len_chars": 6,
+        "receive_full_multibyte_utf8": true,
+        "receive_sample_a_full_chars_vs_bytes": [
+          35,
+          71
+        ],
+        "receive_sample_b_full_chars_vs_bytes": [
+          22,
+          38
+        ],
+        "receive_debug_render_leaked_content": false,
+        "refunded_order_variant": "Terminated"
+      },
+      "redactions": [
+        "API key",
+        "phone number",
+        "SMS body and code",
+        "full provider order identifier",
+        "absolute account balances"
+      ],
+      "limitations": [
+        "This is not revision-bound manual gate evidence.",
+        "No inbound SMS reached the number purchased for this run; the receive decode was verified read-only against orders that already existed on the account.",
+        "Only two received samples were inspected, both verification-code style messages.",
+        "Delivery of an operator-sent international SMS to the virtual number was attempted and did not arrive; this proves nothing about the provider's own service traffic.",
+        "Mutation idempotency was not proven.",
+        "Durable restart recovery was not proven by this observation.",
+        "No production pilot was performed.",
+        "Balance delta may be confounded by concurrent account activity."
+      ]
+    }
+  ]
+}

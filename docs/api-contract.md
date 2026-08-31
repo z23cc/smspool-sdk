@@ -18,7 +18,7 @@
 
 ## Verified collection facts
 
-这里的“Verified”只表示已由当前 Postman 文件和审计脚本确认，不表示已在 2026-08-28 对线上 API 做过验证。
+这里的“Verified”只表示已由当前 Postman 文件和审计脚本确认，不等同于所有 endpoint 的线上证明。选定核心 SMS 流程另有脱敏人工观察，见下方 `Live observations`；它不改变 collection contract，也不满足 `LIVE-001` manual gate。
 
 | 项目 | 当前值 |
 |---|---:|
@@ -40,9 +40,10 @@
 2. `GET /business/users` 的 raw URL 缺少 `https://`，结构化 path 仍为 `/business/users`。
 3. Voucher 的单个生成与批量生成共用 `POST /voucher/generate`，由请求字段区分。
 4. `/request/areacodes` 和四个 Voucher 操作缺少响应样例，因此不能直接声明稳定强类型返回值。
-5. 集合中存在字符串金额、数字金额、以分为单位的字段、`0/1` 布尔、数字/字符串状态以及双重编码 JSON。
-6. 至少存在 HTTP 200 且顶层 `success: 0` 的业务失败样例；成功与否不能只看 HTTP 状态。
-7. 部分成功响应没有 `success` 字段，部分响应直接返回数组。
+5. 受控 live 观察显示 `POST /sms/all_stock` 的响应超过 1 MiB 与 16 MiB；SDK 不再尝试将该响应作为 `Vec<AllStockEntry>` 缓冲，调用会 fail-closed 并建议使用有界 `sms/stock`。
+6. 集合中存在字符串金额、数字金额、以分为单位的字段、`0/1` 布尔、数字/字符串状态以及双重编码 JSON。
+7. 至少存在 HTTP 200 且顶层 `success: 0` 的业务失败样例；成功与否不能只看 HTTP 状态。
+8. 部分成功响应没有 `success` 字段，部分响应直接返回数组。
 
 ## Request contract
 
@@ -111,6 +112,12 @@
 
 非幂等请求发出后遇到超时、连接重置或响应损坏时不会被当作普通失败重试。当前 transport 返回脱敏 `OutcomeUnknown`，包含 endpoint、safety class、阶段、可选 HTTP status 和静态对账提示。发送前可证明的连接失败仍返回普通 transport error。
 
+## Live observations (bounded)
+
+`acceptance/live-observations.json` 记录一份由操作员提供的脱敏观察，而不是可验证的 gate attestation。观察到：Poland / GMX / pool 3 的 USD 0.02 报价与购买、初次 check pending、首次 cancel 的显式大于 60 秒时间锁、后续 cancel 成功，以及 USD 0.02 的余额差额；`sms/all_stock` 超过两个响应上限。记录明确省略 API key、号码、短信/验证码、完整订单 ID 和绝对余额。
+
+这些观察只证明该次受控流程的解码与业务结果，不能证明 mutation 幂等、短信送达、账号级限额、全部 endpoint 认证组合、生产告警、持久化恢复或 pilot。余额差额可能受并发账户活动影响，且精确时间锁字符串未保留。LIVE/OPS/PILOT gates 仍保持 pending。
+
 ## Implemented surface and workflow boundary
 
 稳定入口为 `client.catalog()`、`client.pricing()` 和核心 `client.sms()`（purchase、check、active、cancel、history）。其余 SMS、Preorder、Rental、Carrier、Business、eSIM、Voucher 和通用 raw 请求必须经 `client.experimental()` 访问。`/request/areacodes` 与四个无响应样例的 Voucher 操作返回有界 `serde_json::Value`，不伪造强类型成功契约。
@@ -119,7 +126,44 @@
 
 `src/poll.rs` 只调用稳定的 read-only `sms.check` 和 `sms.active`。单订单 polling 使用绝对 deadline、取消、间隔上限、jitter 和 `Retry-After` floor；验证码只能由调用方 extractor 产生。`ActiveOrdersWatcher` 顺序轮询并按 status/code/full-code 去重，在更新映射前检查最大跟踪数量，active snapshot 中消失的订单会从内存映射移除。所有 workflow 状态都非持久化，不能替代生产任务或重启恢复。
 
-当前实现与 fixture/mock 测试都没有发起真实 SMSPool 或付费请求。
+核心实现、fixture 和 mock 测试不发起真实 SMSPool 请求；live 观察是单独的、不可复现的人工记录，不会在普通测试中重放付费操作。
+
+## Cancellation, reconciliation, and QPS controls
+
+取消是唯一提供高层重试策略的 mutation 工作流。`cancel_with_reconciliation` 默认只发送一次 `sms/cancel`；只有调用方用 `CancelTimeLockRule::message` 或 `machine_type` 配置**完整、精确**的已知时间锁签名时，才会等待并发送下一次取消。`max_cancel_attempts` 和 `max_outcome_unknown_reconciliation_checks` 都是必填的正数上限。每个已发出的取消尝试附带一次即时对账（该对账用于发现短信已送达并停止继续取消，因此只受 `max_cancel_attempts` 约束）；`max_outcome_unknown_reconciliation_checks` 仅限制 `OutcomeUnknown` 之后的连续只读对账轮次。对账总次数上限为二者之和，每次最多 3 个只读请求。收到 `OutcomeUnknown` 时永远不再发送取消，只执行有限的 `sms/check`、`sms/active` 和可选余额差额观察。
+
+### `sms/check` 与 `request/active` 的分工（实测）
+
+供应商在 `sms/check` 的响应里附带（该字段不在任何 Postman 样例中）：
+
+```json
+"warning": "For high volume requests we recommend using /request/active instead of /sms/check"
+```
+
+但这**不是简单替换**，两者能力不同，实测差异如下：
+
+| 能力 | `sms/check` | `request/active` |
+|---|---|---|
+| 请求数 | 每订单 1 次（N 单 = N 次） | 每轮 1 次，与订单数无关 |
+| 携带短信内容 | 是（`sms` / `full_sms`） | 是（`code` / `full_code`） |
+| 已退款/已取消订单 | 明确返回 `status: 6` + `message` | **直接从列表消失** |
+| 区分「已退款」与「从未存在」 | 可以 | **不能** |
+
+关键实测：一笔订单退款后，`request/active` 的条目数由 5 降为 4，该订单**无声消失**；同一时刻 `sms/check` 仍明确返回 `status: 6, message: "This order has been refunded"`。
+
+因此结论是**分工而非替换**：
+
+- **批量探测用 `request/active`** —— 这是供应商建议的方向，也是请求数从 O(N) 降到 O(1) 的唯一途径；
+- **终态判定仍需 `sms/check`** —— 订单从 active 消失时，只有它能说清是退款、取消还是过期；
+- **不得把「从 active 消失」单独当作终态信号**。`ActiveOrdersWatcher` 的文档已明确它不是持久化完成追踪；`cancel_with_reconciliation` 也因此要求 `Absent` 与 `sms/check` 同时佐证。
+
+`examples/axum.rs` 的 worker 按此实现：每轮取一次 active 快照，仅把「明确仍在 pending」的订单走快路径跳过 `sms/check`；其余一律回落到 `sms/check` 取权威答案。该启发式是单向的 —— 判错只会多查一次，不会产生错误的终态。快照请求失败时自动退化为逐单查询。
+
+终态判定需要交叉佐证：`SmsCheck` 的 `Terminated` 变体仅由 `message` 字段的存在推断，而该供应商也会在非终态响应里返回人话。因此时间锁分支只有在 `request/active` **明确报告订单已不存在（Absent）** 时才停止取消；`Present` 表示两个观察互相矛盾，`Unavailable`（含解码失败）表示无法确认，两者都会继续有界重试，以免把仍然存活的号码当成已结算而放弃退款。`Received` 由真实短信内容支撑，无需佐证即可结束。
+
+余额观察返回 `SignedMoneyDelta`，不会暴露或持久化 before/after 绝对余额；差额与 expected refund 相等只表示辅助证据，不能解决并发账户活动或供应商归因问题。取消 mutation 发出后，调用方不能依赖取消 token 让请求中途消失，应依靠结果 disposition 或持久化 `reconcile_only` 状态完成后续对账。
+
+`ClientBuilder::max_requests_per_second` 是可选的客户端 start-rate limiter，与 `max_concurrency` 独立，跨 `Client` clone 共享，并对 read-only retry 的每次尝试生效。QPS 等待有单独的 `TimeoutPhase::QpsAdmission`；未配置时 SDK 不宣称或猜测账号限额。`sms/all_stock` 的真实响应超过当前安全缓冲上限，因此公开方法 fail-closed 返回 `UnsupportedOperation`，请按国家/服务/pool 使用有界 `sms/stock`。
 
 ## Unverified assumptions
 
@@ -130,9 +174,9 @@
 - `quantity > 1` 的购买响应形态。
 - `create_token=1` 的长期稳定返回结构。
 - `web=1` 对 pool 返回形态的完整影响。
-- 429 是否稳定提供 `Retry-After`，以及账号级实际限额。
+- 429 是否稳定提供 `Retry-After`，以及账号级实际限额；SDK 的 `max_requests_per_second` 只是客户端保护，不是供应商限额证明。
 - Unix 时间字段的单位、无时区日期字符串的时区。
-- cancel、resend、activate 等 mutation 是否服务端幂等。
+- cancel、resend、activate 等 mutation 是否服务端幂等；取消工作流只在调用方配置精确时间锁签名后重试，不宣称供应商幂等。
 - 所有无样例 endpoint 的成功与失败形态。
 - SMSPool 对请求去重或客户端幂等键的支持。
 

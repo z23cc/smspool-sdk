@@ -2,7 +2,7 @@ use std::{fmt, sync::Arc, time::Duration};
 
 use secrecy::SecretString;
 use serde::de::DeserializeOwned;
-use tokio::sync::Semaphore;
+use tokio::sync::{Mutex, Semaphore};
 use url::{Host, Url};
 
 use crate::{
@@ -124,6 +124,10 @@ pub struct Client {
     pub(crate) inner: Arc<Inner>,
 }
 
+pub(crate) struct QpsState {
+    pub(crate) next_start: Option<tokio::time::Instant>,
+}
+
 pub(crate) struct Inner {
     pub(crate) http: reqwest::Client,
     pub(crate) api_key: SecretString,
@@ -131,8 +135,11 @@ pub(crate) struct Inner {
     pub(crate) request_timeout: Duration,
     pub(crate) concurrency_wait_timeout: Duration,
     pub(crate) max_response_bytes: usize,
-    pub(crate) semaphore: Semaphore,
+    pub(crate) semaphore: Arc<Semaphore>,
     pub(crate) max_concurrency: usize,
+    pub(crate) qps_interval: Option<Duration>,
+    pub(crate) qps_wait_timeout: Duration,
+    pub(crate) qps_state: Mutex<QpsState>,
     pub(crate) retry: RetryPolicy,
     pub(crate) tracing_enabled: bool,
 }
@@ -140,6 +147,37 @@ pub(crate) struct Inner {
 impl Client {
     pub fn builder(api_key: impl Into<String>) -> ClientBuilder {
         ClientBuilder::new(api_key)
+    }
+
+    /// Upper bound on how long a single SDK call can occupy the caller before it returns.
+    ///
+    /// This is the worst case for a read-only endpoint, which is the only class that retries:
+    /// every attempt may wait for QPS admission, then for a concurrency permit, then run to the
+    /// full request timeout, and consecutive attempts may be separated by a `Retry-After` delay
+    /// clamped to the retry policy.
+    ///
+    /// Callers that hold a lock, lease, or database claim across an SDK call **must** size it
+    /// above this value, otherwise the lease can expire while the request is still in flight and
+    /// a second worker can act on the same record concurrently. Because the bound is derived from
+    /// the live configuration, asserting against it keeps the relationship correct when any
+    /// individual timeout is retuned.
+    pub fn max_in_flight_duration(&self) -> Duration {
+        let inner = &self.inner;
+        let per_attempt = inner
+            .qps_wait_timeout
+            .saturating_add(inner.concurrency_wait_timeout)
+            .saturating_add(inner.request_timeout);
+        let attempts = inner.retry.max_attempts().max(1);
+        let between = inner
+            .retry
+            .max_delay_value()
+            .max(inner.retry.max_retry_after_value());
+        per_attempt
+            .saturating_mul(u32::try_from(attempts).unwrap_or(u32::MAX))
+            .saturating_add(
+                between
+                    .saturating_mul(u32::try_from(attempts.saturating_sub(1)).unwrap_or(u32::MAX)),
+            )
     }
 
     /// Execute a low-level request through the same bounded/authenticated pipeline used by APIs.
@@ -184,6 +222,8 @@ impl fmt::Debug for Client {
             )
             .field("max_response_bytes", &self.inner.max_response_bytes)
             .field("max_concurrency", &self.inner.max_concurrency)
+            .field("qps_interval", &self.inner.qps_interval)
+            .field("qps_wait_timeout", &self.inner.qps_wait_timeout)
             .field("retry", &self.inner.retry)
             .field("tracing_enabled", &self.inner.tracing_enabled)
             .field("api_key", &"[REDACTED]")
@@ -199,6 +239,8 @@ pub struct ClientBuilder {
     concurrency_wait_timeout: Duration,
     max_response_bytes: usize,
     max_concurrency: usize,
+    max_requests_per_second: Option<u32>,
+    qps_wait_timeout: Option<Duration>,
     retry: RetryPolicy,
     tracing_enabled: bool,
 }
@@ -213,6 +255,8 @@ impl ClientBuilder {
             concurrency_wait_timeout: DEFAULT_CONCURRENCY_WAIT_TIMEOUT,
             max_response_bytes: DEFAULT_MAX_RESPONSE_BYTES,
             max_concurrency: DEFAULT_MAX_CONCURRENCY,
+            max_requests_per_second: None,
+            qps_wait_timeout: None,
             retry: RetryPolicy::default(),
             tracing_enabled: false,
         }
@@ -246,6 +290,26 @@ impl ClientBuilder {
 
     pub fn max_concurrency(mut self, value: usize) -> Self {
         self.max_concurrency = value;
+        self
+    }
+
+    /// Limit request starts per second independently from in-flight concurrency.
+    /// A value of zero is rejected by [`Self::build`].
+    /// Opt-in client-side request pacing; there is **no cap by default**.
+    ///
+    /// An unthrottled client was measured at ~92 requests/second per process against the live
+    /// provider, and the limiter is per-process, so N instances multiply it. The vendor documents
+    /// 32 requests/second, but no enforcement (no 429, no `X-RateLimit-*`, no `Retry-After`) was
+    /// observed at ~92 rps over 200 requests — absence of observed enforcement is not absence of
+    /// enforcement, so set this deliberately and divide the account budget across instances.
+    pub fn max_requests_per_second(mut self, value: u32) -> Self {
+        self.max_requests_per_second = Some(value);
+        self
+    }
+
+    /// Bound time spent waiting for a QPS admission slot.
+    pub fn qps_wait_timeout(mut self, value: Duration) -> Self {
+        self.qps_wait_timeout = Some(value);
         self
     }
 
@@ -288,6 +352,29 @@ impl ClientBuilder {
         if self.max_concurrency == 0 {
             return Err(Error::InvalidRequest {
                 field: "max_concurrency",
+                reason: "must be greater than zero",
+            });
+        }
+        if let Some(value) = self.max_requests_per_second {
+            if value == 0 {
+                return Err(Error::InvalidRequest {
+                    field: "max_requests_per_second",
+                    reason: "must be greater than zero",
+                });
+            }
+            if value > 1_000_000_000 {
+                return Err(Error::InvalidRequest {
+                    field: "max_requests_per_second",
+                    reason: "must not exceed one billion",
+                });
+            }
+        }
+        let qps_wait_timeout = self
+            .qps_wait_timeout
+            .unwrap_or(self.concurrency_wait_timeout);
+        if qps_wait_timeout.is_zero() {
+            return Err(Error::InvalidRequest {
+                field: "qps_wait_timeout",
                 reason: "must be greater than zero",
             });
         }
@@ -355,8 +442,13 @@ impl ClientBuilder {
                 request_timeout: self.request_timeout,
                 concurrency_wait_timeout: self.concurrency_wait_timeout,
                 max_response_bytes: self.max_response_bytes,
-                semaphore: Semaphore::new(self.max_concurrency),
+                semaphore: Arc::new(Semaphore::new(self.max_concurrency)),
                 max_concurrency: self.max_concurrency,
+                qps_interval: self
+                    .max_requests_per_second
+                    .map(|value| Duration::from_secs_f64(1.0 / f64::from(value))),
+                qps_wait_timeout,
+                qps_state: Mutex::new(QpsState { next_start: None }),
                 retry: self.retry,
                 tracing_enabled: self.tracing_enabled,
             }),
@@ -378,6 +470,8 @@ impl fmt::Debug for ClientBuilder {
             .field("concurrency_wait_timeout", &self.concurrency_wait_timeout)
             .field("max_response_bytes", &self.max_response_bytes)
             .field("max_concurrency", &self.max_concurrency)
+            .field("max_requests_per_second", &self.max_requests_per_second)
+            .field("qps_wait_timeout", &self.qps_wait_timeout)
             .field("retry", &self.retry)
             .field("tracing_enabled", &self.tracing_enabled)
             .finish()
@@ -442,6 +536,18 @@ mod tests {
             .build()
             .is_err());
         assert!(Client::builder(" ").build().is_err());
+        assert!(Client::builder("key")
+            .max_requests_per_second(0)
+            .build()
+            .is_err());
+        assert!(Client::builder("key")
+            .max_requests_per_second(1_000_000_001)
+            .build()
+            .is_err());
+        assert!(Client::builder("key")
+            .qps_wait_timeout(Duration::ZERO)
+            .build()
+            .is_err());
     }
 
     #[test]

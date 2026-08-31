@@ -1,0 +1,309 @@
+#![cfg(feature = "postgres-example")]
+#![allow(dead_code)]
+
+#[path = "../examples/postgres_order_store.rs"]
+mod postgres_order_store;
+mod support;
+
+use std::time::{Duration, SystemTime, UNIX_EPOCH};
+
+use postgres_order_store::{OrderStore, StoredIntentState, StoredState};
+use smspool::Client;
+use sqlx::{
+    postgres::{PgConnection, PgPoolOptions},
+    Connection, Executor,
+};
+use support::{ResponseScript, Script, ScriptedServer};
+
+fn now_ms() -> i64 {
+    SystemTime::now()
+        .duration_since(UNIX_EPOCH)
+        .unwrap()
+        .as_millis() as i64
+}
+
+fn key() -> String {
+    std::env::var("SMSPOOL_ORDER_KEY")
+        .expect("SMSPOOL_ORDER_KEY is required for the opt-in recovery test")
+}
+
+async fn scoped_pool(database_url: &str, schema: &str) -> sqlx::PgPool {
+    let options = PgPoolOptions::new().max_connections(4).after_connect({
+        let schema = schema.to_owned();
+        move |connection: &mut PgConnection, _meta| {
+            let schema = schema.clone();
+            Box::pin(async move {
+                let statement = format!("SET search_path TO \"{schema}\"");
+                sqlx::query(&statement)
+                    .execute(connection)
+                    .await
+                    .map(|_| ())
+            })
+        }
+    });
+    options.connect(database_url).await.unwrap()
+}
+
+/// A lease must outlive the worst-case in-flight provider call, otherwise it can expire while a
+/// request is still running and a second worker can claim the same order concurrently.
+///
+/// These run without a database: `connect_lazy` defers all I/O, and the guard rejects the pair
+/// before the pool is ever used.
+#[tokio::test]
+async fn lease_shorter_than_worst_case_in_flight_is_rejected() {
+    let pool = PgPoolOptions::new()
+        .connect_lazy("postgres://unused:unused@127.0.0.1:1/unused")
+        .unwrap();
+    let client = Client::builder("test-key")
+        .max_requests_per_second(32)
+        .qps_wait_timeout(Duration::from_secs(5))
+        .build()
+        .unwrap();
+    let worst_case = client.max_in_flight_duration();
+
+    // The value this example previously hard-coded.
+    let error = OrderStore::from_pool(
+        pool.clone(),
+        &"00".repeat(32),
+        "worker",
+        Duration::from_secs(30),
+        worst_case,
+    )
+    .expect_err("a 30s lease must not be accepted against the real worst case");
+    assert!(
+        matches!(
+            error,
+            postgres_order_store::StoreError::LeaseTooShort { .. }
+        ),
+        "unexpected error: {error:?}"
+    );
+
+    // Equal is still unsafe: expiry and completion race.
+    assert!(matches!(
+        OrderStore::from_pool(
+            pool.clone(),
+            &"00".repeat(32),
+            "worker",
+            worst_case,
+            worst_case,
+        )
+        .expect_err("an exactly-equal lease must be rejected"),
+        postgres_order_store::StoreError::LeaseTooShort { .. }
+    ));
+
+    OrderStore::from_pool(
+        pool,
+        &"00".repeat(32),
+        "worker",
+        worst_case.saturating_mul(2),
+        worst_case,
+    )
+    .expect("a lease with margin must be accepted");
+}
+
+/// Pins the arithmetic so retuning any single timeout cannot silently shrink the bound.
+#[test]
+fn worst_case_in_flight_accounts_for_retries_and_backoff() {
+    let client = Client::builder("test-key")
+        .max_requests_per_second(32)
+        .qps_wait_timeout(Duration::from_secs(5))
+        .build()
+        .unwrap();
+    // 3 attempts x (5s qps + 5s concurrency + 30s request) + 2 x 30s max Retry-After.
+    assert_eq!(client.max_in_flight_duration(), Duration::from_secs(180));
+    assert!(
+        client.max_in_flight_duration() > Duration::from_secs(30),
+        "the previously hard-coded 30s lease was below the worst case"
+    );
+}
+
+#[tokio::test]
+#[ignore = "requires disposable PostgreSQL and SMSPOOL_ORDER_KEY"]
+async fn postgres_claim_restart_and_read_only_recovery() {
+    let database_url = std::env::var("DATABASE_URL")
+        .expect("DATABASE_URL is required for the opt-in recovery test");
+    let schema = format!("smspool_recovery_{}", std::process::id());
+    let mut admin = sqlx::postgres::PgConnection::connect(&database_url)
+        .await
+        .unwrap();
+    admin
+        .execute(format!("CREATE SCHEMA \"{schema}\"").as_str())
+        .await
+        .unwrap();
+    drop(admin);
+
+    let pool = scoped_pool(&database_url, &schema).await;
+    let store_a = OrderStore::from_pool(
+        pool.clone(),
+        &key(),
+        "worker-a",
+        Duration::from_secs(10),
+        Duration::from_secs(1),
+    )
+    .unwrap();
+    store_a.migrate().await.unwrap();
+    let store_b = OrderStore::from_pool(
+        pool.clone(),
+        &key(),
+        "worker-b",
+        Duration::from_secs(10),
+        Duration::from_secs(1),
+    )
+    .unwrap();
+
+    let order: smspool::sms::SmsOrder = serde_json::from_value(serde_json::json!({
+        "cc": "48",
+        "cost": "0.02",
+        "cost_in_cents": 2,
+        "country": "Poland",
+        "expiration": 4102444800_i64,
+        "expires_in": 1200,
+        "message": "fixture-success",
+        "number": 48123456789_i64,
+        "order_id": "recovery-order-secret",
+        "phonenumber": "48123456789",
+        "pool": 3,
+        "service": "GMX"
+    }))
+    .unwrap();
+    let intent = store_a
+        .record_purchase_intent("checkout-correlation-1")
+        .await
+        .unwrap();
+    assert_eq!(
+        store_a.purchase_intent_status(&intent).await.unwrap(),
+        Some(StoredIntentState::Pending)
+    );
+    store_a
+        .mark_purchase_intent_reconcile_only(&intent)
+        .await
+        .unwrap();
+    assert_eq!(
+        store_a.purchase_intent_status(&intent).await.unwrap(),
+        Some(StoredIntentState::ReconcileOnly)
+    );
+
+    let reference = store_a
+        .record_purchase_for_intent(&intent, &order, now_ms() + 60_000)
+        .await
+        .unwrap();
+    let duplicate_reference = store_a
+        .record_purchase_for_intent(&intent, &order, now_ms() + 60_000)
+        .await
+        .unwrap();
+    assert_eq!(duplicate_reference, reference);
+    let conflicting_order: smspool::sms::SmsOrder = serde_json::from_value(serde_json::json!({
+        "cc": "48",
+        "cost": "0.02",
+        "cost_in_cents": 2,
+        "country": "Poland",
+        "expiration": 4102444800_i64,
+        "expires_in": 1200,
+        "message": "fixture-success",
+        "number": 48123456789_i64,
+        "order_id": "different-provider-order",
+        "phonenumber": "48123456789",
+        "pool": 3,
+        "service": "GMX"
+    }))
+    .unwrap();
+    assert!(store_a
+        .record_purchase_for_intent(&intent, &conflicting_order, now_ms() + 60_000)
+        .await
+        .is_err());
+    assert_eq!(
+        store_a.purchase_intent_status(&intent).await.unwrap(),
+        Some(StoredIntentState::Resolved)
+    );
+
+    store_a.mark_reconcile_only(&reference).await.unwrap();
+    let now = now_ms();
+    let (claims_a, claims_b) =
+        tokio::join!(store_a.claim_due_at(now, 1), store_b.claim_due_at(now, 1));
+    assert_eq!(
+        claims_a.as_ref().unwrap().len() + claims_b.as_ref().unwrap().len(),
+        1
+    );
+    let mut claim = claims_a
+        .into_iter()
+        .flatten()
+        .chain(claims_b.into_iter().flatten())
+        .next()
+        .unwrap();
+    assert_eq!(claim.state(), StoredState::ReconcileOnly);
+    store_a
+        .release_for_retry(&mut claim, now.saturating_sub(1))
+        .await
+        .unwrap();
+    assert_eq!(
+        store_a.status(&reference).await.unwrap(),
+        Some(StoredState::ReconcileOnly)
+    );
+    let row_id = claim.row_id();
+    store_a.expire_lease_for_test(row_id).await.unwrap();
+
+    let store_restart = OrderStore::from_pool(
+        pool.clone(),
+        &key(),
+        "worker-after-restart",
+        Duration::from_secs(10),
+        Duration::from_secs(1),
+    )
+    .unwrap();
+    let mut recovered = store_restart
+        .claim_due_at(now_ms(), 1)
+        .await
+        .unwrap()
+        .pop()
+        .unwrap();
+    assert_eq!(recovered.reference(), &reference);
+
+    let server = ScriptedServer::start([
+        Script::Respond(ResponseScript::json(200, serde_json::json!({"status": 1}))),
+        Script::Respond(ResponseScript::json(
+            200,
+            serde_json::json!({"status": 3, "sms": "redacted-code"}),
+        )),
+    ])
+    .await;
+    let client = Client::builder("fixture-key")
+        .base_url(server.base_url())
+        .allow_insecure_http_for_mocking(true)
+        .retry_policy(smspool::RetryPolicy::new(1))
+        .build()
+        .unwrap();
+    match client.sms().check(recovered.order_id()).await.unwrap() {
+        smspool::sms::SmsCheck::Pending(_) => store_restart
+            .record_pending(&mut recovered, now_ms() + 100)
+            .await
+            .unwrap(),
+        _ => panic!("first scripted response must be pending"),
+    }
+    let mut recovered = store_restart
+        .claim_due_at(now_ms() + 1_000, 1)
+        .await
+        .unwrap()
+        .pop()
+        .unwrap();
+    match client.sms().check(recovered.order_id()).await.unwrap() {
+        smspool::sms::SmsCheck::Received(_) => store_restart
+            .record_terminal(&mut recovered, StoredState::Received)
+            .await
+            .unwrap(),
+        _ => panic!("second scripted response must be received"),
+    }
+    assert_eq!(
+        store_restart.status(&reference).await.unwrap(),
+        Some(StoredState::Received)
+    );
+    for text in store_restart.table_text_for_test().await.unwrap() {
+        assert!(!text.contains("recovery-order-secret"));
+        assert!(!text.contains("redacted-code"));
+    }
+
+    sqlx::query(&format!("DROP SCHEMA \"{schema}\" CASCADE"))
+        .execute(&pool)
+        .await
+        .unwrap();
+    pool.close().await;
+}

@@ -33,6 +33,10 @@ pub enum Error {
         field: &'static str,
         reason: &'static str,
     },
+    UnsupportedOperation {
+        endpoint: &'static str,
+        reason: UnsupportedReason,
+    },
     OutcomeUnknown(OutcomeUnknown),
 }
 
@@ -73,6 +77,11 @@ impl fmt::Debug for Error {
                 .field("field", field)
                 .field("reason", reason)
                 .finish(),
+            Self::UnsupportedOperation { endpoint, reason } => formatter
+                .debug_struct("UnsupportedOperation")
+                .field("endpoint", endpoint)
+                .field("reason", reason)
+                .finish(),
             Self::OutcomeUnknown(error) => formatter
                 .debug_tuple("OutcomeUnknown")
                 .field(error)
@@ -105,12 +114,31 @@ impl fmt::Display for Error {
             Self::InvalidRequest { field, reason } => {
                 write!(formatter, "invalid request field {field}: {reason}")
             }
+            Self::UnsupportedOperation { endpoint, reason } => {
+                write!(formatter, "endpoint {endpoint} is unsupported: {reason}")
+            }
             Self::OutcomeUnknown(error) => error.fmt(formatter),
         }
     }
 }
 
 impl std::error::Error for Error {}
+
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+#[non_exhaustive]
+pub enum UnsupportedReason {
+    ResponseNotSuitableForBufferedSdk,
+}
+
+impl fmt::Display for UnsupportedReason {
+    fn fmt(&self, formatter: &mut fmt::Formatter<'_>) -> fmt::Result {
+        match self {
+            Self::ResponseNotSuitableForBufferedSdk => {
+                formatter.write_str("the live response is not suitable for bounded buffering")
+            }
+        }
+    }
+}
 
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
 #[non_exhaustive]
@@ -139,6 +167,7 @@ impl fmt::Display for TransportErrorKind {
 #[non_exhaustive]
 pub enum TimeoutPhase {
     ConcurrencyPermit,
+    QpsAdmission,
     Request,
     ResponseBody,
 }
@@ -147,6 +176,7 @@ impl fmt::Display for TimeoutPhase {
     fn fmt(&self, formatter: &mut fmt::Formatter<'_>) -> fmt::Result {
         let label = match self {
             Self::ConcurrencyPermit => "concurrency permit wait",
+            Self::QpsAdmission => "QPS admission",
             Self::Request => "request",
             Self::ResponseBody => "response body",
         };

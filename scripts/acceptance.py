@@ -15,6 +15,7 @@ from typing import Any
 ROOT = Path(__file__).resolve().parents[1]
 GATES_FILE = ROOT / "acceptance" / "gates.json"
 EVIDENCE_FILE = ROOT / "acceptance" / "evidence.json"
+LIVE_OBSERVATIONS_FILE = ROOT / "acceptance" / "live-observations.json"
 BASELINE_FILE = ROOT / "contracts" / "postman-baseline.json"
 VALID_STATUSES = {"active", "pending"}
 VALID_KINDS = {"automated", "manual"}
@@ -23,9 +24,11 @@ REQUIRED_DOCUMENTS = {
     "docs/api-contract.md": ("# API contract", "## Verified collection facts", "## Unverified assumptions"),
     "docs/architecture.md": ("# SDK architecture", "## Reliability model", "## Axum boundary"),
     "docs/production-acceptance.md": ("# Production acceptance standard", "## Acceptance profiles", "## Gate catalogue"),
+    "docs/production-research.md": ("# SMSPool SDK 生产研究与后续验收", "## 1. 证据分层", "## 3. 当前实现的剩余高风险"),
     "docs/generated/endpoint-matrix.md": ("# Postman endpoint matrix",),
     "contracts/postman-baseline.json": (),
     "acceptance/gates.json": (),
+    "acceptance/live-observations.json": (),
 }
 
 
@@ -101,9 +104,127 @@ def validate_definition(definition: dict[str, Any]) -> dict[str, dict[str, Any]]
     return by_id
 
 
+def validate_live_observations() -> None:
+    """Validate sanitized observations without treating them as gate evidence."""
+    try:
+        document = json.loads(LIVE_OBSERVATIONS_FILE.read_text(encoding="utf-8"))
+    except FileNotFoundError as exc:
+        raise DefinitionError(f"missing live observation artifact: {LIVE_OBSERVATIONS_FILE}") from exc
+    except json.JSONDecodeError as exc:
+        raise DefinitionError(f"invalid live observation JSON: {exc}") from exc
+
+    if not isinstance(document, dict) or set(document) != {"format_version", "observations"}:
+        raise DefinitionError(
+            "live observation root must contain only format_version and observations"
+        )
+    if document.get("format_version") != 1:
+        raise DefinitionError("live observation format_version must be 1")
+    observations = document.get("observations")
+    if not isinstance(observations, list) or not observations:
+        raise DefinitionError("live observation observations must be a non-empty array")
+
+    expected_record_keys = {
+        "record_id",
+        "gate",
+        "gate_eligible",
+        "source",
+        "verified_operations",
+        "facts",
+        "redactions",
+        "limitations",
+    }
+    required_fact_keys = {
+        "country",
+        "service",
+        "pool",
+        "quoted_price_usd",
+        "purchased_price_usd",
+        "purchase_decoded",
+        "initial_check",
+        "first_cancel",
+        "later_cancel",
+        "observed_refund_delta_usd",
+    }
+    sensitive_key_fragments = (
+        "apikey",
+        "authorization",
+        "phonenumber",
+        "phone",
+        "smsbody",
+        "smscode",
+        "fullorder",
+        "orderidentifier",
+        "secret",
+        "absolutebalance",
+    )
+
+    def reject_sensitive_keys(value: Any, path: str) -> None:
+        if isinstance(value, dict):
+            for key, nested in value.items():
+                normalized = str(key).lower().replace("_", "").replace("-", "")
+                if any(fragment in normalized for fragment in sensitive_key_fragments):
+                    raise DefinitionError(f"live observation contains sensitive field at {path}.{key}")
+                reject_sensitive_keys(nested, f"{path}.{key}")
+        elif isinstance(value, list):
+            for index, nested in enumerate(value):
+                reject_sensitive_keys(nested, f"{path}[{index}]")
+
+    def require_string_list(value: Any, field: str) -> None:
+        if not isinstance(value, list) or not value or any(
+            not isinstance(item, str) or not item.strip() for item in value
+        ):
+            raise DefinitionError(f"live observation {field} must be a non-empty string array")
+
+    seen_record_ids: set[str] = set()
+    for index, observation in enumerate(observations):
+        if not isinstance(observation, dict) or set(observation) != expected_record_keys:
+            raise DefinitionError(f"live observation[{index}] has unknown or missing fields")
+        if not isinstance(observation["record_id"], str) or not observation["record_id"].strip():
+            raise DefinitionError(f"live observation[{index}] requires record_id")
+        if observation["record_id"] in seen_record_ids:
+            raise DefinitionError(f"live observation[{index}] has a duplicate record_id")
+        seen_record_ids.add(observation["record_id"])
+        if observation["gate"] != "LIVE-001":
+            raise DefinitionError(f"live observation[{index}] gate must be LIVE-001")
+        if observation["gate_eligible"] is not False:
+            raise DefinitionError(f"live observation[{index}] must be explicitly gate_eligible=false")
+        if observation["source"] != "operator-supplied-sanitized-observation":
+            raise DefinitionError(f"live observation[{index}] has an invalid source")
+        require_string_list(observation["verified_operations"], "verified_operations")
+        require_string_list(observation["redactions"], "redactions")
+        require_string_list(observation["limitations"], "limitations")
+        redaction_text = " ".join(observation["redactions"]).lower()
+        for marker in ("api key", "phone", "sms", "full", "balance"):
+            if marker not in redaction_text:
+                raise DefinitionError(f"live observation[{index}] redactions omit {marker!r}")
+        facts = observation["facts"]
+        if not isinstance(facts, dict):
+            raise DefinitionError(f"live observation[{index}] facts must be an object")
+        missing = sorted(required_fact_keys - set(facts))
+        if missing:
+            raise DefinitionError(f"live observation[{index}] facts omit required fields: {missing}")
+        for field in ("country", "service"):
+            if not isinstance(facts[field], str) or not facts[field].strip():
+                raise DefinitionError(f"live observation[{index}] {field} must be a non-empty string")
+        if not isinstance(facts["pool"], int) or isinstance(facts["pool"], bool):
+            raise DefinitionError(f"live observation[{index}] pool must be an integer")
+        for field in ("quoted_price_usd", "purchased_price_usd", "observed_refund_delta_usd"):
+            if not isinstance(facts[field], str) or not facts[field].strip():
+                raise DefinitionError(f"live observation[{index}] {field} must be a string amount")
+        if facts["purchase_decoded"] is not True:
+            raise DefinitionError(f"live observation[{index}] purchase_decoded must be true")
+        if "all_stock_exceeded_bytes" in facts and facts["all_stock_exceeded_bytes"] != [
+            1048576,
+            16777216,
+        ]:
+            raise DefinitionError(f"live observation[{index}] all_stock_exceeded_bytes is invalid")
+        reject_sensitive_keys(observation, f"observations[{index}]")
+
+
 def command_validate(_: argparse.Namespace) -> int:
     definition = load_definition()
     gates = validate_definition(definition)
+    validate_live_observations()
     print(f"gate definition is valid: {len(gates)} gates, {len(definition['profiles'])} profiles")
     return 0
 

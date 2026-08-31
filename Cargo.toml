@@ -5,11 +5,19 @@ edition = "2021"
 rust-version = "1.82"
 description = "Async Rust SDK for the SMSPool API"
 license = "MIT OR Apache-2.0"
+autoexamples = false
 
 [features]
 default = ["rustls-tls"]
 rustls-tls = ["reqwest/rustls-tls"]
 tracing = ["dep:tracing"]
+postgres-example = [
+    "dep:axum",
+    "dep:chacha20poly1305",
+    "dep:hex",
+    "dep:sha2",
+    "dep:sqlx",
+]
 
 [dependencies]
 futures-util = "=0.3.31"
@@ -23,12 +31,20 @@ serde = { version = "=1.0.219", features = ["derive"] }
 serde_json = "=1.0.143"
 serde_path_to_error = "=0.1.17"
 thiserror = "=2.0.16"
-tokio = { version = "=1.47.1", features = ["macros", "rt", "sync", "time"] }
+tokio = { version = "=1.47.1", features = ["macros", "net", "rt", "signal", "sync", "time"] }
 tokio-util = { version = "=0.7.16", features = ["rt"] }
 tracing = { version = "=0.1.41", optional = true }
 url = "=2.5.4"
+axum = { version = "=0.8.4", optional = true }
+chacha20poly1305 = { version = "=0.10.1", optional = true }
+hex = { version = "=0.4.3", optional = true }
+sha2 = { version = "=0.10.9", optional = true }
+sqlx = { version = "=0.8.3", default-features = false, features = ["postgres", "runtime-tokio-rustls"], optional = true }
 
 [dev-dependencies]
-axum = "=0.8.4"
-tokio = { version = "=1.47.1", features = ["io-util", "net"] }
+tokio = { version = "=1.47.1", features = ["io-util"] }
 tracing-subscriber = "=0.3.20"
+
+[[example]]
+name = "axum"
+required-features = ["postgres-example"]

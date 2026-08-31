@@ -17,7 +17,8 @@ use smspool::{
         pricing::PricingFilters,
         rental::RentalPurchaseRequest,
         sms::{
-            AllStockFilters, AreaCodesRequest, HistoryRequest, PricingOption, PurchaseSmsRequest,
+            AllStockEntry, AllStockFilters, AreaCodesRequest, HistoryRequest, PricingOption,
+            PurchaseSmsRequest,
         },
         voucher::{BulkGenerateVouchersRequest, GenerateVoucherRequest},
     },
@@ -109,6 +110,28 @@ async fn every_generated_postman_fixture_exercises_its_public_operation_offline(
             "unknown endpoint fixture: {}",
             row.file
         );
+
+        if index == 20 {
+            let entries: Vec<AllStockEntry> = serde_json::from_slice(&body)
+                .expect("the collection all-stock fixture shape remains decodable");
+            assert!(!entries.is_empty());
+            let client = Client::builder("fixture-api-key").build().unwrap();
+            #[allow(deprecated)]
+            let result = client
+                .experimental()
+                .sms()
+                .all_stock(&AllStockFilters::new())
+                .await;
+            assert!(matches!(
+                result,
+                Err(Error::UnsupportedOperation {
+                    endpoint: "sms.all_stock",
+                    ..
+                })
+            ));
+            wire_exercised.insert(index);
+            continue;
+        }
 
         let server =
             ScriptedServer::start([Script::Respond(ResponseScript::bytes(status, body))]).await;
@@ -222,10 +245,25 @@ fn assert_public_request(index: u16, endpoint: &BaselineEndpoint, request: &Capt
         .filter(|field| !field.disabled)
         .map(|field| field.key.clone())
         .collect::<BTreeSet<_>>();
-    assert_eq!(
-        fields.keys().cloned().collect::<BTreeSet<_>>(),
-        active_body,
-        "endpoint {index} active public-operation fields differ from baseline"
+    let declared_body = endpoint
+        .body_fields
+        .iter()
+        .map(|field| field.key.clone())
+        .collect::<BTreeSet<_>>();
+    let sent = fields.keys().cloned().collect::<BTreeSet<_>>();
+    // Every field the collection marks enabled must be sent, and nothing outside the collection's
+    // declared set may be sent. Fields Postman declares but leaves disabled are optional, so the
+    // SDK may add them (for example `request/pricing` requires a filter to stay under the
+    // response limit); this still rejects both omissions and undeclared fields.
+    assert!(
+        active_body.is_subset(&sent),
+        "endpoint {index} omits baseline-enabled fields: {:?}",
+        active_body.difference(&sent).collect::<Vec<_>>()
+    );
+    assert!(
+        sent.is_subset(&declared_body),
+        "endpoint {index} sends fields absent from the baseline: {:?}",
+        sent.difference(&declared_body).collect::<Vec<_>>()
     );
     for (name, actual) in fields {
         assert_eq!(
@@ -438,12 +476,15 @@ async fn invoke(index: u16, client: &Client) -> Result<(), Error> {
             .stock(&country(), &service(), &pool())
             .await
             .map(drop),
-        20 => client
-            .experimental()
-            .sms()
-            .all_stock(&AllStockFilters::new())
-            .await
-            .map(drop),
+        20 => {
+            #[allow(deprecated)]
+            let result = client
+                .experimental()
+                .sms()
+                .all_stock(&AllStockFilters::new())
+                .await;
+            result.map(drop)
+        }
         21 => client
             .sms()
             .history(&HistoryRequest::new(0, 20).unwrap())
@@ -570,7 +611,12 @@ async fn invoke(index: u16, client: &Client) -> Result<(), Error> {
             .info(&rental_code())
             .await
             .map(drop),
-        42 => client.pricing().all(&PricingFilters::new()).await.map(drop),
+        // A filter is mandatory: the unfiltered catalog exceeds the response limit.
+        42 => client
+            .pricing()
+            .all(&PricingFilters::new().country(CountryId::new("1").unwrap()))
+            .await
+            .map(drop),
         43 => client
             .pricing()
             .quote(&country(), &service(), &pool())

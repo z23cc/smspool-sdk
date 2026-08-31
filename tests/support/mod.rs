@@ -6,7 +6,7 @@ use std::{
         atomic::{AtomicUsize, Ordering},
         Arc, Mutex,
     },
-    time::Duration,
+    time::{Duration, Instant},
 };
 
 use tokio::{
@@ -21,6 +21,7 @@ pub struct CapturedRequest {
     pub target: String,
     pub headers: BTreeMap<String, String>,
     pub body: Vec<u8>,
+    pub received_at: Instant,
 }
 
 impl CapturedRequest {
@@ -296,6 +297,7 @@ async fn read_request(stream: &mut TcpStream) -> Option<CapturedRequest> {
         target,
         headers,
         body,
+        received_at: Instant::now(),
     })
 }
 

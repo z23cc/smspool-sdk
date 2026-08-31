@@ -22,16 +22,18 @@ pub use client::{Client, ClientBuilder, RetryPolicy};
 pub use endpoint::{AuthMode, BodyMode, SafetyClass};
 pub use error::{
     ApiError, Error, OutcomeStage, OutcomeUnknown, ParameterError, RawJson, TimeoutPhase,
-    TransportErrorKind,
+    TransportErrorKind, UnsupportedReason,
 };
 pub use poll::{
-    wait_for_code_with, wait_for_sms, ActiveOrdersWatcher, CodePollResult, PollError, PollOptions,
-    PollOptionsError, WatchError,
+    cancel_with_reconciliation, wait_for_code_with, wait_for_sms, ActiveObservation,
+    ActiveOrdersWatcher, BalanceObservation, CancelOptions, CancelTimeLockRule,
+    CancelWorkflowError, CancellationDisposition, CancellationResult, CheckObservation,
+    CodePollResult, ExpectedRefundMatch, PollError, PollOptions, PollOptionsError, WatchError,
 };
 pub use transport::TransportRequest;
 pub use types::{
     ActivationToken, BusinessUserId, Cents, CountryId, Days, DecimalValue, DecodedJson,
     EsimCredential, Hours, InvalidValue, Money, OrderId, Password, PhoneNumber, PlanId, PoolId,
-    PreorderId, RawFormValue, RedactedValue, RentalCode, RentalId, Seconds, ServiceId, SmsText,
-    StatusValue, TransactionId, UnixTimestamp, VendorDateTime,
+    PreorderId, RawFormValue, RedactedValue, RentalCode, RentalId, Seconds, ServiceId,
+    SignedMoneyDelta, SmsText, StatusValue, TransactionId, UnixTimestamp, VendorDateTime,
 };

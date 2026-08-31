@@ -9,13 +9,15 @@ use std::{
     time::Duration,
 };
 
+use http::StatusCode;
+
 use rand::Rng as _;
 use tokio::time::{sleep_until, Instant};
 use tokio_util::sync::CancellationToken;
 
 use crate::{
     api::sms::{ActiveOrder, SmsCheck},
-    Client, Error, OrderId,
+    Client, Error, Money, OrderId, SignedMoneyDelta,
 };
 
 const DEFAULT_BASE_INTERVAL: Duration = Duration::from_secs(2);
@@ -184,6 +186,545 @@ impl std::error::Error for PollError {
             Self::Client(error) => Some(error),
             Self::Deadline { .. } | Self::Cancelled { .. } => None,
         }
+    }
+}
+
+/// Exact provider signature which is safe to retry after a cancellation time-lock response.
+///
+/// No default rule is supplied because the vendor signature can vary by account or deployment.
+///
+/// A live account was observed rejecting an early cancellation with HTTP 400 and the message
+/// `"This phone number cannot be cancelled yet, please try again later!"`, carrying **no**
+/// `machine_type`. For that deployment only [`Self::message`] can match; a [`Self::machine_type`]
+/// rule would silently never fire and the workflow would degrade to a single attempt plus
+/// read-only reconciliation. Confirm the signature for your own account before relying on it.
+#[derive(Clone)]
+pub struct CancelTimeLockRule {
+    status: StatusCode,
+    signature: TimeLockSignature,
+    retry_after: Duration,
+}
+
+#[derive(Clone)]
+enum TimeLockSignature {
+    MachineType(String),
+    Message(String),
+}
+
+impl CancelTimeLockRule {
+    pub fn machine_type(
+        status: StatusCode,
+        value: impl Into<String>,
+        retry_after: Duration,
+    ) -> Result<Self, PollOptionsError> {
+        Self::new(
+            status,
+            TimeLockSignature::MachineType(value.into()),
+            retry_after,
+        )
+    }
+
+    pub fn message(
+        status: StatusCode,
+        value: impl Into<String>,
+        retry_after: Duration,
+    ) -> Result<Self, PollOptionsError> {
+        Self::new(
+            status,
+            TimeLockSignature::Message(value.into()),
+            retry_after,
+        )
+    }
+
+    fn new(
+        status: StatusCode,
+        signature: TimeLockSignature,
+        retry_after: Duration,
+    ) -> Result<Self, PollOptionsError> {
+        if status.is_success() {
+            return Err(PollOptionsError::new(
+                "time_lock_rule.status",
+                "must be a non-success status",
+            ));
+        }
+        let empty = match &signature {
+            TimeLockSignature::MachineType(value) | TimeLockSignature::Message(value) => {
+                value.trim().is_empty()
+            }
+        };
+        if empty {
+            return Err(PollOptionsError::new(
+                "time_lock_rule.signature",
+                "must not be empty",
+            ));
+        }
+        if retry_after.is_zero() {
+            return Err(PollOptionsError::new(
+                "time_lock_rule.retry_after",
+                "must be greater than zero",
+            ));
+        }
+        Ok(Self {
+            status,
+            signature,
+            retry_after,
+        })
+    }
+
+    fn matches(&self, error: &crate::ApiError) -> bool {
+        if error.status() != self.status {
+            return false;
+        }
+        match &self.signature {
+            TimeLockSignature::MachineType(value) => error.machine_type() == Some(value.as_str()),
+            TimeLockSignature::Message(value) => error.message() == Some(value.as_str()),
+        }
+    }
+
+    fn retry_after(&self) -> Duration {
+        self.retry_after
+    }
+}
+
+impl fmt::Debug for CancelTimeLockRule {
+    fn fmt(&self, formatter: &mut fmt::Formatter<'_>) -> fmt::Result {
+        let kind = match self.signature {
+            TimeLockSignature::MachineType(_) => "machine_type",
+            TimeLockSignature::Message(_) => "message",
+        };
+        formatter
+            .debug_struct("CancelTimeLockRule")
+            .field("status", &self.status)
+            .field("signature_kind", &kind)
+            .field("retry_after", &self.retry_after)
+            .finish()
+    }
+}
+
+/// Options for cancellation with bounded, read-only reconciliation.
+///
+/// Paid-call volume note: a `Terminated` check only ends the workflow when `request/active`
+/// affirmatively reports the order absent. When that snapshot is unavailable or undecodable the
+/// workflow keeps issuing cancellations up to [`Self::max_cancel_attempts`] instead of
+/// short-circuiting, trading extra `sms/cancel` requests for never abandoning a live, unrefunded
+/// number. In practice a settled order rejects the next attempt and the workflow stops there with
+/// [`CancellationDisposition::Inconclusive`].
+#[derive(Clone, Debug)]
+pub struct CancelOptions {
+    poll: PollOptions,
+    max_cancel_attempts: usize,
+    max_outcome_unknown_reconciliation_checks: usize,
+    observe_balance: bool,
+    expected_refund: Option<Money>,
+    time_lock_rule: Option<CancelTimeLockRule>,
+}
+
+impl CancelOptions {
+    pub fn new(poll: PollOptions) -> Self {
+        Self {
+            poll,
+            max_cancel_attempts: 1,
+            max_outcome_unknown_reconciliation_checks: 1,
+            observe_balance: false,
+            expected_refund: None,
+            time_lock_rule: None,
+        }
+    }
+
+    pub fn max_cancel_attempts(mut self, value: usize) -> Self {
+        self.max_cancel_attempts = value;
+        self
+    }
+
+    /// Bounds the read-only reconciliation loop that runs **only** after an
+    /// [`Error::OutcomeUnknown`] cancellation attempt.
+    ///
+    /// It deliberately does not cap [`CancellationResult::reconciliation_checks`], which also
+    /// counts the single reconciliation performed after each time-lock rejection. That
+    /// per-attempt reconciliation is what detects an SMS arriving mid-retry and stops the
+    /// workflow from cancelling a delivered order, so it stays bounded by `max_cancel_attempts`
+    /// rather than by this value.
+    ///
+    /// Budget accordingly: total reconciliations are bounded by
+    /// `max_cancel_attempts + max_outcome_unknown_reconciliation_checks`, and each one issues up
+    /// to three read-only calls (`sms/check`, `request/active`, and `request/balance` when
+    /// [`Self::observe_balance`] is set).
+    pub fn max_outcome_unknown_reconciliation_checks(mut self, value: usize) -> Self {
+        self.max_outcome_unknown_reconciliation_checks = value;
+        self
+    }
+
+    pub fn observe_balance(mut self, value: bool) -> Self {
+        self.observe_balance = value;
+        self
+    }
+
+    pub fn expected_refund(mut self, value: Money) -> Self {
+        self.expected_refund = Some(value);
+        self.observe_balance = true;
+        self
+    }
+
+    pub fn time_lock_rule(mut self, value: CancelTimeLockRule) -> Self {
+        self.time_lock_rule = Some(value);
+        self
+    }
+
+    pub fn poll_options(&self) -> &PollOptions {
+        &self.poll
+    }
+}
+
+#[derive(Clone, Debug, Eq, PartialEq)]
+#[non_exhaustive]
+pub enum CheckObservation {
+    Pending,
+    Received,
+    Terminated,
+    NotFound,
+    Unavailable,
+}
+
+#[derive(Clone, Debug, Eq, PartialEq)]
+#[non_exhaustive]
+pub enum ActiveObservation {
+    Present,
+    Absent,
+    Unavailable,
+}
+
+#[derive(Clone, Debug, Eq, PartialEq)]
+#[non_exhaustive]
+pub enum ExpectedRefundMatch {
+    NotConfigured,
+    Matches,
+    DoesNotMatch,
+}
+
+#[derive(Clone, Debug, Eq, PartialEq)]
+#[non_exhaustive]
+pub enum BalanceObservation {
+    NotRequested,
+    Unavailable,
+    Delta {
+        amount: SignedMoneyDelta,
+        expected_refund_match: ExpectedRefundMatch,
+    },
+}
+
+#[derive(Clone, Debug)]
+#[non_exhaustive]
+pub enum CancellationDisposition {
+    CancellationAccepted,
+    TerminalSms,
+    StillActive,
+    NotFound,
+    Inconclusive,
+    OutcomeUnknown(crate::OutcomeUnknown),
+}
+
+#[derive(Clone, Debug)]
+#[non_exhaustive]
+pub struct CancellationResult {
+    pub disposition: CancellationDisposition,
+    pub cancel_attempts: usize,
+    pub reconciliation_checks: usize,
+    pub check: CheckObservation,
+    pub active: ActiveObservation,
+    pub balance: BalanceObservation,
+}
+
+#[derive(Debug)]
+#[non_exhaustive]
+pub enum CancelWorkflowError {
+    InvalidOptions(PollOptionsError),
+    Client(Error),
+    Deadline,
+    Cancelled,
+}
+
+impl fmt::Display for CancelWorkflowError {
+    fn fmt(&self, formatter: &mut fmt::Formatter<'_>) -> fmt::Result {
+        match self {
+            Self::InvalidOptions(error) => error.fmt(formatter),
+            Self::Client(error) => write!(formatter, "SMS cancellation failed: {error}"),
+            Self::Deadline => formatter.write_str("SMS cancellation deadline elapsed"),
+            Self::Cancelled => formatter.write_str("SMS cancellation was cancelled"),
+        }
+    }
+}
+
+impl std::error::Error for CancelWorkflowError {}
+
+impl From<Error> for CancelWorkflowError {
+    fn from(error: Error) -> Self {
+        Self::Client(error)
+    }
+}
+
+/// Cancels an order with strict time-lock retry and read-only reconciliation.
+///
+/// Mutation attempts are never selected against cancellation or deadline. A configured exact
+/// [`CancelTimeLockRule`] is the only condition that permits a later cancellation request.
+pub async fn cancel_with_reconciliation(
+    client: &Client,
+    order_id: &OrderId,
+    options: CancelOptions,
+) -> Result<CancellationResult, CancelWorkflowError> {
+    if options.max_cancel_attempts == 0 {
+        return Err(CancelWorkflowError::InvalidOptions(PollOptionsError::new(
+            "max_cancel_attempts",
+            "must be greater than zero",
+        )));
+    }
+    if options.max_outcome_unknown_reconciliation_checks == 0 {
+        return Err(CancelWorkflowError::InvalidOptions(PollOptionsError::new(
+            "max_outcome_unknown_reconciliation_checks",
+            "must be greater than zero",
+        )));
+    }
+    let poll = &options.poll;
+    cancellation_preflight(poll)?;
+    let mut result = CancellationResult {
+        disposition: CancellationDisposition::Inconclusive,
+        cancel_attempts: 0,
+        reconciliation_checks: 0,
+        check: CheckObservation::Unavailable,
+        active: ActiveObservation::Unavailable,
+        balance: if options.observe_balance {
+            BalanceObservation::Unavailable
+        } else {
+            BalanceObservation::NotRequested
+        },
+    };
+    let before_balance = if options.observe_balance {
+        match client.catalog().balance().await {
+            Ok(balance) => Some(balance.balance),
+            Err(_) => None,
+        }
+    } else {
+        None
+    };
+
+    loop {
+        cancellation_preflight(poll)?;
+        result.cancel_attempts += 1;
+        match client.sms().cancel(order_id).await {
+            Ok(_) => {
+                result.disposition = CancellationDisposition::CancellationAccepted;
+                reconcile_once(client, order_id, before_balance, &options, &mut result).await;
+                return Ok(result);
+            }
+            Err(Error::OutcomeUnknown(unknown)) => {
+                result.disposition = CancellationDisposition::OutcomeUnknown(unknown);
+                for _ in 0..options.max_outcome_unknown_reconciliation_checks {
+                    reconcile_once(client, order_id, before_balance, &options, &mut result).await;
+                    if matches!(
+                        result.check,
+                        CheckObservation::Received
+                            | CheckObservation::Terminated
+                            | CheckObservation::NotFound
+                    ) {
+                        break;
+                    }
+                    if result.reconciliation_checks
+                        < options.max_outcome_unknown_reconciliation_checks
+                    {
+                        wait_reconciliation(poll).await?;
+                    }
+                }
+                return Ok(result);
+            }
+            Err(Error::Api(error))
+                if options
+                    .time_lock_rule
+                    .as_ref()
+                    .is_some_and(|rule| rule.matches(&error)) =>
+            {
+                reconcile_once(client, order_id, before_balance, &options, &mut result).await;
+                if let Some(disposition) = settled_disposition(&result) {
+                    result.disposition = disposition;
+                    return Ok(result);
+                }
+                if result.cancel_attempts >= options.max_cancel_attempts {
+                    result.disposition = exhausted_disposition(&result);
+                    return Ok(result);
+                }
+                let delay = options
+                    .time_lock_rule
+                    .as_ref()
+                    .expect("guarded by match")
+                    .retry_after();
+                wait_cancel_retry(poll, delay).await?;
+            }
+            // A 429 is rejected by the provider before it acts, so the order is unchanged and
+            // another attempt is safe. `sms/cancel` is a mutation and is never retried by the
+            // transport, so returning here would abandon the workflow with cancel budget and
+            // deadline still remaining, leaving a live unrefunded number.
+            Err(Error::RateLimited { retry_after, .. }) => {
+                reconcile_once(client, order_id, before_balance, &options, &mut result).await;
+                if let Some(disposition) = settled_disposition(&result) {
+                    result.disposition = disposition;
+                    return Ok(result);
+                }
+                if result.cancel_attempts >= options.max_cancel_attempts {
+                    result.disposition = exhausted_disposition(&result);
+                    return Ok(result);
+                }
+                let delay = retry_after.unwrap_or(poll.base_interval);
+                wait_cancel_retry(poll, delay).await?;
+            }
+            Err(Error::Api(_)) | Err(_) => {
+                reconcile_once(client, order_id, before_balance, &options, &mut result).await;
+                result.disposition = disposition_from_observations(&result);
+                return Ok(result);
+            }
+        }
+    }
+}
+
+fn cancellation_preflight(options: &PollOptions) -> Result<(), CancelWorkflowError> {
+    if options.cancellation.is_cancelled() {
+        return Err(CancelWorkflowError::Cancelled);
+    }
+    if Instant::now() >= options.deadline {
+        return Err(CancelWorkflowError::Deadline);
+    }
+    Ok(())
+}
+
+async fn wait_cancel_retry(
+    options: &PollOptions,
+    retry_after: Duration,
+) -> Result<(), CancelWorkflowError> {
+    let delay = polling_delay(
+        options,
+        options.base_interval.max(retry_after),
+        Some(retry_after),
+    );
+    let wake_at = capped_wake_at(delay, options.deadline);
+    tokio::select! {
+        biased;
+        _ = options.cancellation.cancelled() => Err(CancelWorkflowError::Cancelled),
+        _ = sleep_until(options.deadline) => Err(CancelWorkflowError::Deadline),
+        _ = sleep_until(wake_at) => Ok(()),
+    }
+}
+
+async fn wait_reconciliation(options: &PollOptions) -> Result<(), CancelWorkflowError> {
+    let wake_at = capped_wake_at(options.base_interval, options.deadline);
+    tokio::select! {
+        biased;
+        _ = options.cancellation.cancelled() => Err(CancelWorkflowError::Cancelled),
+        _ = sleep_until(options.deadline) => Err(CancelWorkflowError::Deadline),
+        _ = sleep_until(wake_at) => Ok(()),
+    }
+}
+
+async fn reconcile_once(
+    client: &Client,
+    order_id: &OrderId,
+    before_balance: Option<Money>,
+    options: &CancelOptions,
+    result: &mut CancellationResult,
+) {
+    result.reconciliation_checks += 1;
+    result.check = match client.sms().check(order_id).await {
+        Ok(SmsCheck::Pending(_)) => CheckObservation::Pending,
+        Ok(SmsCheck::Received(_)) => CheckObservation::Received,
+        Ok(SmsCheck::Terminated(_)) => CheckObservation::Terminated,
+        Err(Error::Api(error)) if error.status() == StatusCode::NOT_FOUND => {
+            CheckObservation::NotFound
+        }
+        Err(_) => CheckObservation::Unavailable,
+    };
+    result.active = match client.sms().active().await {
+        Ok(orders) if orders.iter().any(|order| order.order_code == *order_id) => {
+            ActiveObservation::Present
+        }
+        Ok(_) => ActiveObservation::Absent,
+        Err(_) => ActiveObservation::Unavailable,
+    };
+    if options.observe_balance {
+        result.balance = match (
+            before_balance,
+            client
+                .catalog()
+                .balance()
+                .await
+                .ok()
+                .map(|value| value.balance),
+        ) {
+            (Some(before), Some(after)) => {
+                let amount = SignedMoneyDelta::new(after.value() - before.value());
+                let expected_refund_match = options.expected_refund.map_or(
+                    ExpectedRefundMatch::NotConfigured,
+                    |expected| {
+                        if amount.value() == expected.value() {
+                            ExpectedRefundMatch::Matches
+                        } else {
+                            ExpectedRefundMatch::DoesNotMatch
+                        }
+                    },
+                );
+                BalanceObservation::Delta {
+                    amount,
+                    expected_refund_match,
+                }
+            }
+            (Some(_), None) => BalanceObservation::Unavailable,
+            (None, None) => BalanceObservation::Unavailable,
+            (None, Some(_)) => BalanceObservation::Unavailable,
+        };
+    }
+}
+
+/// Terminal states that justify ending cancellation, shared by every retrying branch.
+///
+/// `Received` is backed by real SMS content. `Terminated` is inferred from the presence of a
+/// human-readable `message` alone, and this vendor also returns prose on non-terminal responses,
+/// so it additionally requires that `request/active` affirmatively reports the order absent.
+/// `Unavailable` is not agreement.
+fn settled_disposition(result: &CancellationResult) -> Option<CancellationDisposition> {
+    match result.check {
+        CheckObservation::Received => Some(CancellationDisposition::TerminalSms),
+        CheckObservation::Terminated if result.active == ActiveObservation::Absent => {
+            Some(CancellationDisposition::TerminalSms)
+        }
+        CheckObservation::NotFound => Some(CancellationDisposition::NotFound),
+        CheckObservation::Terminated
+        | CheckObservation::Pending
+        | CheckObservation::Unavailable => None,
+    }
+}
+
+/// Disposition once the cancel-attempt budget is spent without a settled observation.
+fn exhausted_disposition(result: &CancellationResult) -> CancellationDisposition {
+    if matches!(result.check, CheckObservation::Pending)
+        || matches!(result.active, ActiveObservation::Present)
+    {
+        CancellationDisposition::StillActive
+    } else {
+        CancellationDisposition::Inconclusive
+    }
+}
+
+fn disposition_from_observations(result: &CancellationResult) -> CancellationDisposition {
+    match result.check {
+        CheckObservation::Received => CancellationDisposition::TerminalSms,
+        // A `message`-inferred terminal state is only reported as settled when request/active
+        // affirmatively agrees. Contradiction means still active; an unavailable snapshot is
+        // inconclusive rather than settled.
+        CheckObservation::Terminated => match result.active {
+            ActiveObservation::Absent => CancellationDisposition::TerminalSms,
+            ActiveObservation::Present => CancellationDisposition::StillActive,
+            ActiveObservation::Unavailable => CancellationDisposition::Inconclusive,
+        },
+        CheckObservation::NotFound => CancellationDisposition::NotFound,
+        CheckObservation::Pending if matches!(result.active, ActiveObservation::Present) => {
+            CancellationDisposition::StillActive
+        }
+        _ => CancellationDisposition::Inconclusive,
     }
 }
 

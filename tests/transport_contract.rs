@@ -1,6 +1,6 @@
 mod support;
 
-use std::time::{Duration, SystemTime};
+use std::time::{Duration, Instant, SystemTime};
 
 use http::Method;
 use serde_json::{json, Value};
@@ -651,6 +651,158 @@ async fn concurrency_limit_serializes_in_flight_requests() {
 }
 
 #[tokio::test]
+async fn qps_limit_paces_starts_across_client_clones() {
+    let server = ScriptedServer::start([ok(), ok(), ok()]).await;
+    let client = Client::builder("key")
+        .base_url(server.base_url())
+        .allow_insecure_http_for_mocking(true)
+        .max_concurrency(3)
+        .max_requests_per_second(5)
+        .qps_wait_timeout(Duration::from_secs(2))
+        .retry_policy(retry_policy(1))
+        .build()
+        .unwrap();
+    let make = || {
+        request(
+            "test.qps",
+            Method::GET,
+            "/qps",
+            BodyMode::None,
+            AuthMode::Public,
+            SafetyClass::ReadOnly,
+        )
+    };
+    let started = Instant::now();
+    let mut tasks = Vec::new();
+    for _ in 0..3 {
+        let client = client.clone();
+        tasks.push(tokio::spawn(async move {
+            let _: Value = client.experimental().raw(make()).await.unwrap();
+        }));
+    }
+    for task in tasks {
+        task.await.unwrap();
+    }
+    assert!(started.elapsed() >= Duration::from_millis(300));
+    assert_eq!(server.request_count(), 3);
+}
+
+#[tokio::test]
+async fn qps_pacing_is_independent_of_in_flight_concurrency() {
+    let delayed = || {
+        Script::Respond(
+            ResponseScript::json(200, json!({"ok": true})).body_delay(Duration::from_millis(250)),
+        )
+    };
+    let server = ScriptedServer::start([delayed(), delayed(), delayed()]).await;
+    let client = Client::builder("key")
+        .base_url(server.base_url())
+        .allow_insecure_http_for_mocking(true)
+        .max_concurrency(3)
+        .max_requests_per_second(5)
+        .qps_wait_timeout(Duration::from_secs(2))
+        .retry_policy(retry_policy(1))
+        .build()
+        .unwrap();
+    let make = || {
+        request(
+            "test.qps.overlap",
+            Method::GET,
+            "/qps-overlap",
+            BodyMode::None,
+            AuthMode::Public,
+            SafetyClass::ReadOnly,
+        )
+    };
+    let mut tasks = Vec::new();
+    for _ in 0..3 {
+        let client = client.clone();
+        tasks.push(tokio::spawn(async move {
+            let _: Value = client.experimental().raw(make()).await.unwrap();
+        }));
+    }
+    for task in tasks {
+        task.await.unwrap();
+    }
+    let mut received = server
+        .requests()
+        .into_iter()
+        .map(|request| request.received_at)
+        .collect::<Vec<_>>();
+    received.sort();
+    assert_eq!(received.len(), 3);
+    for pair in received.windows(2) {
+        assert!(pair[1].duration_since(pair[0]) >= Duration::from_millis(150));
+    }
+    assert!(server.max_in_flight() >= 2);
+}
+
+#[tokio::test]
+async fn qps_admission_timeout_does_not_send_a_request() {
+    let server = ScriptedServer::start([ok()]).await;
+    let client = Client::builder("key")
+        .base_url(server.base_url())
+        .allow_insecure_http_for_mocking(true)
+        .max_requests_per_second(1)
+        .qps_wait_timeout(Duration::from_millis(20))
+        .retry_policy(retry_policy(1))
+        .build()
+        .unwrap();
+    let make = || {
+        request(
+            "test.qps.timeout",
+            Method::GET,
+            "/qps-timeout",
+            BodyMode::None,
+            AuthMode::Public,
+            SafetyClass::ReadOnly,
+        )
+    };
+    let _: Value = client.experimental().raw(make()).await.unwrap();
+    let error = client.experimental().raw(make()).await.unwrap_err();
+    assert!(matches!(
+        error,
+        Error::Timeout {
+            phase: TimeoutPhase::QpsAdmission,
+            ..
+        }
+    ));
+    assert_eq!(server.request_count(), 1);
+}
+
+#[tokio::test]
+async fn read_only_retry_attempts_consume_qps_capacity() {
+    let server = ScriptedServer::start([
+        Script::Respond(ResponseScript::json(429, json!({"error": "busy"}))),
+        ok(),
+    ])
+    .await;
+    let client = Client::builder("key")
+        .base_url(server.base_url())
+        .allow_insecure_http_for_mocking(true)
+        .max_requests_per_second(10)
+        .qps_wait_timeout(Duration::from_secs(1))
+        .retry_policy(retry_policy(2))
+        .build()
+        .unwrap();
+    let started = Instant::now();
+    let _: Value = client
+        .experimental()
+        .raw(request(
+            "test.qps.retry",
+            Method::GET,
+            "/qps-retry",
+            BodyMode::None,
+            AuthMode::Public,
+            SafetyClass::ReadOnly,
+        ))
+        .await
+        .unwrap();
+    assert!(started.elapsed() >= Duration::from_millis(80));
+    assert_eq!(server.request_count(), 2);
+}
+
+#[tokio::test]
 async fn invalid_modes_and_query_credentials_fail_before_network_io() {
     let server = ScriptedServer::start([]).await;
     let client = client(&server);
@@ -689,4 +841,50 @@ async fn invalid_modes_and_query_credentials_fail_before_network_io() {
         .unwrap_err();
     assert!(matches!(error, Error::InvalidRequest { field: "auth", .. }));
     assert_eq!(server.request_count(), 0);
+}
+
+/// The unfiltered pricing catalog measured ~17.2 MiB live, so it can never fit the response
+/// limit. The guard must reject it locally, without sending anything.
+#[tokio::test]
+async fn unfiltered_pricing_is_rejected_before_any_request_is_sent() {
+    let server = ScriptedServer::start([]).await;
+    let error = client(&server)
+        .pricing()
+        .all(&smspool::pricing::PricingFilters::new())
+        .await
+        .expect_err("an unfiltered pricing query must be rejected");
+
+    assert!(
+        matches!(
+            error,
+            smspool::Error::InvalidRequest {
+                field: "pricing_filters",
+                ..
+            }
+        ),
+        "unexpected error: {error:?}"
+    );
+    assert!(
+        server.requests().is_empty(),
+        "the guard must fire before the wire"
+    );
+
+    // A filtered query is still allowed to proceed.
+    let filtered = client(&server)
+        .pricing()
+        .all(
+            &smspool::pricing::PricingFilters::new()
+                .max_price(smspool::Money::new(rust_decimal::Decimal::new(2, 2))),
+        )
+        .await;
+    assert!(
+        !matches!(
+            filtered,
+            Err(smspool::Error::InvalidRequest {
+                field: "pricing_filters",
+                ..
+            })
+        ),
+        "a filtered query must not be rejected by the guard"
+    );
 }

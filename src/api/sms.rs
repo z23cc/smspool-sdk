@@ -146,10 +146,16 @@ impl ExperimentalSmsApi {
             .await
     }
 
-    pub async fn all_stock(&self, filters: &AllStockFilters) -> Result<Vec<AllStockEntry>, Error> {
-        self.client
-            .execute_endpoint(&endpoint::SMS_ALL_STOCK, wire(filters.fields()))
-            .await
+    /// The live unfiltered response exceeded 16 MiB and is not safe for this buffered API.
+    /// Use [`Self::stock`] for a targeted country/service/pool lookup instead.
+    #[deprecated(
+        note = "use stock(country, service, pool); the live all_stock response is too large to buffer safely"
+    )]
+    pub async fn all_stock(&self, _filters: &AllStockFilters) -> Result<Vec<AllStockEntry>, Error> {
+        Err(Error::UnsupportedOperation {
+            endpoint: endpoint::SMS_ALL_STOCK.name,
+            reason: crate::UnsupportedReason::ResponseNotSuitableForBufferedSdk,
+        })
     }
 
     /// No response example exists for this operation, so its result remains raw JSON.
@@ -395,6 +401,7 @@ impl HistoryRequest {
     }
 }
 
+#[allow(dead_code)]
 #[derive(Clone, Debug, Default)]
 pub struct AllStockFilters {
     country: Option<CountryId>,
@@ -420,20 +427,6 @@ impl AllStockFilters {
     pub fn pool(mut self, value: PoolId) -> Self {
         self.pool = Some(value);
         self
-    }
-
-    fn fields(&self) -> Vec<(&'static str, String)> {
-        let mut fields = Vec::new();
-        if let Some(value) = &self.country {
-            fields.push(("country", value.to_string()));
-        }
-        if let Some(value) = &self.service {
-            fields.push(("service", value.to_string()));
-        }
-        if let Some(value) = &self.pool {
-            fields.push(("pool", value.to_string()));
-        }
-        fields
     }
 }
 
@@ -539,6 +532,38 @@ pub enum SmsCheck {
     Pending(PendingSms),
     Received(ReceivedSms),
     Terminated(TerminatedSms),
+}
+
+impl SmsCheck {
+    /// The provider's raw `status`, preserved verbatim for every variant.
+    ///
+    /// Variant selection is driven by response *shape* (`sms`/`full_sms`, then `message`), not by
+    /// this value, because only `1` (pending), `3` (complete), and `6` (refunded) have observed
+    /// evidence. Callers holding vendor knowledge about other codes should branch on this.
+    pub fn status(&self) -> &StatusValue {
+        match self {
+            Self::Pending(inner) => &inner.status,
+            Self::Received(inner) => &inner.status,
+            Self::Terminated(inner) => &inner.status,
+        }
+    }
+
+    /// The raw status as an integer, when the provider sent a numeric one.
+    pub fn status_code(&self) -> Option<i64> {
+        match self.status() {
+            StatusValue::Integer(value) => Some(*value),
+            _ => None,
+        }
+    }
+
+    /// Whether this snapshot is terminal, i.e. polling it again cannot make progress.
+    ///
+    /// Shape-derived and deliberately conservative: an unrecognised numeric status that carries
+    /// neither SMS content nor a `message` reads as pending, so a workflow keeps polling to its
+    /// deadline instead of settling an order on a guess.
+    pub fn is_terminal(&self) -> bool {
+        matches!(self, Self::Received(_) | Self::Terminated(_))
+    }
 }
 
 impl<'de> Deserialize<'de> for SmsCheck {

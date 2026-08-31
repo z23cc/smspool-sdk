@@ -154,6 +154,99 @@ class AcceptanceDefinitionTests(unittest.TestCase):
         with self.assertRaises(acceptance_tool.DefinitionError):
             acceptance_tool.validate_definition(definition)
 
+    def test_sanitized_live_observation_is_valid_but_not_gate_evidence(self) -> None:
+        source = acceptance_tool.LIVE_OBSERVATIONS_FILE.read_text(encoding="utf-8")
+        with tempfile.TemporaryDirectory() as directory:
+            observation_file = Path(directory) / "live-observations.json"
+            observation_file.write_text(source, encoding="utf-8")
+            with patch.object(acceptance_tool, "LIVE_OBSERVATIONS_FILE", observation_file):
+                acceptance_tool.validate_live_observations()
+            document = json.loads(source)
+            self.assertFalse(document["observations"][0]["gate_eligible"])
+            self.assertNotIn("attestations", document)
+
+    def test_validate_command_checks_sanitized_observations(self) -> None:
+        with patch.object(
+            acceptance_tool,
+            "validate_live_observations",
+            side_effect=acceptance_tool.DefinitionError("malformed observation"),
+        ):
+            with self.assertRaises(acceptance_tool.DefinitionError):
+                acceptance_tool.command_validate(None)
+
+    def test_sanitized_live_observation_rejects_gate_eligibility(self) -> None:
+        source = json.loads(acceptance_tool.LIVE_OBSERVATIONS_FILE.read_text(encoding="utf-8"))
+        source["observations"][0]["gate_eligible"] = True
+        with tempfile.TemporaryDirectory() as directory:
+            observation_file = Path(directory) / "live-observations.json"
+            observation_file.write_text(json.dumps(source), encoding="utf-8")
+            with patch.object(acceptance_tool, "LIVE_OBSERVATIONS_FILE", observation_file):
+                with self.assertRaises(acceptance_tool.DefinitionError):
+                    acceptance_tool.validate_live_observations()
+
+    def test_sanitized_live_observation_rejects_sensitive_fields(self) -> None:
+        source = json.loads(acceptance_tool.LIVE_OBSERVATIONS_FILE.read_text(encoding="utf-8"))
+        source["observations"][0]["facts"]["api_key"] = "must-not-be-recorded"
+        with tempfile.TemporaryDirectory() as directory:
+            observation_file = Path(directory) / "live-observations.json"
+            observation_file.write_text(json.dumps(source), encoding="utf-8")
+            with patch.object(acceptance_tool, "LIVE_OBSERVATIONS_FILE", observation_file):
+                with self.assertRaises(acceptance_tool.DefinitionError):
+                    acceptance_tool.validate_live_observations()
+
+    def _reject_mutated_observation(self, mutate) -> None:
+        """The generalized schema must still reject malformed records."""
+        source = json.loads(acceptance_tool.LIVE_OBSERVATIONS_FILE.read_text(encoding="utf-8"))
+        mutate(source)
+        with tempfile.TemporaryDirectory() as directory:
+            observation_file = Path(directory) / "live-observations.json"
+            observation_file.write_text(json.dumps(source), encoding="utf-8")
+            with patch.object(acceptance_tool, "LIVE_OBSERVATIONS_FILE", observation_file):
+                with self.assertRaises(acceptance_tool.DefinitionError):
+                    acceptance_tool.validate_live_observations()
+
+    def test_sanitized_live_observation_rejects_blank_route_fields(self) -> None:
+        self._reject_mutated_observation(
+            lambda doc: doc["observations"][0]["facts"].update({"country": "   "})
+        )
+
+    def test_sanitized_live_observation_rejects_non_integer_pool(self) -> None:
+        self._reject_mutated_observation(
+            lambda doc: doc["observations"][0]["facts"].update({"pool": "3"})
+        )
+
+    def test_sanitized_live_observation_rejects_boolean_pool(self) -> None:
+        self._reject_mutated_observation(
+            lambda doc: doc["observations"][0]["facts"].update({"pool": True})
+        )
+
+    def test_sanitized_live_observation_rejects_missing_required_fact(self) -> None:
+        self._reject_mutated_observation(
+            lambda doc: doc["observations"][0]["facts"].pop("purchased_price_usd")
+        )
+
+    def test_sanitized_live_observation_rejects_duplicate_record_ids(self) -> None:
+        def mutate(doc):
+            first = doc["observations"][0]
+            doc["observations"].append(json.loads(json.dumps(first)))
+
+        self._reject_mutated_observation(mutate)
+
+    def test_sanitized_live_observation_rejects_altered_all_stock_evidence(self) -> None:
+        self._reject_mutated_observation(
+            lambda doc: doc["observations"][0]["facts"].update(
+                {"all_stock_exceeded_bytes": [1, 2]}
+            )
+        )
+
+    def test_sanitized_live_observation_scans_added_fact_keys_for_secrets(self) -> None:
+        """Extra fact keys are allowed, so the secret scan must still reach them."""
+        self._reject_mutated_observation(
+            lambda doc: doc["observations"][-1]["facts"].update(
+                {"provider_full_order_identifier": "ABC12345"}
+            )
+        )
+
     def test_active_manual_gate_can_verify_fresh_bound_evidence(self) -> None:
         now = datetime.now(timezone.utc).replace(microsecond=0)
         attestation = {

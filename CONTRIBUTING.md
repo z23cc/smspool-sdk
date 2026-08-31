@@ -64,9 +64,12 @@ cargo test --test live_receive -- --ignored --nocapture
 
 The crate is not published. Before the first release:
 
-1. Set `repository` and `documentation` in `Cargo.toml`.
-2. Replace `<COPYRIGHT HOLDER>` in `LICENSE-MIT`.
-3. Move the `Unreleased` section of `CHANGELOG.md` under a version heading.
-4. Confirm `cargo package --locked` succeeds and review `cargo package --list`.
-5. Run `./scripts/acceptance.sh sdk`.
-6. Consider `cargo-semver-checks` once a baseline version exists.
+1. Replace `<COPYRIGHT HOLDER>` in `LICENSE-MIT`.
+2. Move the `Unreleased` section of `CHANGELOG.md` under a version heading.
+3. Confirm `cargo package --locked` succeeds and review `cargo package --list`.
+4. Run `./scripts/acceptance.sh sdk`.
+5. Consider `cargo-semver-checks` once a baseline version exists.
+
+`repository` is set. `documentation` is deliberately unset so crates.io falls back to
+docs.rs. The `smspool` crate name was unclaimed as of the last check; re-verify before
+publishing, since availability can change at any time.

@@ -1,0 +1,79 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+env:
+  CARGO_TERM_COLOR: never
+  RUSTFLAGS: -D warnings
+
+jobs:
+  acceptance:
+    name: Acceptance (sdk profile)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          components: rustfmt, clippy
+      - uses: Swatinem/rust-cache@v2
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      # Single source of truth: the same gate definition used locally.
+      # Covers fmt, clippy, unit/integration tests, all Postman fixtures,
+      # the wire contract, and the redaction suite.
+      - name: Run sdk acceptance profile
+        run: ./scripts/acceptance.sh sdk
+
+  msrv:
+    name: MSRV ${{ matrix.rust }}
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        rust: ["1.82.0"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@master
+        with:
+          toolchain: ${{ matrix.rust }}
+      - uses: Swatinem/rust-cache@v2
+      - name: Check with locked dependencies
+        run: cargo check --locked --all-features --all-targets
+
+  package:
+    name: Package
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: Swatinem/rust-cache@v2
+      - name: Verify the published artifact builds
+        run: cargo package --locked
+
+  postgres:
+    name: Durable recovery (PostgreSQL)
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: smspool
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd pg_isready --health-interval 5s
+          --health-timeout 5s --health-retries 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: Swatinem/rust-cache@v2
+      # Opt-in test: exercises claim leases, restart recovery, and reconcile-only state.
+      # Needs no SMSPool credentials and makes no provider requests.
+      - name: Run the opt-in recovery test
+        env:
+          DATABASE_URL: postgres://postgres:postgres@127.0.0.1:5432/smspool
+          SMSPOOL_ORDER_KEY: ${{ '00112233445566778899aabbccddeeff00112233445566778899aabbccddeeff' }}
+        run: cargo test --features postgres-example --test postgres_recovery -- --ignored

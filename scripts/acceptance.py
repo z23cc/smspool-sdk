@@ -29,6 +29,13 @@ REQUIRED_DOCUMENTS = {
     "contracts/postman-baseline.json": (),
     "acceptance/gates.json": (),
     "acceptance/live-observations.json": (),
+    # Standard crate scaffolding. Listed here so it cannot silently disappear.
+    "CHANGELOG.md": ("# Changelog", "## [Unreleased]", "### Known limitations"),
+    "CONTRIBUTING.md": ("# Contributing", "## Testing rules", "## Release checklist"),
+    "SECURITY.md": ("# Security", "## What this SDK protects by default", "## What it does not protect"),
+    "LICENSE-MIT": ("MIT License",),
+    "LICENSE-APACHE": ("Apache License",),
+    ".github/workflows/ci.yml": ("name: CI",),
 }
 
 

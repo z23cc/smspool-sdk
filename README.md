@@ -132,3 +132,32 @@ python3 scripts/acceptance.py validate  # also validates sanitized live observat
 - [`contracts/postman-baseline.json`](contracts/postman-baseline.json)：确定性生成的契约基线
 
 不要手工修改 baseline、endpoint matrix 或 fixture；Postman 变化应通过 `scripts/postman_contract.py` 重新生成并审查 diff。
+
+项目文档：
+
+- [`CHANGELOG.md`](CHANGELOG.md)：变更记录与**已知限制**
+- [`CONTRIBUTING.md`](CONTRIBUTING.md)：开发流程、契约再生成、发布检查清单
+- [`SECURITY.md`](SECURITY.md)：默认保护范围、**不**保护的部分与运维规则
+
+## Feature flags
+
+| Flag | 默认 | 说明 |
+|---|---|---|
+| `rustls-tls` | ✅ | 通过 rustls 提供 TLS |
+| `tracing` | | 低基数 `tracing` 事件；不记录请求体或凭据 |
+| `postgres-example` | | 仅供 Axum/PostgreSQL 示例与其恢复测试使用，非库功能 |
+
+## MSRV
+
+Rust **1.82.0**。MSRV 变更按 minor 版本处理，并在 CI 中以 `--locked` 校验。
+
+## License
+
+双许可，任选其一：
+
+- Apache License 2.0（[`LICENSE-APACHE`](LICENSE-APACHE)）
+- MIT（[`LICENSE-MIT`](LICENSE-MIT)）
+
+除非另有明确声明，你有意提交的任何贡献均按上述双许可授权，无附加条款。
+
+> 发布前需替换 `LICENSE-MIT` 中的 `<COPYRIGHT HOLDER>`，并在 `Cargo.toml` 填入 `repository` 与 `documentation`。见 `CONTRIBUTING.md` 的发布检查清单。

@@ -5,7 +5,23 @@ edition = "2021"
 rust-version = "1.82"
 description = "Async Rust SDK for the SMSPool API"
 license = "MIT OR Apache-2.0"
+readme = "README.md"
+keywords = ["smspool", "sms", "otp", "api-client", "async"]
+categories = ["api-bindings", "asynchronous"]
+# Set before publishing; intentionally left unset rather than guessed.
+# repository = "https://github.com/<owner>/smspool-sdk"
+# documentation = "https://docs.rs/smspool"
 autoexamples = false
+exclude = [
+    "/_git_data",
+    "/prompt-exports",
+    "/acceptance",
+    "/contracts",
+    "/scripts",
+    "/docs",
+    "/tests",
+    "/postman.json",
+]
 
 [features]
 default = ["rustls-tls"]

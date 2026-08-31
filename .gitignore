@@ -10,5 +10,8 @@ __pycache__/
 .env.*
 !.env.example
 
+# Local tooling exports
+/prompt-exports/
+
 # Environment-specific manual acceptance attestations
 /acceptance/evidence.json

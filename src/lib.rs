@@ -6,6 +6,13 @@
 #![forbid(unsafe_code)]
 #![deny(rust_2018_idioms)]
 
+/// Compiles the README's Rust examples as doctests so they cannot silently rot.
+///
+/// Doc-only; it is not part of the public API surface at runtime.
+#[cfg(doctest)]
+#[doc = include_str!("../README.md")]
+pub struct ReadmeDoctests;
+
 pub mod api;
 pub mod client;
 #[allow(dead_code)]

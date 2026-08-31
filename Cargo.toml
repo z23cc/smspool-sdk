@@ -50,7 +50,7 @@ thiserror = "=2.0.16"
 tokio = { version = "=1.53.1", features = ["macros", "net", "rt", "signal", "sync", "time"] }
 tokio-util = { version = "=0.7.16", features = ["rt"] }
 tracing = { version = "=0.1.41", optional = true }
-url = "=2.5.4"
+url = "=2.5.8"
 axum = { version = "=0.8.4", optional = true }
 chacha20poly1305 = { version = "=0.10.1", optional = true }
 hex = { version = "=0.4.3", optional = true }

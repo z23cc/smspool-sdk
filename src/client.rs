@@ -531,23 +531,31 @@ mod tests {
             assert!(Client::builder("key").base_url(base).build().is_err());
         }
         assert!(Client::builder("key").max_concurrency(0).build().is_err());
-        assert!(Client::builder("key")
-            .max_response_bytes(0)
-            .build()
-            .is_err());
+        assert!(
+            Client::builder("key")
+                .max_response_bytes(0)
+                .build()
+                .is_err()
+        );
         assert!(Client::builder(" ").build().is_err());
-        assert!(Client::builder("key")
-            .max_requests_per_second(0)
-            .build()
-            .is_err());
-        assert!(Client::builder("key")
-            .max_requests_per_second(1_000_000_001)
-            .build()
-            .is_err());
-        assert!(Client::builder("key")
-            .qps_wait_timeout(Duration::ZERO)
-            .build()
-            .is_err());
+        assert!(
+            Client::builder("key")
+                .max_requests_per_second(0)
+                .build()
+                .is_err()
+        );
+        assert!(
+            Client::builder("key")
+                .max_requests_per_second(1_000_000_001)
+                .build()
+                .is_err()
+        );
+        assert!(
+            Client::builder("key")
+                .qps_wait_timeout(Duration::ZERO)
+                .build()
+                .is_err()
+        );
     }
 
     #[test]

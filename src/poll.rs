@@ -12,12 +12,12 @@ use std::{
 use http::StatusCode;
 
 use rand::RngExt as _;
-use tokio::time::{sleep_until, Instant};
+use tokio::time::{Instant, sleep_until};
 use tokio_util::sync::CancellationToken;
 
 use crate::{
-    api::sms::{ActiveOrder, SmsCheck},
     Client, Error, Money, OrderId, SignedMoneyDelta,
+    api::sms::{ActiveOrder, SmsCheck},
 };
 
 const DEFAULT_BASE_INTERVAL: Duration = Duration::from_secs(2);

@@ -1,14 +1,14 @@
-use serde::{de::Error as _, Deserialize, Deserializer};
+use serde::{Deserialize, Deserializer, de::Error as _};
 use serde_json::Value;
 
 use crate::{
+    Client, Error,
     api::{invalid, wire},
     endpoint,
     types::{
         ActivationToken, Cents, CountryId, Money, OrderId, PhoneNumber, PoolId, RawFormValue,
         RedactedValue, ServiceId, SmsText, StatusValue, UnixTimestamp, VendorDateTime,
     },
-    Client, Error,
 };
 
 #[derive(Clone, Debug)]

@@ -10,15 +10,15 @@ use std::{
 };
 
 use chacha20poly1305::{
-    aead::{Aead, KeyInit},
     XChaCha20Poly1305, XNonce,
+    aead::{Aead, KeyInit},
 };
 use rand::Rng as _;
 use secrecy::{ExposeSecret, SecretBox};
 use serde::Serialize;
 use sha2::{Digest, Sha256};
-use smspool::{sms::SmsOrder, OrderId};
-use sqlx::{postgres::PgPoolOptions, PgPool, Row};
+use smspool::{OrderId, sms::SmsOrder};
+use sqlx::{PgPool, Row, postgres::PgPoolOptions};
 use thiserror::Error;
 
 const MIGRATION: &str = include_str!("postgres/migrations/0001_durable_orders.sql");

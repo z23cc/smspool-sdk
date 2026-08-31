@@ -11,19 +11,19 @@ use std::{
 };
 
 use axum::{
+    Json, Router,
     extract::{Path, State},
     http::StatusCode,
     response::IntoResponse,
     routing::get,
-    Json, Router,
 };
 use postgres_order_store::{
-    record_successful_purchase_for_intent, OrderReference, OrderStore, StoredState,
+    OrderReference, OrderStore, StoredState, record_successful_purchase_for_intent,
 };
 use serde_json::json;
 use smspool::{
-    sms::{SmsCheck, SmsOrder},
     Client, Error,
+    sms::{SmsCheck, SmsOrder},
 };
 use tokio_util::sync::CancellationToken;
 

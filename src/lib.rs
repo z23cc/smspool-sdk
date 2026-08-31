@@ -24,7 +24,7 @@ pub mod poll;
 pub mod transport;
 pub mod types;
 
-pub use api::{catalog, pricing, sms, ExperimentalApi};
+pub use api::{ExperimentalApi, catalog, pricing, sms};
 pub use client::{Client, ClientBuilder, RetryPolicy};
 pub use endpoint::{AuthMode, BodyMode, SafetyClass};
 pub use error::{
@@ -32,10 +32,10 @@ pub use error::{
     TransportErrorKind, UnsupportedReason,
 };
 pub use poll::{
-    cancel_with_reconciliation, wait_for_code_with, wait_for_sms, ActiveObservation,
-    ActiveOrdersWatcher, BalanceObservation, CancelOptions, CancelTimeLockRule,
+    ActiveObservation, ActiveOrdersWatcher, BalanceObservation, CancelOptions, CancelTimeLockRule,
     CancelWorkflowError, CancellationDisposition, CancellationResult, CheckObservation,
     CodePollResult, ExpectedRefundMatch, PollError, PollOptions, PollOptionsError, WatchError,
+    cancel_with_reconciliation, wait_for_code_with, wait_for_sms,
 };
 pub use transport::TransportRequest;
 pub use types::{

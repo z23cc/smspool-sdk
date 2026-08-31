@@ -1,7 +1,7 @@
 use std::str::FromStr;
 
 use rust_decimal::Decimal;
-use serde::{de::DeserializeOwned, Deserialize, Deserializer};
+use serde::{Deserialize, Deserializer, de::DeserializeOwned};
 use serde_json::Value;
 
 use crate::types::{DecodedJson, StatusValue};
@@ -16,7 +16,7 @@ where
         other => {
             return Err(E::custom(format!(
                 "expected decimal string or number, got {other}"
-            )))
+            )));
         }
     };
 

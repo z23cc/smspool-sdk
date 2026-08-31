@@ -3,10 +3,10 @@ use std::collections::BTreeMap;
 use serde::Deserialize;
 
 use crate::{
+    Client, Error,
     api::{invalid, wire},
     endpoint,
     types::{ActivationToken, BusinessUserId, Money, Password, RedactedValue},
-    Client, Error,
 };
 
 use super::sms::ActionResponse;

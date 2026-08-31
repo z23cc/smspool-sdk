@@ -4,7 +4,7 @@ use std::{
 };
 
 use futures_util::StreamExt;
-use http::{header::RETRY_AFTER, Method, StatusCode};
+use http::{Method, StatusCode, header::RETRY_AFTER};
 use secrecy::ExposeSecret;
 use serde::de::DeserializeOwned;
 use serde_json::Value;

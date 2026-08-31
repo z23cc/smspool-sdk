@@ -1,10 +1,10 @@
 use serde_json::Value;
 
 use crate::{
+    Client, Error,
     api::{invalid, wire},
     endpoint,
     types::{ActivationToken, Money},
-    Client, Error,
 };
 
 #[derive(Clone, Debug)]

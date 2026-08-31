@@ -1,10 +1,10 @@
 use serde::Deserialize;
 
 use crate::{
+    Client, Error,
     api::wire,
     endpoint,
     types::{CountryId, Money, PoolId, ServiceId},
-    Client, Error,
 };
 
 #[derive(Clone, Debug)]

@@ -25,9 +25,9 @@ use std::{str::FromStr, time::Duration};
 
 use http::StatusCode;
 use smspool::{
+    CancelOptions, CancelTimeLockRule, Client, CountryId, Money, PollOptions, ServiceId,
     sms::{PurchaseSmsRequest, PurchaseSmsResponse, SmsCheck},
-    wait_for_sms, CancelOptions, CancelTimeLockRule, Client, CountryId, Money, PollOptions,
-    ServiceId,
+    wait_for_sms,
 };
 use tokio::time::Instant;
 use tokio_util::sync::CancellationToken;

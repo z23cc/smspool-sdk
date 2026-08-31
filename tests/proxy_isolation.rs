@@ -1,3 +1,17 @@
+//! Proves that a loopback mock request ignores environment proxy settings.
+//!
+//! Rust 2024 makes `std::env::set_var` unsafe because mutating the environment races with any
+//! concurrent `getenv`. The mutation here is sound only because of an invariant that this file
+//! must preserve:
+//!
+//! 1. **This binary contains exactly one test.** Integration tests run in parallel threads within
+//!    a binary, so a second test here would make the mutation racy. Adding one requires moving
+//!    the environment manipulation into a child process instead.
+//! 2. `#[tokio::test]` defaults to a current-thread runtime, so there are no tokio workers.
+//! 3. `support::ScriptedServer` spawns tokio tasks only, never OS threads.
+//!
+//! Together these mean no other thread can be inside `getenv` while the guards run.
+
 mod support;
 
 use std::{ffi::OsString, time::Duration};
@@ -15,8 +29,11 @@ impl EnvGuard {
     fn set(key: &'static str, value: Option<&str>) -> Self {
         let previous = std::env::var_os(key);
         match value {
-            Some(value) => std::env::set_var(key, value),
-            None => std::env::remove_var(key),
+            // SAFETY: see the module invariant above. No other thread exists in this process
+            // while the environment is mutated.
+            Some(value) => unsafe { std::env::set_var(key, value) },
+            // SAFETY: as above.
+            None => unsafe { std::env::remove_var(key) },
         }
         Self { key, previous }
     }
@@ -25,8 +42,11 @@ impl EnvGuard {
 impl Drop for EnvGuard {
     fn drop(&mut self) {
         match &self.previous {
-            Some(value) => std::env::set_var(self.key, value),
-            None => std::env::remove_var(self.key),
+            // SAFETY: as above. Guards are declared before the `Client`, so the client and its
+            // connection pool are dropped first and cannot observe the restore.
+            Some(value) => unsafe { std::env::set_var(self.key, value) },
+            // SAFETY: as above.
+            None => unsafe { std::env::remove_var(self.key) },
         }
     }
 }

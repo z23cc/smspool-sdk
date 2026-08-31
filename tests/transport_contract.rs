@@ -3,10 +3,10 @@ mod support;
 use std::time::{Duration, Instant, SystemTime};
 
 use http::Method;
-use serde_json::{json, Value};
+use serde_json::{Value, json};
 use smspool::{
-    sms::PurchaseSmsRequest, AuthMode, BodyMode, Client, CountryId, Error, OrderId, OutcomeStage,
-    RetryPolicy, SafetyClass, ServiceId, TimeoutPhase, TransportErrorKind, TransportRequest,
+    AuthMode, BodyMode, Client, CountryId, Error, OrderId, OutcomeStage, RetryPolicy, SafetyClass,
+    ServiceId, TimeoutPhase, TransportErrorKind, TransportRequest, sms::PurchaseSmsRequest,
 };
 use support::{ResponseScript, Script, ScriptedServer};
 
@@ -129,10 +129,12 @@ async fn exact_body_modes_and_authentication_are_preserved() {
         captured[0].header("authorization"),
         Some("Bearer api-key-wire-sentinel")
     );
-    assert!(captured[0]
-        .header("content-type")
-        .unwrap()
-        .starts_with("multipart/form-data; boundary="));
+    assert!(
+        captured[0]
+            .header("content-type")
+            .unwrap()
+            .starts_with("multipart/form-data; boundary=")
+    );
     let multipart = captured[0].body_text();
     assert!(multipart.contains("name=\"orderid\""));
     assert!(multipart.contains("order-42"));
@@ -141,10 +143,12 @@ async fn exact_body_modes_and_authentication_are_preserved() {
 
     assert_eq!(captured[1].method, "GET");
     assert_eq!(captured[1].target, "/country/retrieve_all");
-    assert!(captured[1]
-        .header("content-type")
-        .unwrap()
-        .starts_with("multipart/form-data; boundary="));
+    assert!(
+        captured[1]
+            .header("content-type")
+            .unwrap()
+            .starts_with("multipart/form-data; boundary=")
+    );
 
     assert_eq!(captured[2].target, "/request/areacodes");
     assert_eq!(

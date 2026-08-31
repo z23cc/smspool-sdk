@@ -4,12 +4,12 @@ use std::{str::FromStr, time::Duration};
 
 use http::StatusCode;
 use rust_decimal::Decimal;
-use serde_json::{json, Value};
+use serde_json::{Value, json};
 use smspool::{
-    cancel_with_reconciliation, wait_for_code_with, wait_for_sms, ActiveOrdersWatcher,
-    BalanceObservation, CancelOptions, CancelTimeLockRule, CancellationDisposition,
-    CheckObservation, Client, ExpectedRefundMatch, Money, OrderId, PollError, PollOptions,
-    RetryPolicy, WatchError,
+    ActiveOrdersWatcher, BalanceObservation, CancelOptions, CancelTimeLockRule,
+    CancellationDisposition, CheckObservation, Client, ExpectedRefundMatch, Money, OrderId,
+    PollError, PollOptions, RetryPolicy, WatchError, cancel_with_reconciliation,
+    wait_for_code_with, wait_for_sms,
 };
 use tokio::time::Instant;
 use tokio_util::sync::CancellationToken;
@@ -841,7 +841,7 @@ async fn watcher_fails_locally_before_growing_beyond_its_bound() {
 /// that classification is shape-driven while the raw status stays reachable.
 #[tokio::test]
 async fn numeric_status_classification_is_pinned_for_every_known_and_unknown_code() {
-    use smspool::{types::StatusValue, CheckObservation};
+    use smspool::{CheckObservation, types::StatusValue};
 
     // (status, extra fields, expected variant, expected terminal)
     let cases: Vec<(i64, Value, &str, bool)> = vec![

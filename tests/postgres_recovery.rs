@@ -10,8 +10,8 @@ use std::time::{Duration, SystemTime, UNIX_EPOCH};
 use postgres_order_store::{OrderStore, StoredIntentState, StoredState};
 use smspool::Client;
 use sqlx::{
-    postgres::{PgConnection, PgPoolOptions},
     Connection, Executor,
+    postgres::{PgConnection, PgPoolOptions},
 };
 use support::{ResponseScript, Script, ScriptedServer};
 
@@ -213,10 +213,12 @@ async fn postgres_claim_restart_and_read_only_recovery() {
         "service": "GMX"
     }))
     .unwrap();
-    assert!(store_a
-        .record_purchase_for_intent(&intent, &conflicting_order, now_ms() + 60_000)
-        .await
-        .is_err());
+    assert!(
+        store_a
+            .record_purchase_for_intent(&intent, &conflicting_order, now_ms() + 60_000)
+            .await
+            .is_err()
+    );
     assert_eq!(
         store_a.purchase_intent_status(&intent).await.unwrap(),
         Some(StoredIntentState::Resolved)

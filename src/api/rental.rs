@@ -3,13 +3,13 @@ use std::collections::BTreeMap;
 use serde::Deserialize;
 
 use crate::{
+    Client, Error,
     api::{invalid, wire},
     endpoint,
     types::{
         Days, DecimalValue, Money, PhoneNumber, RawFormValue, RedactedValue, RentalCode, RentalId,
         ServiceId, SmsText, UnixTimestamp, VendorDateTime,
     },
-    Client, Error,
 };
 
 use super::sms::ActionResponse;

@@ -1,6 +1,6 @@
 use serde::Deserialize;
 
-use crate::{api::wire, endpoint, types::PhoneNumber, Client, Error};
+use crate::{Client, Error, api::wire, endpoint, types::PhoneNumber};
 
 #[derive(Clone, Debug)]
 pub struct CarrierApi {

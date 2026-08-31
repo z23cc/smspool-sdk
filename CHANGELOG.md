@@ -24,6 +24,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- **Migrated to edition 2024.** Prepared with `cargo fix --edition`, then each reported
+  change audited rather than accepted. The only code change was in `tests/proxy_isolation.rs`,
+  where edition 2024 makes `std::env::set_var` unsafe; the `FIXME` that `cargo fix` leaves
+  behind was replaced with a real safety argument and the invariant it depends on. Ten
+  tail-expression drop-order changes were reviewed: all involve temporaries holding
+  `SecretBox` values or futures, none hold a lock, and the one drop-order-sensitive site
+  (the QPS mutex) already uses an explicit `drop`. Earlier zeroization of secrets is an
+  improvement, not a regression.
 - **MSRV raised from 1.82 to 1.85.** Several dependencies moved to edition 2024, which
   Cargo only supports from 1.85. The `postgres-example` dev feature needs a newer
   toolchain still, because sqlx 0.9 declares `rust-version = 1.94`; that constraint does

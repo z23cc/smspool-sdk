@@ -114,10 +114,10 @@ python3 scripts/postman_contract.py check
 - caller-supplied code extraction、active watcher 去重/移除/容量上限；
 - public API doctest 和 Axum 示例编译。
 
-Rust 1.82 锁定依赖检查与显式 example 检查也属于发布前完整验证：
+Rust 1.85 库级锁定依赖检查与显式 example 检查也属于发布前完整验证：
 
 ```bash
-cargo +1.82.0 check --locked
+cargo +1.85.0 check --locked --lib --features tracing
 cargo check --examples --all-features
 cargo test --test workflow
 ```

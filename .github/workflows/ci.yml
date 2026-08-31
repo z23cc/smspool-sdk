@@ -33,15 +33,18 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        rust: ["1.82.0"]
+        rust: ["1.85.0"]
     steps:
       - uses: actions/checkout@v4
       - uses: dtolnay/rust-toolchain@master
         with:
           toolchain: ${{ matrix.rust }}
       - uses: Swatinem/rust-cache@v2
-      - name: Check with locked dependencies
-        run: cargo check --locked --all-features --all-targets
+      # The MSRV covers the published library surface only. `postgres-example` is a
+      # dev-only feature whose sqlx dependency declares rust-version 1.94, so it is
+      # deliberately excluded here and exercised by the stable jobs instead.
+      - name: Check the library at the declared MSRV
+        run: cargo check --locked --lib --features tracing
 
   package:
     name: Package

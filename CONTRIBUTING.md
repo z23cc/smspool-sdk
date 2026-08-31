@@ -2,7 +2,8 @@
 
 ## Prerequisites
 
-- Rust stable and 1.82.0 (the MSRV)
+- Rust stable and 1.85.0 (the library MSRV)
+- The `postgres-example` feature needs a newer toolchain: sqlx 0.9 declares rust-version 1.94
 - Python 3.11+ for the acceptance and contract tooling
 - Docker, only for the opt-in PostgreSQL recovery test
 
@@ -64,12 +65,11 @@ cargo test --test live_receive -- --ignored --nocapture
 
 The crate is not published. Before the first release:
 
-1. Replace `<COPYRIGHT HOLDER>` in `LICENSE-MIT`.
-2. Move the `Unreleased` section of `CHANGELOG.md` under a version heading.
-3. Confirm `cargo package --locked` succeeds and review `cargo package --list`.
-4. Run `./scripts/acceptance.sh sdk`.
-5. Consider `cargo-semver-checks` once a baseline version exists.
+1. Move the `Unreleased` section of `CHANGELOG.md` under a version heading.
+2. Confirm `cargo package --locked` succeeds and review `cargo package --list`.
+3. Run `./scripts/acceptance.sh sdk`.
+4. Consider `cargo-semver-checks` once a baseline version exists.
 
-`repository` is set. `documentation` is deliberately unset so crates.io falls back to
+The project is Apache-2.0 only; update `NOTICE` if the copyright holder changes. `repository` is set. `documentation` is deliberately unset so crates.io falls back to
 docs.rs. The `smspool` crate name was unclaimed as of the last check; re-verify before
 publishing, since availability can change at any time.

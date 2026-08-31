@@ -13,7 +13,7 @@ use chacha20poly1305::{
     aead::{Aead, KeyInit},
     XChaCha20Poly1305, XNonce,
 };
-use rand::RngCore;
+use rand::Rng as _;
 use secrecy::{ExposeSecret, SecretBox};
 use serde::Serialize;
 use sha2::{Digest, Sha256};
@@ -705,7 +705,7 @@ impl OrderStore {
         let cipher = XChaCha20Poly1305::new_from_slice(self.key.expose_secret())
             .map_err(|_| StoreError::Encryption)?;
         let ciphertext = cipher
-            .encrypt(XNonce::from_slice(&nonce), order_id.as_str().as_bytes())
+            .encrypt(&XNonce::from(nonce), order_id.as_str().as_bytes())
             .map_err(|_| StoreError::Encryption)?;
         let fingerprint = self.fingerprint(order_id.as_str());
         Ok((fingerprint, nonce, ciphertext))
@@ -716,7 +716,7 @@ impl OrderStore {
         let cipher = XChaCha20Poly1305::new_from_slice(self.key.expose_secret())
             .map_err(|_| StoreError::Decryption)?;
         let plaintext = cipher
-            .decrypt(XNonce::from_slice(&nonce), ciphertext)
+            .decrypt(&XNonce::from(nonce), ciphertext)
             .map_err(|_| StoreError::Decryption)?;
         let value = String::from_utf8(plaintext).map_err(|_| StoreError::Decryption)?;
         OrderId::new(value).map_err(|_| StoreError::Decryption)

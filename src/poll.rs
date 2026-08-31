@@ -11,7 +11,7 @@ use std::{
 
 use http::StatusCode;
 
-use rand::Rng as _;
+use rand::RngExt as _;
 use tokio::time::{sleep_until, Instant};
 use tokio_util::sync::CancellationToken;
 

@@ -33,8 +33,8 @@ REQUIRED_DOCUMENTS = {
     "CHANGELOG.md": ("# Changelog", "## [Unreleased]", "### Known limitations"),
     "CONTRIBUTING.md": ("# Contributing", "## Testing rules", "## Release checklist"),
     "SECURITY.md": ("# Security", "## What this SDK protects by default", "## What it does not protect"),
-    "LICENSE-MIT": ("MIT License",),
-    "LICENSE-APACHE": ("Apache License",),
+    "LICENSE-APACHE": ("Apache License", "Version 2.0"),
+    "NOTICE": ("Copyright",),
     ".github/workflows/ci.yml": ("name: CI",),
 }
 

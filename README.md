@@ -1,6 +1,6 @@
 # SMSPool Rust SDK
 
-面向 Tokio/Axum 服务的异步 Rust SMSPool API SDK，声明 MSRV Rust 1.82。
+面向 Tokio/Axum 服务的异步 Rust SMSPool API SDK，库 MSRV 为 Rust 1.85。
 
 ## Current status
 
@@ -149,15 +149,14 @@ python3 scripts/acceptance.py validate  # also validates sanitized live observat
 
 ## MSRV
 
-Rust **1.82.0**。MSRV 变更按 minor 版本处理，并在 CI 中以 `--locked` 校验。
+库 MSRV 为 Rust **1.85.0**，由 CI 以 `cargo check --locked --lib` 校验。
+
+`postgres-example` 是仅供示例使用的 dev feature，其 sqlx 0.9 依赖声明 `rust-version = 1.94`，因此启用它需要更新的工具链。这不影响库本身的 MSRV —— 该 feature 不属于发布产物的必需路径。
+
+MSRV 变更按 minor 版本处理。
 
 ## License
 
-双许可，任选其一：
+[Apache License 2.0](LICENSE-APACHE)，版权声明见 [`NOTICE`](NOTICE)。
 
-- Apache License 2.0（[`LICENSE-APACHE`](LICENSE-APACHE)）
-- MIT（[`LICENSE-MIT`](LICENSE-MIT)）
-
-除非另有明确声明，你有意提交的任何贡献均按上述双许可授权，无附加条款。
-
-> 发布前需替换 `LICENSE-MIT` 中的 `<COPYRIGHT HOLDER>`，并在 `Cargo.toml` 填入 `repository` 与 `documentation`。见 `CONTRIBUTING.md` 的发布检查清单。
+除非另有明确声明，你有意提交给本项目的任何贡献，均按 Apache-2.0 授权，无附加条款。

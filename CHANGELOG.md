@@ -22,6 +22,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Acceptance gate tooling (`scripts/acceptance.sh`) with `foundation`, `sdk`, and
   `production` profiles.
 
+### Changed
+
+- **MSRV raised from 1.82 to 1.85.** Several dependencies moved to edition 2024, which
+  Cargo only supports from 1.85. The `postgres-example` dev feature needs a newer
+  toolchain still, because sqlx 0.9 declares `rust-version = 1.94`; that constraint does
+  not apply to the published library.
+- Dependencies moved to their current major versions: reqwest 0.13, rand 0.10, sqlx 0.9,
+  sha2 0.11, chacha20poly1305 0.11, plus routine minor and patch updates. This required
+  migrations: reqwest renamed its rustls feature and split out `form`/`query`; sqlx
+  renamed its runtime/TLS features and now requires dynamic SQL to be wrapped in
+  `AssertSqlSafe`; rand moved `random_range` to `RngExt` and dropped `RngCore` from the
+  root; chacha20poly1305 deprecated `Array::from_slice`.
+- Licensed under Apache-2.0 only; the previous `MIT OR Apache-2.0` dual licence and
+  `LICENSE-MIT` are removed. Copyright attribution now lives in `NOTICE`.
+
 ### Security
 
 - API keys, phone numbers, SMS bodies, eSIM credentials, and arbitrary JSON fallbacks are
@@ -31,8 +46,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Known limitations
 
-- Not published; `repository` and `documentation` metadata and the `LICENSE-MIT` copyright
-  holder are intentionally unset. See `CONTRIBUTING.md` for the release checklist.
+- Not published. `documentation` is intentionally unset so crates.io falls back to docs.rs.
+  See `CONTRIBUTING.md` for the release checklist.
 - `sms.all_stock` and unfiltered `pricing.all` fail closed: their live responses measured
   ~16 MiB and ~17.2 MiB respectively, far beyond any safe buffered limit.
 - The 429 / `Retry-After` path is covered by mocks only. It could not be induced live: 200

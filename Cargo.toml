@@ -2,9 +2,9 @@
 name = "smspool"
 version = "0.1.0"
 edition = "2021"
-rust-version = "1.82"
+rust-version = "1.85"
 description = "Async Rust SDK for the SMSPool API"
-license = "MIT OR Apache-2.0"
+license = "Apache-2.0"
 readme = "README.md"
 keywords = ["smspool", "sms", "otp", "api-client", "async"]
 categories = ["api-bindings", "asynchronous"]
@@ -25,7 +25,7 @@ exclude = [
 
 [features]
 default = ["rustls-tls"]
-rustls-tls = ["reqwest/rustls-tls"]
+rustls-tls = ["reqwest/rustls"]
 tracing = ["dep:tracing"]
 postgres-example = [
     "dep:axum",
@@ -37,29 +37,31 @@ postgres-example = [
 
 [dependencies]
 futures-util = "=0.3.34"
-http = "=1.3.1"
+http = "=1.5.0"
 httpdate = "=1.0.3"
-rand = "=0.9.3"
-reqwest = { version = "=0.12.28", default-features = false, features = ["multipart", "stream"] }
-rust_decimal = "=1.37.2"
+rand = "=0.10.2"
+# reqwest 0.13 split `form` and `query` out of the default set and renamed the
+# rustls feature; all four are used by the transport.
+reqwest = { version = "=0.13.4", default-features = false, features = ["form", "multipart", "query", "stream"] }
+rust_decimal = "=1.42.1"
 secrecy = "=0.10.3"
-serde = { version = "=1.0.219", features = ["derive"] }
-serde_json = "=1.0.143"
-serde_path_to_error = "=0.1.17"
-thiserror = "=2.0.16"
+serde = { version = "=1.0.229", features = ["derive"] }
+serde_json = "=1.0.151"
+serde_path_to_error = "=0.1.20"
+thiserror = "=2.0.20"
 tokio = { version = "=1.53.1", features = ["macros", "net", "rt", "signal", "sync", "time"] }
-tokio-util = { version = "=0.7.16", features = ["rt"] }
-tracing = { version = "=0.1.41", optional = true }
+tokio-util = { version = "=0.7.19", features = ["rt"] }
+tracing = { version = "=0.1.44", optional = true }
 url = "=2.5.8"
-axum = { version = "=0.8.4", optional = true }
-chacha20poly1305 = { version = "=0.10.1", optional = true }
+axum = { version = "=0.8.9", optional = true }
+chacha20poly1305 = { version = "=0.11.0", optional = true }
 hex = { version = "=0.4.3", optional = true }
-sha2 = { version = "=0.10.9", optional = true }
-sqlx = { version = "=0.8.3", default-features = false, features = ["postgres", "runtime-tokio-rustls"], optional = true }
+sha2 = { version = "=0.11.0", optional = true }
+sqlx = { version = "=0.9.0", default-features = false, features = ["postgres", "runtime-tokio", "tls-rustls-ring"], optional = true }
 
 [dev-dependencies]
 tokio = { version = "=1.53.1", features = ["io-util"] }
-tracing-subscriber = "=0.3.20"
+tracing-subscriber = "=0.3.23"
 
 [[example]]
 name = "axum"

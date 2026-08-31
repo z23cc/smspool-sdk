@@ -14,7 +14,7 @@ use chacha20poly1305::{
     XChaCha20Poly1305, XNonce,
 };
 use rand::RngCore;
-use secrecy::{ExposeSecret, Secret};
+use secrecy::{ExposeSecret, SecretBox};
 use serde::Serialize;
 use sha2::{Digest, Sha256};
 use smspool::{sms::SmsOrder, OrderId};
@@ -47,7 +47,9 @@ pub enum StoreError {
 #[derive(Clone)]
 pub struct OrderStore {
     pool: PgPool,
-    key: Secret<[u8; 32]>,
+    // secrecy 0.10 does not make SecretBox cloneable for [u8; 32]; the store derives Clone,
+    // so the key is shared behind an Arc rather than duplicated per clone.
+    key: std::sync::Arc<SecretBox<[u8; 32]>>,
     owner: String,
     lease_ms: i64,
 }
@@ -233,7 +235,7 @@ impl OrderStore {
         }
         Ok(Self {
             pool,
-            key: Secret::new(key),
+            key: std::sync::Arc::new(SecretBox::new(Box::new(key))),
             owner: owner.into(),
             lease_ms,
         })

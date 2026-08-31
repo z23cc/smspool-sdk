@@ -7,6 +7,12 @@ updates:
     open-pull-requests-limit: 5
     commit-message:
       prefix: "chore(deps)"
+    # Every dependency is exact-pinned for reproducibility, so ungrouped updates
+    # produce one PR per crate. Group the routine ones into a single PR and keep
+    # major bumps separate, since those need an API migration and a human.
+    groups:
+      cargo-minor-and-patch:
+        update-types: ["minor", "patch"]
     ignore:
       # `quinn` is an optional dependency of reqwest, activated only by its HTTP/3
       # feature, which this crate does not enable. It is present in Cargo.lock because

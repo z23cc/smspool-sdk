@@ -437,7 +437,7 @@ impl ClientBuilder {
         Ok(Client {
             inner: Arc::new(Inner {
                 http,
-                api_key: SecretString::new(self.api_key),
+                api_key: SecretString::new(self.api_key.into_boxed_str()),
                 base_url,
                 request_timeout: self.request_timeout,
                 concurrency_wait_timeout: self.concurrency_wait_timeout,

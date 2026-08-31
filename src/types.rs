@@ -235,7 +235,7 @@ macro_rules! sensitive_string {
                 if value.is_empty() {
                     return Err(InvalidValue::new($field, "must not be empty"));
                 }
-                Ok(Self(SecretString::new(value)))
+                Ok(Self(SecretString::new(value.into_boxed_str())))
             }
 
             /// Explicitly exposes customer or credential data.
@@ -290,7 +290,7 @@ impl PhoneNumber {
         if value.is_empty() {
             return Err(InvalidValue::new("phone_number", "must not be empty"));
         }
-        Ok(Self(SecretString::new(value)))
+        Ok(Self(SecretString::new(value.into_boxed_str())))
     }
 
     /// Explicitly exposes the normalized vendor value.

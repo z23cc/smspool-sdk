@@ -1,0 +1,25 @@
+version: 2
+updates:
+  - package-ecosystem: cargo
+    directory: "/"
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 5
+    commit-message:
+      prefix: "chore(deps)"
+    ignore:
+      # `quinn` is an optional dependency of reqwest, activated only by its HTTP/3
+      # feature, which this crate does not enable. It is present in Cargo.lock because
+      # the lockfile records unactivated optional dependencies, but it is never built:
+      #   cargo tree --all-features -e normal | grep -ci quinn  ->  0
+      #
+      # Its advisories are QUIC transport issues with no exposure here, while its
+      # upgrades cascade into cpufeatures 0.3.1, which requires edition2024 and breaks
+      # the documented MSRV of 1.82.
+      #
+      # REMOVE THIS IGNORE if reqwest's HTTP/3 feature is ever enabled, or if quinn
+      # becomes a real build dependency for any other reason. Verify with the command
+      # above returning a non-zero count.
+      - dependency-name: "quinn"
+      - dependency-name: "quinn-proto"
+      - dependency-name: "quinn-udp"

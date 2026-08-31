@@ -69,11 +69,11 @@ fn active_order(order_id: &str, status: &str, code: &str, full_code: &str) -> Va
 
 #[tokio::test]
 async fn cancellation_interrupts_an_in_flight_read_without_a_second_request() {
-    let server = ScriptedServer::start([Script::Hang(Duration::from_secs(2))]).await;
+    let server = ScriptedServer::start([Script::Hang(Duration::from_secs(10))]).await;
     let client = client(&server);
     let cancellation = CancellationToken::new();
     let options = PollOptions::new(
-        Instant::now() + Duration::from_secs(1),
+        Instant::now() + Duration::from_secs(5),
         cancellation.clone(),
     )
     .with_intervals(Duration::from_millis(10), Duration::from_millis(10))
@@ -83,7 +83,8 @@ async fn cancellation_interrupts_an_in_flight_read_without_a_second_request() {
     let order_id = OrderId::new("cancel-me").unwrap();
 
     let cancel_task = tokio::spawn(async move {
-        tokio::time::sleep(Duration::from_millis(20)).await;
+        // Long enough that the request has certainly been issued even on a loaded runner.
+        tokio::time::sleep(Duration::from_millis(300)).await;
         cancellation.cancel();
     });
     let result = wait_for_sms(&client, &order_id, options).await;
@@ -102,7 +103,9 @@ async fn deadline_preserves_the_last_pending_snapshot() {
     let result = wait_for_sms(
         &client,
         &order_id,
-        options(Duration::from_millis(40), Duration::from_millis(100)),
+        // Deadline well above the loopback fetch, interval above the deadline, so exactly
+        // one request happens and the deadline is what ends the wait.
+        options(Duration::from_millis(1_000), Duration::from_millis(5_000)),
     )
     .await;
 
@@ -247,8 +250,10 @@ async fn watcher_deadline_preempts_an_already_queued_event() {
         ]),
     ))])
     .await;
+    // Margins are deliberately wide: the first `next()` performs real loopback I/O, so a
+    // tight deadline makes this assert runner speed rather than preemption semantics.
     let poll_options = PollOptions::new(
-        Instant::now() + Duration::from_millis(30),
+        Instant::now() + Duration::from_millis(1_000),
         CancellationToken::new(),
     )
     .with_intervals(Duration::from_millis(5), Duration::from_millis(5))
@@ -258,7 +263,7 @@ async fn watcher_deadline_preempts_an_already_queued_event() {
     let mut watcher = ActiveOrdersWatcher::new(client(&server), poll_options, 4).unwrap();
 
     watcher.next().await.unwrap();
-    tokio::time::sleep(Duration::from_millis(50)).await;
+    tokio::time::sleep(Duration::from_millis(1_200)).await;
     let error = watcher.next().await.unwrap_err();
 
     assert!(matches!(error, WatchError::Deadline { .. }));

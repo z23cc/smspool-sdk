@@ -23,6 +23,14 @@ exclude = [
     "/postman.json",
 ]
 
+# docs.rs bakes this into the published version and cannot be changed afterwards.
+# Build with `tracing` so those items appear, but never with `postgres-example`:
+# that feature is example-only and its sqlx dependency requires a much newer
+# toolchain than the library itself.
+[package.metadata.docs.rs]
+features = ["tracing"]
+all-features = false
+
 [features]
 default = ["rustls-tls"]
 rustls-tls = ["reqwest/rustls"]

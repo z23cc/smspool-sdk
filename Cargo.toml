@@ -50,7 +50,7 @@ httpdate = "=1.0.3"
 rand = "=0.10.2"
 # reqwest 0.13 split `form` and `query` out of the default set and renamed the
 # rustls feature; all four are used by the transport.
-reqwest = { version = "=0.13.4", default-features = false, features = ["form", "multipart", "query", "stream"] }
+reqwest = { version = "=0.13.5", default-features = false, features = ["form", "multipart", "query", "stream"] }
 rust_decimal = "=1.43.0"
 secrecy = "=0.10.3"
 serde = { version = "=1.0.229", features = ["derive"] }

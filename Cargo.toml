@@ -47,16 +47,16 @@ postgres-example = [
 futures-util = "=0.3.34"
 http = "=1.5.0"
 httpdate = "=1.0.3"
-rand = "=0.10.2"
+rand = "=0.10.3"
 # reqwest 0.13 split `form` and `query` out of the default set and renamed the
 # rustls feature; all four are used by the transport.
-reqwest = { version = "=0.13.4", default-features = false, features = ["form", "multipart", "query", "stream"] }
+reqwest = { version = "=0.13.5", default-features = false, features = ["form", "multipart", "query", "stream"] }
 rust_decimal = "=1.43.0"
 secrecy = "=0.10.3"
 serde = { version = "=1.0.229", features = ["derive"] }
 serde_json = "=1.0.151"
 serde_path_to_error = "=0.1.20"
-thiserror = "=2.0.20"
+thiserror = "=2.0.21"
 tokio = { version = "=1.53.1", features = ["macros", "net", "rt", "signal", "sync", "time"] }
 tokio-util = { version = "=0.7.19", features = ["rt"] }
 tracing = { version = "=0.1.44", optional = true }
